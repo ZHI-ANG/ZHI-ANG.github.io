@@ -108,21 +108,27 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://zhi-ang.github.io/categories/index.html">
+  <meta name="description" content="1. Understanding KF via a simple example一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$ 同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{\H_tx_t} + \mathbf{v_t}\tag{2">
+<meta name="keywords" content="感知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kalman Filter 简单理解1">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/01/kalman filter/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
+<meta property="og:description" content="1. Understanding KF via a simple example一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$ 同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{\H_tx_t} + \mathbf{v_t}\tag{2">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-18T09:39:00.136Z">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/08/01/kalman%20filter/kalman.png">
+<meta property="og:updated_time" content="2019-08-07T15:53:57.753Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="Kalman Filter 简单理解1">
+<meta name="twitter:description" content="1. Understanding KF via a simple example一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$ 同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{\H_tx_t} + \mathbf{v_t}\tag{2">
+<meta name="twitter:image" content="https://zhi-ang.github.io/2019/08/01/kalman%20filter/kalman.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/categories/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/01/kalman filter/">
 
 
 
@@ -132,7 +138,7 @@
   };
 </script>
 
-  <title>categories | 極東魔術昼寝結社の夏</title>
+  <title>Kalman Filter 简单理解1 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -269,7 +275,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -328,104 +334,217 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/01/kalman filter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                6 categories in total
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ROS/">ROS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SLAM/">SLAM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/感知/">感知</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">Kalman Filter 简单理解1
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-01 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-01T17:17:10+08:00">2019-08-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-07 23:53:57" itemprop="dateModified" datetime="2019-08-07T23:53:57+08:00">2019-08-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/感知/" itemprop="url" rel="index"><span itemprop="name">感知</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="1-Understanding-KF-via-a-simple-example"><a href="#1-Understanding-KF-via-a-simple-example" class="headerlink" title="1. Understanding KF via a simple example"></a>1. Understanding KF via a simple example</h2><p>一个线性时变系统，可以以下面的方程表示：<br>$$<br>\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}<br>$$</p>
+<p>同时该系统可以被观测：<br>$$<br>\mathbf{z_t} = \mathbf{\H_tx_t} + \mathbf{v_t}\tag{2}<br>$$</p>
+<p>其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以$\mathbf{Q_t}$和$\mathbf{R_t}$表示。</p>
+<p>由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：<br>$$<br>\mathbf{\hat{x}<em>{t|t-1}} = \mathbf{F_t\hat{x}</em>{t-1|t-1}}+\mathbf{B_tu_t}\tag{3}<br>$$</p>
+<p>上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常用$\mathbf{P_{t|t-1}}$表示。$\mathbf{P_{t|t-1}}$可以通过下式求得：<br>$$<br>\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}<em>{t|t-1})(x_t-\hat{x}</em>{t|t-1})^T]\tag{4}<br>$$</p>
+<p>利用(3)式，可以求出：<br>$$<br>\mathbf{P_{t|t-1}} = \mathbf{F_t}\mathbf{P_{t-1|t-1}}\mathbf{F_t}^T + \mathbf{Q_t}\tag{5}<br>$$</p>
+<p>利用观测方程更新状态方程可以写成如下公式，先不必纠结怎么得到：<br>$$<br>\mathbf{\hat{x}<em>{t|t}} = \mathbf{\hat{x}</em>{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}\tag{6}<br>$$</p>
+<p>$$<br>\mathbf{P_{t|t-1}} = \mathbf{P_{t|t-1}}-\mathbf{K_tH_tP_{t|t-1}}\tag{7}<br>$$</p>
+<p>其中，<br>$$<br>\mathbf{K_t} = \mathbf{P_{t|t-1}H_t^T(H_tP_{t|t-1}H_t^T+R_t)^{-1}}\tag{8}<br>$$</p>
+<p>为了理解(5)-(8)式，可以通过一个简单的例子来直观的说明其正确性。  </p>
+<p><img src="kalman.png" alt></p>
+<p>上图中，一个火车沿铁路前进，根据上一个状态，以及油门，可以估计当前的位置，如图中粉色高斯函数。而通过无线电设备，同样可以观测火车当前的位置，如图中蓝色的区域。为了更精确的描述火车的位置，我们将两个高斯函数相乘，得到最终的状态预测结果，如图中绿色的区域。</p>
+<p>更详细的，预测的概率密度函数服从$\mathcal{y_1} \sim \mathcal{N(\mu_1, \sigma_1^2)}$，观测的概率密度函数服从$\mathcal{y_2} \sim \mathcal{N(\mu_2, \sigma_2^2)}$。根据高斯函数相乘的性质，可以得到，<br>$$<br>\mathcal{y_{fused}} \sim \mathcal{N(\mu_{fused}, \sigma_{fused}^2)}\tag{9}<br>$$</p>
+<p>其中，<br>$$<br>\mu_{fused} = \frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2} = \mu_1+\frac{\sigma_1^2(\mu_2-\mu_1)}{\sigma_1^2+\sigma_2^2} = \mu_1+K(\mu_2-H\mu_1) \tag{10}<br>$$</p>
+<p>$$<br>\sigma_{fused}^2 = \frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}=\sigma_1^2-\frac{\mu_1^4}{\sigma_1^2+\sigma_2^2} = \mu_1^2-KH\mu_1^2\tag{11}<br>$$</p>
+<p>其中，$K$为卡尔曼增益，而$H$为转移矩阵，描述了观测方程和状态方程的映射关系。</p>
+<h3 id="2-代码实例"><a href="#2-代码实例" class="headerlink" title="2. 代码实例"></a>2. 代码实例</h3><p><a href="https://synapticlab.co.kr/attachment/cfile1.uf@2737C54B590907BA0D46CE.pdf" target="_blank" rel="noopener">https://synapticlab.co.kr/attachment/cfile1.uf@2737C54B590907BA0D46CE.pdf</a></p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/感知/" rel="tag"># 感知</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/01/kalman_filter/" rel="next" title="Kalman Filter 简单理解1">
+                <i class="fa fa-chevron-left"></i> Kalman Filter 简单理解1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/01/hexo/" rel="prev" title="Hexo插入图片以及数学公式">
+                Hexo插入图片以及数学公式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -455,8 +574,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -570,6 +698,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Understanding-KF-via-a-simple-example"><span class="nav-number">1.</span> <span class="nav-text">1. Understanding KF via a simple example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-代码实例"><span class="nav-number">1.1.</span> <span class="nav-text">2. 代码实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -713,7 +857,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
 
 
 
@@ -752,6 +896,30 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
   
 
 
