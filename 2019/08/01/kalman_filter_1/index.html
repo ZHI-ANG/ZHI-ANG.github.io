@@ -467,10 +467,10 @@
         <p>一个线性时变系统，可以以下面的方程表示：<br>$$<br>\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}<br>$$</p>
 <p>同时该系统可以被观测：<br>$$<br>\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}<br>$$</p>
 <p>其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以$\mathbf{Q_t}$和$\mathbf{R_t}$表示。</p>
-<p>由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：<br>$$<br>\mathbf{\hat{x}<em>{t|t-1}} = \mathbf{F_t\hat{x}</em>{t-1|t-1}}+\mathbf{B_tu_t}\tag{3}<br>$$</p>
-<p>上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常用$\mathbf{P_{t|t-1}}$表示。$\mathbf{P_{t|t-1}}$可以通过下式求得：<br>$$<br>\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}<em>{t|t-1})(x_t-\hat{x}</em>{t|t-1})^T]\tag{4}<br>$$</p>
+<p>由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：<br>$$<br>\mathbf{\hat{x}{t|t-1}} = \mathbf{F_t\hat{x}{t-1|t-1}}+\mathbf{B_tu_t}\tag{3}<br>$$</p>
+<p>上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常用$\mathbf{P_{t|t-1}}$表示。$\mathbf{P_{t|t-1}}$可以通过下式求得：<br>$$<br>\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}{t|t-1})(x_t-\hat{x}{t|t-1})^T]\tag{4}<br>$$</p>
 <p>利用(3)式，可以求出：<br>$$<br>\mathbf{P_{t|t-1}} = \mathbf{F_t}\mathbf{P_{t-1|t-1}}\mathbf{F_t}^T + \mathbf{Q_t}\tag{5}<br>$$</p>
-<p>利用观测方程更新状态方程可以写成如下公式，先不必纠结怎么得到：<br>$$<br>\mathbf{\hat{x}<em>{t|t}} = \mathbf{\hat{x}</em>{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}\tag{6}<br>$$</p>
+<p>利用观测方程更新状态方程可以写成如下公式，先不必纠结怎么得到：<br>$$<br>\mathbf{\hat{x}{t|t}} = \mathbf{\hat{x}{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}\tag{6}<br>$$</p>
 <p>$$<br>\mathbf{P_{t|t-1}} = \mathbf{P_{t|t-1}}-\mathbf{K_tH_tP_{t|t-1}}\tag{7}<br>$$</p>
 <p>其中，<br>$$<br>\mathbf{K_t} = \mathbf{P_{t|t-1}H_t^T(H_tP_{t|t-1}H_t^T+R_t)^{-1}}\tag{8}<br>$$</p>
 <p>为了理解(5)-(8)式，可以通过一个简单的例子来直观的说明其正确性。  </p>
