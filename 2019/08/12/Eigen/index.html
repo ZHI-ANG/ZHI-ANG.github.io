@@ -108,20 +108,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="極東魔術昼寝結社の夏">
-<meta property="og:url" content="https://zhi-ang.github.io/tags/ROS/index.html">
+  <meta name="description" content="总结工程实践常用的Eigen库应用，持续更新…  1. Combining multiple transformations in Eigen into one transformation matrixQ: I have several transformations in Eigen, in the form of translations (Eigen::Vector3f) and rot">
+<meta name="keywords" content="Eigen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eigen常见用法总结">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/12/Eigen/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
+<meta property="og:description" content="总结工程实践常用的Eigen库应用，持续更新…  1. Combining multiple transformations in Eigen into one transformation matrixQ: I have several transformations in Eigen, in the form of translations (Eigen::Vector3f) and rot">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-12T14:32:10.655Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="極東魔術昼寝結社の夏">
+<meta name="twitter:title" content="Eigen常见用法总结">
+<meta name="twitter:description" content="总结工程实践常用的Eigen库应用，持续更新…  1. Combining multiple transformations in Eigen into one transformation matrixQ: I have several transformations in Eigen, in the form of translations (Eigen::Vector3f) and rot">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/tags/ROS/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/12/Eigen/">
 
 
 
@@ -131,7 +136,7 @@
   };
 </script>
 
-  <title>Tag: ROS | 極東魔術昼寝結社の夏</title>
+  <title>Eigen常见用法总结 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -180,7 +185,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -251,7 +256,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -327,82 +332,212 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>ROS<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/12/Eigen/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/08/02/ros_spin/" itemprop="url">
-              
-                <span itemprop="name">ros::spin()和ros::spinOnce()</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Eigen常见用法总结
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-02T17:17:10+08:00" content="2019-08-02">
-          08-02
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-12 17:17:10 / Modified: 22:32:10" itemprop="dateCreated datePublished" datetime="2019-08-12T17:17:10+08:00">2019-08-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>总结工程实践常用的Eigen库应用，持续更新…</p>
+</blockquote>
+<h3 id="1-Combining-multiple-transformations-in-Eigen-into-one-transformation-matrix"><a href="#1-Combining-multiple-transformations-in-Eigen-into-one-transformation-matrix" class="headerlink" title="1. Combining multiple transformations in Eigen into one transformation matrix"></a><a href="https://stackoverflow.com/questions/18785938/combining-multiple-transformations-in-eigen-into-one-transformation-matrix" target="_blank" rel="noopener">1. Combining multiple transformations in Eigen into one transformation matrix</a></h3><p><strong>Q:</strong> I have several transformations in Eigen, in the form of translations (<code>Eigen::Vector3f</code>) and rotations (<code>Eigen::Quaternionf</code>). I would like to combine all these transformations, in an order of my choosing, into a 4x4 transformation matrix <code>Eigen::Matrix4f</code>.</p>
+<p>For example, I would like to apply the following transformations in the order A, B, C, D, E:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Eigen::Vector3f translation_A;</span><br><span class="line">Eigen::Quaternionf rotation_B;</span><br><span class="line">Eigen::Quaternionf rotation_C;</span><br><span class="line">Eigen::Quaternionf rotation_D;</span><br><span class="line">Eigen::Vector3f translation_E;</span><br></pre></td></tr></table></figure>
+
+<p><strong>A:</strong> </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Eigen::Vector3f trans_vec_A;</span><br><span class="line"><span class="comment">//note that you have to create a Translation because multiplying a </span></span><br><span class="line"><span class="comment">//Transform with a vector will _apply_ the transform to the vector</span></span><br><span class="line">Eigen::Translation&lt;<span class="keyword">float</span>,<span class="number">3</span>&gt; translation_A(trans_vec_A);</span><br><span class="line">Eigen::Quaternionf rotation_B;</span><br><span class="line">Eigen::Quaternionf rotation_C;</span><br><span class="line">Eigen::Quaternionf rotation_D;</span><br><span class="line">Eigen::Vector3f trans_vec_E;</span><br><span class="line">Eigen::Translation&lt;<span class="keyword">float</span>,<span class="number">3</span>&gt; translation_E(trans_vec_E);</span><br><span class="line">Eigen::Transform&lt;<span class="keyword">float</span>,<span class="number">3</span>,Affine&gt; combined = </span><br><span class="line">      translation_A * rotation_B * rotation_C * rotation_D * translation_E;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Note that</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined = A*B*C*D*E</span><br></pre></td></tr></table></figure>
+
+<p>so <code>combined</code> applied to a vector <code>v</code> is</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined*v = A*B*C*D*E*v = A*(B*(C*(D*(E*v))))</span><br></pre></td></tr></table></figure>
+
+<p>that is, <code>E</code> is applied first, then <code>D</code>, and so on. In my mind, this is the <em>correct</em> order, but that may be a matter of taste.</p>
+<p>then apply <code>pcl::transformPointCloud(*src_pointcloud, *dst_pointcloud, combined);</code></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Eigen/" rel="tag"># Eigen</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/10/multithread/" rel="next" title="C++ 11多线程编程(第1-5部分)">
+                <i class="fa fa-chevron-left"></i> C++ 11多线程编程(第1-5部分)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -423,8 +558,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -544,6 +688,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Combining-multiple-transformations-in-Eigen-into-one-transformation-matrix"><span class="nav-number">1.</span> <span class="nav-text">1. Combining multiple transformations in Eigen into one transformation matrix</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -679,6 +839,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
