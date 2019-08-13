@@ -453,7 +453,7 @@
         <blockquote>
 <p>项目中遇到的四元数常见用法，持续更新……</p>
 </blockquote>
-<h2 id="1-四元数与向量相乘"><a href="#1-四元数与向量相乘" class="headerlink" title="1. 四元数与向量相乘"></a>1. 四元数与向量相乘</h2><p>结论： 任意向量$\mathbf{v}$沿着以单位向量定义的旋转轴$\mathbf{u}$旋转$\theta$度之后的$\mathbf{v’}$可以使用四元数乘法获得。令$v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]$，那么：<br>$$<br>v’=qvq^=qvq^{-1}<br>$$<br>换句话说，如果有$ q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]$，那么$v’=qvq^$可以将$\mathbf{v}$沿着$\mathbf{u}$旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数$q=[a,\mathbf{b}]$，如果想要提取对应的旋转的角度，那么我们可以直接得到：<br>$$<br>\frac{\theta}{2}=\cos^{-1}(a)<br>$$<br>如果想要获得旋转轴，只需要将$\mathbf{b}$的每一项除以$\sin(\frac{\theta}{2})$就可以了。<br>$$<br>\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}<br>$$<br>具体的推导过程，见参考文献1。</p>
+<h2 id="1-四元数与向量相乘"><a href="#1-四元数与向量相乘" class="headerlink" title="1. 四元数与向量相乘"></a>1. 四元数与向量相乘</h2><p>结论： 任意向量$\mathbf{v}$沿着以单位向量定义的旋转轴$\mathbf{u}$旋转$\theta$度之后的$\mathbf{v’}$可以使用四元数乘法获得。令$v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]$，那么：$$v’=qvq^=qvq^{-1}$$换句话说，如果有$ q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]$，那么$v’=qvq^$可以将$\mathbf{v}$沿着$\mathbf{u}$旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数$q=[a,\mathbf{b}]$，如果想要提取对应的旋转的角度，那么我们可以直接得到：$$\frac{\theta}{2}=\cos^{-1}(a)$$如果想要获得旋转轴，只需要将$\mathbf{b}$的每一项除以$\sin(\frac{\theta}{2})$就可以了。$$\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}$$具体的推导过程，见参考文献1。</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
 <li><a href="https://github.com/Krasjet/quaternion" target="_blank" rel="noopener">https://github.com/Krasjet/quaternion</a></li>
 </ol>
