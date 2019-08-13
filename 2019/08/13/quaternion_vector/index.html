@@ -108,20 +108,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="極東魔術昼寝結社の夏">
-<meta property="og:url" content="https://zhi-ang.github.io/tags/Eigen/index.html">
+  <meta name="description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量$\mathbf{v}$沿着以单位向量定义的旋转轴$\mathbf{u}$旋转$\theta$度之后的$\mathbf{v’}$可以使用四元数乘法获得。令$v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">
+<meta name="keywords" content="刚体运动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四元数知识总结">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/13/quaternion_vector/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
+<meta property="og:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量$\mathbf{v}$沿着以单位向量定义的旋转轴$\mathbf{u}$旋转$\theta$度之后的$\mathbf{v’}$可以使用四元数乘法获得。令$v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-13T14:19:18.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="極東魔術昼寝結社の夏">
+<meta name="twitter:title" content="四元数知识总结">
+<meta name="twitter:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量$\mathbf{v}$沿着以单位向量定义的旋转轴$\mathbf{u}$旋转$\theta$度之后的$\mathbf{v’}$可以使用四元数乘法获得。令$v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/tags/Eigen/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/13/quaternion_vector/">
 
 
 
@@ -131,7 +136,7 @@
   };
 </script>
 
-  <title>Tag: Eigen | 極東魔術昼寝結社の夏</title>
+  <title>四元数知识总结 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -180,7 +185,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -251,7 +256,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -327,82 +332,204 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Eigen<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/quaternion_vector/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/08/12/Eigen/" itemprop="url">
-              
-                <span itemprop="name">Eigen常见用法总结</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">四元数知识总结
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-12T17:17:10+08:00" content="2019-08-12">
-          08-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-13 17:17:10 / Modified: 22:19:18" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/刚体运动/" itemprop="url" rel="index"><span itemprop="name">刚体运动</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>项目中遇到的四元数常见用法，持续更新……</p>
+</blockquote>
+<h2 id="1-四元数与向量相乘"><a href="#1-四元数与向量相乘" class="headerlink" title="1. 四元数与向量相乘"></a>1. 四元数与向量相乘</h2><p>结论： 任意向量$\mathbf{v}$沿着以单位向量定义的旋转轴$\mathbf{u}$旋转$\theta$度之后的$\mathbf{v’}$可以使用四元数乘法获得。令$v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]$，那么：<br>$$<br>v’=qvq^<em>=qvq^{-1}<br>$$<br>换句话说，如果有$ q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]$，那么$v’=qvq^</em>$可以将$\mathbf{v}$沿着$\mathbf{u}$旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数$q=[a,\mathbf{b}]$，如果想要提取对应的旋转的角度，那么我们可以直接得到：<br>$$<br>\frac{\theta}{2}=\cos^{-1}(a)<br>$$<br>如果想要获得旋转轴，只需要将$\mathbf{b}$的每一项除以$\sin(\frac{\theta}{2})$就可以了。<br>$$<br>\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}<br>$$<br>具体的推导过程，见参考文献1。</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<li><a href="https://github.com/Krasjet/quaternion" target="_blank" rel="noopener">https://github.com/Krasjet/quaternion</a></li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/刚体运动/" rel="tag"># 刚体运动</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/Eigen/" rel="next" title="Eigen常见用法总结">
+                <i class="fa fa-chevron-left"></i> Eigen常见用法总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/13/pf/" rel="prev" title="粒子滤波算法笔记(一):算法概述">
+                粒子滤波算法笔记(一):算法概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -423,8 +550,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -548,6 +684,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-四元数与向量相乘"><span class="nav-number">1.</span> <span class="nav-text">1. 四元数与向量相乘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">1.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -683,26 +835,19 @@
 
 
   
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
 
 
 
   
 
 
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
 
   
-
-
-
-
-
-
-
 
 
 
@@ -712,7 +857,16 @@
 
 
 
+
+
+
+
+
   
+
+
+
+
 
   
 
@@ -721,11 +875,37 @@
   
 
   
-  
 
   
   
 
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
   
 
 
