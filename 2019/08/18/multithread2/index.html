@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第6-7部分 事件处理与信号量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服务">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&lt;翻译&gt; C++多线程编程(第6-10部分)">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/18/multithread2/index.html">
+<meta property="og:site_name" content="極東魔術昼寝結社の夏">
+<meta property="og:description" content="第6-7部分 事件处理与信号量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服务">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://thispointer.com//wp-content/uploads/2015/06/first.png">
+<meta property="og:image" content="https://thispointer.com//wp-content/uploads/2015/06/second_output.png">
+<meta property="og:updated_time" content="2019-08-18T16:10:06.933Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&lt;翻译&gt; C++多线程编程(第6-10部分)">
+<meta name="twitter:description" content="第6-7部分 事件处理与信号量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服务">
+<meta name="twitter:image" content="https://thispointer.com//wp-content/uploads/2015/06/first.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/18/multithread2/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title><翻译> C++多线程编程(第6-10部分) | 極東魔術昼寝結社の夏</翻译></title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">極東魔術昼寝結社の夏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/18/multithread2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"><翻译> C++多线程编程(第6-10部分)
+              
+            
+          </翻译></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-18 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-18T17:17:10+08:00">2019-08-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-19 00:10:06" itemprop="dateModified" datetime="2019-08-19T00:10:06+08:00">2019-08-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第6-7部分-事件处理与信号量"><a href="#第6-7部分-事件处理与信号量" class="headerlink" title="第6-7部分 事件处理与信号量"></a>第6-7部分 事件处理与信号量</h2><p>现在我们需要设计一个网络应用，这个应用需要完成如下任务：</p>
+<ol>
+<li>和服务器交互</li>
+<li>从XML文件中加载一些数据</li>
+<li>处理第2个任务中得到的数据</li>
+</ol>
+<p>显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：</p>
+<ol>
+<li>和服务器交互</li>
+<li>等待XML数据被线程2加载</li>
+<li>收到数据就作数据处理</li>
+</ol>
+<p>而线程2负责：</p>
+<ol>
+<li>加载XML数据</li>
+<li>告知线程1数据是否完成</li>
+</ol>
+<p>可以从下图直观的看出程序的执行流程：</p>
+<p><img src="https://thispointer.com//wp-content/uploads/2015/06/first.png" alt></p>
+<p>图中线程1需要等待线程2发送<code>完成数据读取</code>的信号。一旦收到信号，便会执行数据处理操作。这里，多线程的好处在于，当线程1忙于与服务器交互的时候，线程2可以同步加载数据，这样就减小了总的等待时间。那么如何实现这个程序呢？</p>
+<h3 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h3><p>最简单的想法是自定义一个全局变量，作为线程2是否完成数据读取的信号。初始化这个变量为<code>false</code>，当线程2完成数据读取就设置为<code>true</code>。线程1轮询这个变量，当读到这个变量为<code>true</code>时，就处理数据。但是由于这个变量被两个线程共用，因此需要使用互斥锁来进行线程同步。具体代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Application</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">std</span>::mutex m_mutex;</span><br><span class="line">	<span class="keyword">bool</span> m_bDataLoaded;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Application()</span><br><span class="line">	&#123;</span><br><span class="line">		m_bDataLoaded = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">loadData</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">// Make This Thread sleep for 1 Second</span></span><br><span class="line">		<span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::milliseconds(<span class="number">1000</span>));</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Loading Data from XML"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">// Lock The Data structure</span></span><br><span class="line">		<span class="built_in">std</span>::lock_guard&lt;<span class="built_in">std</span>::mutex&gt; guard(m_mutex);</span><br><span class="line">		<span class="comment">// Set the flag to true, means data is loaded</span></span><br><span class="line">		m_bDataLoaded = <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">mainTask</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Do Some Handshaking"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">// Acquire the Lock</span></span><br><span class="line">		m_mutex.lock();</span><br><span class="line">		<span class="comment">// Check if flag is set to true or not</span></span><br><span class="line">		<span class="keyword">while</span>(m_bDataLoaded != <span class="literal">true</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// Release the lock</span></span><br><span class="line">			m_mutex.unlock();</span><br><span class="line">			<span class="comment">//sleep for 100 milli seconds</span></span><br><span class="line">			<span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::milliseconds(<span class="number">100</span>));</span><br><span class="line">			<span class="comment">// Acquire the lock</span></span><br><span class="line">			m_mutex.lock();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// Release the lock</span></span><br><span class="line">		m_mutex.unlock();</span><br><span class="line">		<span class="comment">//Doc processing on loaded Data</span></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Do Processing On loaded Data"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Application app;</span><br><span class="line">	<span class="built_in">std</span>::<span class="function">thread <span class="title">thread_1</span><span class="params">(&amp;Application::mainTask, &amp;app)</span></span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="function">thread <span class="title">thread_2</span><span class="params">(&amp;Application::loadData, &amp;app)</span></span>;</span><br><span class="line">	thread_2.join();</span><br><span class="line">	thread_1.join();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<p><img src="https://thispointer.com//wp-content/uploads/2015/06/second_output.png" alt></p>
+<p>然而这种做法<strong>存在缺陷</strong>：</p>
+<p>反复的上锁和解锁会消耗大量不必要的时间。有没有更好的解决方法呢？</p>
+<h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><p>为了杜绝反复的轮询，我们希望线程1能够在事件未发生时阻塞，只有当事件发生后才继续。这种想法可以通过<code>信号量</code>实现。</p>
+<p>信号量是一种用于两个线程交互的变量。一个线程等待它被激活，另一个线程则负责激活它。</p>
+<p>使用信号量时需要添加头文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;condition_variable&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>让我们看一下信号量如何工作：</p>
+<ul>
+<li>首先定义一个互斥锁，用于信号量的工作。</li>
+<li>线程1调用信号量的<code>wait()</code>函数，这个函数在其内部查询互斥锁，检查是否满足了指定的条件。</li>
+<li>如果没有满足指定条件，信号量释放这个互斥锁并阻塞线程1。</li>
+<li>线程2负责在指定条件满足是，将信号量激活。</li>
+<li>一旦信号量激活，线程1恢复运转。它首先检查指定条件是否真正满足(因为一个更高等级的调用也可能使线程1恢复运转)。</li>
+<li>如果是一个更高级的调用，那么线程1再次调用<code>wait()</code>函数。</li>
+</ul>
+<p>具体的代码实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;condition_variable&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::placeholders;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Application</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">std</span>::mutex m_mutex;</span><br><span class="line">	<span class="built_in">std</span>::condition_variable m_condVar;</span><br><span class="line">	<span class="keyword">bool</span> m_bDataLoaded;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Application()</span><br><span class="line">	&#123;</span><br><span class="line">		m_bDataLoaded = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">loadData</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">// Make This Thread sleep for 1 Second</span></span><br><span class="line">		<span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::milliseconds(<span class="number">1000</span>));</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Loading Data from XML"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">// Lock The Data structure</span></span><br><span class="line">		<span class="built_in">std</span>::lock_guard&lt;<span class="built_in">std</span>::mutex&gt; guard(m_mutex);</span><br><span class="line">		<span class="comment">// Set the flag to true, means data is loaded</span></span><br><span class="line">		m_bDataLoaded = <span class="literal">true</span>;</span><br><span class="line">		<span class="comment">// Notify the condition variable</span></span><br><span class="line">		m_condVar.notify_one();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isDataLoaded</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> m_bDataLoaded;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">mainTask</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Do Some Handshaking"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="comment">// Acquire the lock</span></span><br><span class="line">		<span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; mlock(m_mutex);</span><br><span class="line">		<span class="comment">// Start waiting for the Condition Variable to get signaled</span></span><br><span class="line">		<span class="comment">// Wait() will internally release the lock and make the thread to block</span></span><br><span class="line">		<span class="comment">// As soon as condition variable get signaled, resume the thread and</span></span><br><span class="line">		<span class="comment">// again acquire the lock. Then check if condition is met or not</span></span><br><span class="line">		<span class="comment">// If condition is met then continue else again go in wait.</span></span><br><span class="line">		m_condVar.wait(mlock, <span class="built_in">std</span>::bind(&amp;Application::isDataLoaded, <span class="keyword">this</span>));</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Do Processing On loaded Data"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Application app;</span><br><span class="line">	<span class="built_in">std</span>::<span class="function">thread <span class="title">thread_1</span><span class="params">(&amp;Application::mainTask, &amp;app)</span></span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="function">thread <span class="title">thread_2</span><span class="params">(&amp;Application::loadData, &amp;app)</span></span>;</span><br><span class="line">	thread_2.join();</span><br><span class="line">	thread_1.join();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/13/pf/" rel="next" title="粒子滤波算法笔记(一):算法概述">
+                <i class="fa fa-chevron-left"></i> 粒子滤波算法笔记(一):算法概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ZHI-ANG">
+            
+              <p class="site-author-name" itemprop="name">ZHI-ANG</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ZHI-ANG" title="GitHub &rarr; https://github.com/ZHI-ANG" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="mailto:zhiang-li@outlook.com" title="E-Mail &rarr; mailto:zhiang-li@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第6-7部分-事件处理与信号量"><span class="nav-number">1.</span> <span class="nav-text">第6-7部分 事件处理与信号量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种方法"><span class="nav-number">1.1.</span> <span class="nav-text">第一种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种方法"><span class="nav-number">1.2.</span> <span class="nav-text">第二种方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">©2018 by ZHI-ANG</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
