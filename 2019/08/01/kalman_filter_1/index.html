@@ -108,19 +108,19 @@
 
 
 
-  <meta name="description" content="一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$ 同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}$$ 其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态">
+  <meta name="description" content="一个线性时变系统，可以以下面的方程表示：  \mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}同时该系统可以被观测：  \mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态传递噪声和观">
 <meta name="keywords" content="感知">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kalman Filter 简单理解1">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/01/kalman_filter_1/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$ 同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}$$ 其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态">
+<meta property="og:description" content="一个线性时变系统，可以以下面的方程表示：  \mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}同时该系统可以被观测：  \mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态传递噪声和观">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://zhi-ang.github.io/2019/08/01/kalman_filter_1/kalman.png">
 <meta property="og:updated_time" content="2019-08-07T16:06:00.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kalman Filter 简单理解1">
-<meta name="twitter:description" content="一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$ 同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}$$ 其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态">
+<meta name="twitter:description" content="一个线性时变系统，可以以下面的方程表示：  \mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}同时该系统可以被观测：  \mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态传递噪声和观">
 <meta name="twitter:image" content="https://zhi-ang.github.io/2019/08/01/kalman_filter_1/kalman.png">
 
 
@@ -464,22 +464,31 @@
       
 
       
-        <p>一个线性时变系统，可以以下面的方程表示：<br>$$<br>\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}<br>$$</p>
-<p>同时该系统可以被观测：<br>$$<br>\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}<br>$$</p>
-<p>其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以$\mathbf{Q_t}$和$\mathbf{R_t}$表示。</p>
-<p>由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：<br>$$<br>\mathbf{\tilde{x}{t|t-1}} = \mathbf{F_t\tilde{x}{t-1|t-1}}+\mathbf{B_tu_t}\tag{3}<br>$$</p>
-<p>上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常用$\mathbf{P_{t|t-1}}$表示。$\mathbf{P_{t|t-1}}$可以通过下式求得：<br>$$<br>\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}{t|t-1})(x_t-\hat{x}{t|t-1})^T]\tag{4}<br>$$</p>
-<p>利用(3)式，可以求出：<br>$$<br>\mathbf{P_{t|t-1}} = \mathbf{F_t}\mathbf{P_{t-1|t-1}}\mathbf{F_t}^T + \mathbf{Q_t}\tag{5}<br>$$</p>
-<p>利用观测方程更新状态方程可以写成如下公式，先不必纠结怎么得到：<br>$$<br>\mathbf{\tilde{x}{t|t}} = \mathbf{\hat{x}{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}\tag{6}<br>$$</p>
-<p>$$<br>\mathbf{P_{t|t-1}} = \mathbf{P_{t|t-1}}-\mathbf{K_tH_tP_{t|t-1}}\tag{7}<br>$$</p>
-<p>其中，<br>$$<br>\mathbf{K_t} = \mathbf{P_{t|t-1}H_t^T(H_tP_{t|t-1}H_t^T+R_t)^{-1}}\tag{8}<br>$$</p>
-<p>为了理解(5)-(8)式，可以通过一个简单的例子来直观的说明其正确性。  </p>
+        <p>一个线性时变系统，可以以下面的方程表示：</p>
+<script type="math/tex; mode=display">
+\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}</script><p>同时该系统可以被观测：</p>
+<script type="math/tex; mode=display">
+\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}\tag{2}</script><p>其中，$\mathbf{w_t}$和$\mathbf{v_t}$分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以$\mathbf{Q_t}$和$\mathbf{R_t}$表示。</p>
+<p>由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：  </p>
+<script type="math/tex; mode=display">
+\mathbf{\tilde{x}_{t|t-1}} = \mathbf{F_t\tilde{x}_{t-1|t-1}}+\mathbf{B_tu_t}\tag{3}</script><p>上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常用$\mathbf{P_{t|t-1}}$表示。$\mathbf{P_{t|t-1}}$可以通过下式求得：  </p>
+<script type="math/tex; mode=display">
+\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}_{t|t-1})(x_t-\hat{x}_{t|t-1})^T]\tag{4}</script><p>利用(3)式，可以求出：  </p>
+<script type="math/tex; mode=display">
+\mathbf{P_{t|t-1}} = \mathbf{F_t}\mathbf{P_{t-1|t-1}}\mathbf{F_t}^T + \mathbf{Q_t}\tag{5}</script><p>利用观测方程更新状态方程可以写成如下公式，先不必纠结怎么得到：  </p>
+<script type="math/tex; mode=display">
+\mathbf{\tilde{x}_{t|t}} = \mathbf{\hat{x}_{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}\tag{6}</script><script type="math/tex; mode=display">
+\mathbf{P_{t|t-1}} = \mathbf{P_{t|t-1}}-\mathbf{K_tH_tP_{t|t-1}}\tag{7}</script><p>其中，  </p>
+<script type="math/tex; mode=display">
+\mathbf{K_t} = \mathbf{P_{t|t-1}H_t^T(H_tP_{t|t-1}H_t^T+R_t)^{-1}}\tag{8}</script><p>为了理解(5)-(8)式，可以通过一个简单的例子来直观的说明其正确性。  </p>
 <p><img src="kalman.png" alt></p>
 <p>上图中，一个火车沿铁路前进，根据上一个状态，以及油门，可以估计当前的位置，如图中粉色高斯函数。而通过无线电设备，同样可以观测火车当前的位置，如图中蓝色的区域。为了更精确的描述火车的位置，我们将两个高斯函数相乘，得到最终的状态预测结果，如图中绿色的区域。</p>
-<p>更详细的，预测的概率密度函数服从$\mathcal{y_1} \sim \mathcal{N(\mu_1, \sigma_1^2)}$，观测的概率密度函数服从$\mathcal{y_2} \sim \mathcal{N(\mu_2, \sigma_2^2)}$。根据高斯函数相乘的性质，可以得到，<br>$$<br>\mathcal{y_{fused}} \sim \mathcal{N(\mu_{fused}, \sigma_{fused}^2)}\tag{9}<br>$$</p>
-<p>其中，<br>$$<br>\mu_{fused} = \frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2} = \mu_1+\frac{\sigma_1^2(\mu_2-\mu_1)}{\sigma_1^2+\sigma_2^2} = \mu_1+K(\mu_2-H\mu_1) \tag{10}<br>$$</p>
-<p>$$<br>\sigma_{fused}^2 = \frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}=\sigma_1^2-\frac{\mu_1^4}{\sigma_1^2+\sigma_2^2} = \mu_1^2-KH\mu_1^2\tag{11}<br>$$</p>
-<p>其中，$K$为卡尔曼增益，而$H$为转移矩阵，描述了观测方程和状态方程的映射关系。</p>
+<p>更详细的，预测的概率密度函数服从$\mathcal{y_1} \sim \mathcal{N(\mu_1, \sigma_1^2)}$，观测的概率密度函数服从$\mathcal{y_2} \sim \mathcal{N(\mu_2, \sigma_2^2)}$。根据高斯函数相乘的性质，可以得到，</p>
+<script type="math/tex; mode=display">
+\mathcal{y_{fused}} \sim \mathcal{N(\mu_{fused}, \sigma_{fused}^2)}\tag{9}</script><p>其中，</p>
+<script type="math/tex; mode=display">
+\mu_{fused} = \frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2} = \mu_1+\frac{\sigma_1^2(\mu_2-\mu_1)}{\sigma_1^2+\sigma_2^2} = \mu_1+K(\mu_2-H\mu_1) \tag{10}</script><script type="math/tex; mode=display">
+\sigma_{fused}^2 = \frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}=\sigma_1^2-\frac{\mu_1^4}{\sigma_1^2+\sigma_2^2} = \mu_1^2-KH\mu_1^2\tag{11}</script><p>其中，$K$为卡尔曼增益，而$H$为转移矩阵，描述了观测方程和状态方程的映射关系。</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://synapticlab.co.kr/attachment/cfile1.uf@2737C54B590907BA0D46CE.pdf" target="_blank" rel="noopener">https://synapticlab.co.kr/attachment/cfile1.uf@2737C54B590907BA0D46CE.pdf</a></p>
 
       
@@ -601,7 +610,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -659,9 +668,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
