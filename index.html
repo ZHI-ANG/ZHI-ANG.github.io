@@ -640,11 +640,9 @@
           1 滤波方法对比
 
 
-
 方法
 优点
 缺点
-
 
 
 
@@ -663,7 +661,7 @@ Unscented Kalman filter
 非多模，难以处理非高斯/非线性
 
 
-Ex
+Exte
           ...
           <!--noindex-->
           
@@ -1739,10 +1737,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
         
           
           JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。
-假设$F:R_n-&gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：
-
-\begin{bmatrix}
-\frac{\partial y_1}{\partial 
+假设$F:R_n-&gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：$$\begin{bmatrix}\frac{\partial y_1}{\partial x
           ...
           <!--noindex-->
           
@@ -1988,7 +1983,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/01/hexo/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/01/kalman_filter_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -2008,7 +2003,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/01/hexo/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">Hexo插入图片以及数学公式</a>
+                <a href="/2019/08/01/kalman_filter_1/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">Kalman Filter 简单理解1</a>
               
             
           </h1>
@@ -2050,7 +2045,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-07 23:40:22" itemprop="dateModified" datetime="2019-08-07T23:40:22+08:00">2019-08-07</time>
+                <time title="Modified: 2019-08-08 00:06:00" itemprop="dateModified" datetime="2019-08-08T00:06:00+08:00">2019-08-08</time>
               
             
           </span>
@@ -2067,7 +2062,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/感知/" itemprop="url" rel="index"><span itemprop="name">感知</span></a></span>
 
                 
                 
@@ -2103,15 +2098,13 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
       
         
           
-          Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。
-1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问：
-1![](/images/image.jpg)
-这种方法，图片在网页的任何位置都可以访问。但是
+          一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$
+同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v
           ...
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/01/hexo/#more" rel="contents">
+              <a class="btn" href="/2019/08/01/kalman_filter_1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
