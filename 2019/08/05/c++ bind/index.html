@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="建站撒花，第一个个人博客。之前使用的自己的服务器，但是总是由于一些原因无法访问，因此搬到github，虽然慢了点，但是比较稳定。以后在这个上面写一些论文的学习心得和收获。">
-<meta name="keywords" content="记录">
+  <meta name="description" content="记录学习代码过程中遇到的一些c++用法，方便以后查询，持续更新……    std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数： 1f(a,b,c);  但是我们有时只需要输入两个参数： 1g(a,b) := f(a,4,b);  这里的g就是f的偏函数。我们可以利用std::bind()实现这种用法： 1auto g = bind(f, _1,">
+<meta name="keywords" content="c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="建站纪念">
-<meta property="og:url" content="https://zhi-ang.github.io/2018/11/18/First-Page/index.html">
+<meta property="og:title" content="C++ cheetsheet">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/05/c++ bind/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="建站撒花，第一个个人博客。之前使用的自己的服务器，但是总是由于一些原因无法访问，因此搬到github，虽然慢了点，但是比较稳定。以后在这个上面写一些论文的学习心得和收获。">
+<meta property="og:description" content="记录学习代码过程中遇到的一些c++用法，方便以后查询，持续更新……    std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数： 1f(a,b,c);  但是我们有时只需要输入两个参数： 1g(a,b) := f(a,4,b);  这里的g就是f的偏函数。我们可以利用std::bind()实现这种用法： 1auto g = bind(f, _1,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-08T01:29:11.911Z">
+<meta property="og:updated_time" content="2019-08-19T13:01:13.475Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="建站纪念">
-<meta name="twitter:description" content="建站撒花，第一个个人博客。之前使用的自己的服务器，但是总是由于一些原因无法访问，因此搬到github，虽然慢了点，但是比较稳定。以后在这个上面写一些论文的学习心得和收获。">
+<meta name="twitter:title" content="C++ cheetsheet">
+<meta name="twitter:description" content="记录学习代码过程中遇到的一些c++用法，方便以后查询，持续更新……    std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数： 1f(a,b,c);  但是我们有时只需要输入两个参数： 1g(a,b) := f(a,4,b);  这里的g就是f的偏函数。我们可以利用std::bind()实现这种用法： 1auto g = bind(f, _1,">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/2018/11/18/First-Page/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/05/c++ bind/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>建站纪念 | 極東魔術昼寝結社の夏</title>
+  <title>C++ cheetsheet | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2018/11/18/First-Page/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/05/c++ bind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -369,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">建站纪念
+          <h1 class="post-title" itemprop="name headline">C++ cheetsheet
               
             
           </h1>
@@ -394,7 +394,7 @@
                 
               
 
-              <time title="Created: 2018-11-18 17:17:10" itemprop="dateCreated datePublished" datetime="2018-11-18T17:17:10+08:00">2018-11-18</time>
+              <time title="Created: 2019-08-05 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-05T17:17:10+08:00">2019-08-05</time>
             
 
             
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-08 09:29:11" itemprop="dateModified" datetime="2019-08-08T09:29:11+08:00">2019-08-08</time>
+                <time title="Modified: 2019-08-19 21:01:13" itemprop="dateModified" datetime="2019-08-19T21:01:13+08:00">2019-08-19</time>
               
             
           </span>
@@ -428,7 +428,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
 
                 
                 
@@ -462,7 +462,34 @@
       
 
       
-        <p>建站撒花，第一个个人博客。之前使用的自己的服务器，但是总是由于一些原因无法访问，因此搬到github，虽然慢了点，但是比较稳定。以后在这个上面写一些论文的学习心得和收获。</p>
+        <blockquote>
+<p>记录学习代码过程中遇到的一些c++用法，方便以后查询，持续更新……  </p>
+</blockquote>
+<h2 id="std-bind"><a href="#std-bind" class="headerlink" title="std::bind()"></a>std::bind()</h2><p><code>std::bind()</code>是一种偏函数的用法。例如我们有一个函数体<code>f</code>，它由三个参数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(a,b,c);</span><br></pre></td></tr></table></figure>
+
+<p>但是我们有时只需要输入两个参数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g(a,b) := f(a,<span class="number">4</span>,b);</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>g</code>就是<code>f</code>的偏函数。我们可以利用<code>std::bind()</code>实现这种用法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> g = bind(f, _1, <span class="number">4</span>, _2);</span><br></pre></td></tr></table></figure>
+
+<p>虽然可以使<code>fanctor</code>实现这种用法，但是这种写法更清晰。</p>
+<p><strong>有两个常用的使用场景：</strong></p>
+<ol>
+<li>当我们使用标准库中<code>transform, map, sort</code>等算法时，需要传入一个可调用对象，但是我们只关心这个可调用对象中多个输入参数中的某几个，这时可以使用bind，将可调用对象参数中我们需要设置的部分填上具体的参数值：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// raise every value in vec to the power of 7</span></span><br><span class="line"><span class="built_in">std</span>::transform(vec.begin(), vec.end(), some_output, <span class="built_in">std</span>::bind(<span class="built_in">std</span>::<span class="built_in">pow</span>, _1, <span class="number">7</span>));</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中<code>pow</code>函数可以输入两个参数，但是我们这里仅仅关心的是7次方。</p>
+<ol start="2">
+<li>std::bind()的另一个普遍用法是和std::function()一起用作安全函数指针。这种用法通常用在回调机制中。有时一些函数需要花费很长时间完成某些任务，而我们不想要浪费时间等待他们。这时我们可以创建另一个线程运行这个函数，然后传递给它一个函数指针，当它完成任务后回调这个函数。</li>
+</ol>
+<p><code>std::bind()</code>的一个普遍用法是和<code>std::function()</code>一起用作安全函数指针。可以用作回调机制。一种广泛的使用场景是一些函数需要花费很长时间完成某些任务，而我们不想要浪费时间等待他们。我们可以在另一个线程运行这个函数，然后传递给它一个函数指针，当它完成任务后回调。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">//just shorthand to avoid long typing</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::function&lt;<span class="keyword">void</span> (<span class="keyword">float</span> result)&gt; TCallback;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//this function takes long time</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">longRunningFunction</span><span class="params">(TCallback callback)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//do some long running task</span></span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="comment">//callback to return result</span></span><br><span class="line">        callback(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//this function gets called by longRunningFunction after its done</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterCompleteCallback</span><span class="params">(<span class="keyword">float</span> result)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longRunningFunctionAsync</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//create callback - this equivalent of safe function pointer</span></span><br><span class="line">        <span class="keyword">auto</span> callback = <span class="built_in">std</span>::bind(&amp;MyClass::afterCompleteCallback, </span><br><span class="line">            <span class="keyword">this</span>, <span class="built_in">std</span>::placeholders::_1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//normally you want to start below function on seprate thread, </span></span><br><span class="line">        <span class="comment">//but for illustration we will just do simple call</span></span><br><span class="line">        longRunningFunction(callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://stackoverflow.com/questions/6610046/stdfunction-and-stdbind-what-are-they-and-when-should-they-be-used" target="_blank" rel="noopener">https://stackoverflow.com/questions/6610046/stdfunction-and-stdbind-what-are-they-and-when-should-they-be-used</a></p>
 
       
     </div>
@@ -486,7 +513,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/记录/" rel="tag"># 记录</a>
+            <a href="/tags/c/" rel="tag"># c++</a>
           
         </div>
       
@@ -499,14 +526,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/08/03/Jacobian&Hessian/" rel="next" title="Jacobian和Hessian">
+                <i class="fa fa-chevron-left"></i> Jacobian和Hessian
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/01/kalman_filter_1/" rel="prev" title="Kalman Filter 简单理解1">
-                Kalman Filter 简单理解1 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/05/C++ Lambda/" rel="prev" title="C++ 11 中的Lambda表达式">
+                C++ 11 中的Lambda表达式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -552,8 +583,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -675,6 +715,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#std-bind"><span class="nav-number">1.</span> <span class="nav-text">std::bind()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">1.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
