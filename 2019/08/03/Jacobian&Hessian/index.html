@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：$$\begin{bmatrix}\frac{\partial y_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial y_1}{\partia">
+  <meta name="description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：  \begin{bmatrix} \frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n}">
 <meta name="keywords" content="非线性优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jacobian和Hessian">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/03/Jacobian&Hessian/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：$$\begin{bmatrix}\frac{\partial y_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial y_1}{\partia">
+<meta property="og:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：  \begin{bmatrix} \frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n}">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-08-19T13:10:46.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jacobian和Hessian">
-<meta name="twitter:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：$$\begin{bmatrix}\frac{\partial y_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial y_1}{\partia">
+<meta name="twitter:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：  \begin{bmatrix} \frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n}">
 
 
 
@@ -463,9 +463,16 @@
 
       
         <h2 id="Jacobian"><a href="#Jacobian" class="headerlink" title="Jacobian"></a>Jacobian</h2><p>Jacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。</p>
-<p>假设$F:R_n-&gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：<br>$$<br>\begin{bmatrix}<br>\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n} \<br>\vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_m}{\partial x_n} \<br>\end{bmatrix}<br>$$<br>此矩阵表示为$J_F(x_1, \cdots, x_n)$，或者$\frac{\partial(y_1,\cdots,y_m)}{\partial(x_1,\cdots,x_n)}$</p>
-<p>如果$\mathbf{p}$是$R_n$中的一点，$F$在$\mathbf{p}$点可微，那么在这点的导数由$J_F(\mathbf{p})$给出。在这种情况下，由$F(\mathbf{p})$描述的线性算子就是接近点$\mathbf{p}$的$F$的最优线性逼近，$\mathbf{x}$逼近于$\mathbf{p}$：<br>$$<br>F(\mathbf{x}) \approx F(\mathbf{p})+J_F(\mathbf{p})\cdot(\mathbf{x}-\mathbf{p})<br>$$</p>
-<h2 id="Jacobian行列式"><a href="#Jacobian行列式" class="headerlink" title="Jacobian行列式"></a>Jacobian行列式</h2><p>对于Jacobian是方阵的函数$F$，Jacobian行列式给出了$F$在接近给定点的重要信息。若$F$在$\mathbf{p}$点的Jacobian行列式不为0，则$F$在该点附近具有反函数。如果$\mathbf{p}$点的Jacobian行列式为正，则$F$在该点的取向不变，反之则改变。而行列式的绝对值反映了函数$F$在$\mathbf{p}$点的缩放因子。</p>
+<p>假设$F:R_n-&gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+\frac{\partial y_1}{\partial x_1} & \cdots & \frac{\partial y_1}{\partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n} \\
+\end{bmatrix}</script><p>此矩阵表示为$J_F(x_1, \cdots, x_n)$，或者$\frac{\partial(y_1,\cdots,y_m)}{\partial(x_1,\cdots,x_n)}$</p>
+<p>如果$\mathbf{p}$是$R_n$中的一点，$F$在$\mathbf{p}$点可微，那么在这点的导数由$J_F(\mathbf{p})$给出。在这种情况下，由$F(\mathbf{p})$描述的线性算子就是接近点$\mathbf{p}$的$F$的最优线性逼近，$\mathbf{x}$逼近于$\mathbf{p}$：</p>
+<script type="math/tex; mode=display">
+F(\mathbf{x}) \approx F(\mathbf{p})+J_F(\mathbf{p})\cdot(\mathbf{x}-\mathbf{p})</script><h2 id="Jacobian行列式"><a href="#Jacobian行列式" class="headerlink" title="Jacobian行列式"></a>Jacobian行列式</h2><p>对于Jacobian是方阵的函数$F$，Jacobian行列式给出了$F$在接近给定点的重要信息。若$F$在$\mathbf{p}$点的Jacobian行列式不为0，则$F$在该点附近具有反函数。如果$\mathbf{p}$点的Jacobian行列式为正，则$F$在该点的取向不变，反之则改变。而行列式的绝对值反映了函数$F$在$\mathbf{p}$点的缩放因子。</p>
 
       
     </div>
@@ -586,7 +593,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="ros::spin()和ros::spinOnce()的作用ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。 很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。  以一定间隔处理回调 一般而言，你很少会希望ROS">
+  <meta name="description" content="问题描述首先需要明白catkin_make生成的可执行文件在什么地方。一般${catkin_ws}/devel/lib文件夹下。因此，对于直接rosrun，不需要launch文件的节点程序，我们可以按照下面的步骤进行调试：  运行roscore 使用gdb打开${catkin_ws}/devel/lib文件夹下的节点程序 使用gdb指令进行调试  但是对于需要launch文件配置参数的节点程序，采">
 <meta name="keywords" content="ROS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ros::spin()和ros::spinOnce()">
-<meta property="og:url" content="https://zhi-ang.github.io/2019/08/02/ros_spin/index.html">
+<meta property="og:title" content="使用gdb调试ros程序">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/20/ros_debug/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="ros::spin()和ros::spinOnce()的作用ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。 很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。  以一定间隔处理回调 一般而言，你很少会希望ROS">
+<meta property="og:description" content="问题描述首先需要明白catkin_make生成的可执行文件在什么地方。一般${catkin_ws}/devel/lib文件夹下。因此，对于直接rosrun，不需要launch文件的节点程序，我们可以按照下面的步骤进行调试：  运行roscore 使用gdb打开${catkin_ws}/devel/lib文件夹下的节点程序 使用gdb指令进行调试  但是对于需要launch文件配置参数的节点程序，采">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-07T13:43:26.958Z">
+<meta property="og:updated_time" content="2019-08-20T08:34:28.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ros::spin()和ros::spinOnce()">
-<meta name="twitter:description" content="ros::spin()和ros::spinOnce()的作用ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。 很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。  以一定间隔处理回调 一般而言，你很少会希望ROS">
+<meta name="twitter:title" content="使用gdb调试ros程序">
+<meta name="twitter:description" content="问题描述首先需要明白catkin_make生成的可执行文件在什么地方。一般${catkin_ws}/devel/lib文件夹下。因此，对于直接rosrun，不需要launch文件的节点程序，我们可以按照下面的步骤进行调试：  运行roscore 使用gdb打开${catkin_ws}/devel/lib文件夹下的节点程序 使用gdb指令进行调试  但是对于需要launch文件配置参数的节点程序，采">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/02/ros_spin/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/20/ros_debug/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>ros::spin()和ros::spinOnce() | 極東魔術昼寝結社の夏</title>
+  <title>使用gdb调试ros程序 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/02/ros_spin/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/20/ros_debug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -369,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ros::spin()和ros::spinOnce()
+          <h1 class="post-title" itemprop="name headline">使用gdb调试ros程序
               
             
           </h1>
@@ -394,24 +394,12 @@
                 
               
 
-              <time title="Created: 2019-08-02 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-02T17:17:10+08:00">2019-08-02</time>
+              <time title="Created: 2019-08-20 17:17:10 / Modified: 16:34:28" itemprop="dateCreated datePublished" datetime="2019-08-20T17:17:10+08:00">2019-08-20</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-08-07 21:43:26" itemprop="dateModified" datetime="2019-08-07T21:43:26+08:00">2019-08-07</time>
               
             
           </span>
@@ -462,27 +450,34 @@
       
 
       
-        <h3 id="ros-spin-和ros-spinOnce-的作用"><a href="#ros-spin-和ros-spinOnce-的作用" class="headerlink" title="ros::spin()和ros::spinOnce()的作用"></a>ros::spin()和ros::spinOnce()的作用</h3><p>ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。</p>
-<p>很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。</p>
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>首先需要明白catkin_make生成的可执行文件在什么地方。一般<code>${catkin_ws}/devel/lib</code>文件夹下。因此，对于直接rosrun，不需要launch文件的节点程序，我们可以按照下面的步骤进行调试：</p>
 <ol>
-<li><p>以一定间隔处理回调</p>
-<p>一般而言，你很少会希望ROS回调函数只在固定的时间间隔被调用。比如一个消息的频率为100HZ，而ros::spinOnce()仅仅5HZ，而同时queue_size为1，那么你将丢失95/100的消息。</p>
-<p>这种情况下，使用ROS::Timer是一个更好的选择。</p>
-</li>
-<li><p>存在ROS以外的其他回调函数</p>
-<p>比如使用另一个需要处理异步消息的库，你就需要将这个库中类似于spinOnce()的函数同spinOnce()一起放到主循环函数中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ros::<span class="function">Rate <span class="title">r</span><span class="params">(<span class="number">100</span>)</span></span>;</span><br><span class="line"><span class="keyword">while</span> (ros::ok())</span><br><span class="line">&#123;</span><br><span class="line">  libusb_handle_events_timeout(...); <span class="comment">// Handle USB events</span></span><br><span class="line">  ros::spinOnce();                   <span class="comment">// Handle ROS events</span></span><br><span class="line">  r.sleep();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将ROS集成到其他框架中</p>
-<p>例如在使用OpenGL和GLUT时，一种集成ROS的方法是告诉GLUT的主循环，每10ms就调用以下ros::spinOnce()：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">timerCb</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; ros::spinOnce(); &#125;</span><br><span class="line"></span><br><span class="line">glutTimerFunc(<span class="number">10</span>, timerCb, <span class="number">0</span>);</span><br><span class="line">glutMainLoop(); <span class="comment">// Never returns</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>运行roscore</li>
+<li>使用gdb打开<code>${catkin_ws}/devel/lib</code>文件夹下的节点程序</li>
+<li>使用gdb指令进行调试</li>
 </ol>
-<h3 id="ros-spin-和ros-spinOnce-的区别"><a href="#ros-spin-和ros-spinOnce-的区别" class="headerlink" title="ros::spin()和ros::spinOnce()的区别"></a>ros::spin()和ros::spinOnce()的区别</h3><p>ros::spin()再调用之后不会返回，因此主程序不会继续执行，所以循环没有意义。而ros::spinOnce()在调用之后会返回，继续执行后面的程序。</p>
-<p>ros::spin()函数一般不会出现在循环中，因为程序执行到spin()后就不调用其他语句了，也就是说该循环没有任何意义，还有就是spin()函数后面一定不能有其他语句(return 0 除外)，有也是白搭，不会执行的。ros::spinOnce()的用法相对来说很灵活，但往往需要考虑调用消息的时机，调用频率，以及消息池的大小，这些都要根据现实情况协调好，不然会造成数据丢包或者延迟的错误。</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://answers.ros.org/question/11887/significance-of-rosspinonce/" target="_blank" rel="noopener">https://answers.ros.org/question/11887/significance-of-rosspinonce/</a></p>
-<p><a href="http://wiki.ros.org/roscpp/Overview/Callbacks and Spinning" target="_blank" rel="noopener">http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning</a></p>
-<p><a href="https://www.cnblogs.com/liu-fa/p/5925381.html" target="_blank" rel="noopener">https://www.cnblogs.com/liu-fa/p/5925381.html</a></p>
+<p>但是对于需要launch文件配置参数的节点程序，采用上述方法就不太方便。不过ROS已经想到了这一点，只需我们在launch文件中设置一个参数，ROS就可自动完成上述三个步骤。</p>
+<h2 id="配置catkin-make"><a href="#配置catkin-make" class="headerlink" title="配置catkin_make"></a>配置catkin_make</h2><p>使用如下指令编译ros节点：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make -DCMAKE_BUILD_TYPE=Debug</span><br></pre></td></tr></table></figure>
+<h2 id="配置launch文件"><a href="#配置launch文件" class="headerlink" title="配置launch文件"></a>配置launch文件</h2><p>在launch文件中，根据以下需要，在该节点的<code>&lt;node&gt;</code>标签中添加对应指令：</p>
+<ul>
+<li><code>launch-prefix=&quot;xterm -e gdb --args&quot;</code> : run your node in a gdb in a separate xterm window, manually type <code>run</code> to start it</li>
+<li><code>launch-prefix=&quot;gdb -ex run --args&quot;</code> : run your node in gdb in the same xterm as your launch without having to type <code>run</code> to start it</li>
+<li><code>launch-prefix=&quot;stterm -g 200x60 -e gdb -ex run --args&quot;</code> : run your node in gdb in a new stterm window without having to type <code>run</code> to start it</li>
+<li><code>launch-prefix=&quot;valgrind&quot;</code> : run your node in valgrind</li>
+<li><code>launch-prefix=&quot;xterm -e&quot;</code> : run your node in a separate xterm window</li>
+</ul>
+<p>比如说，原本的节点写法如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">"bdxt"</span> <span class="attr">type</span>=<span class="string">"bdxt"</span> <span class="attr">name</span>=<span class="string">"bdxt"</span> <span class="attr">output</span>=<span class="string">"screen"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在需要改为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">"bdxt"</span> <span class="attr">type</span>=<span class="string">"bdxt"</span> <span class="attr">name</span>=<span class="string">"bdxt"</span> <span class="attr">output</span>=<span class="string">"screen"</span> <span class="attr">launch-prefix</span>=<span class="string">"xterm -e gdb --args"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>另外，如果是<code>python</code>脚本，需要修改为pdb，<code>launch-prefix=&quot;xterm -e python -m pdb &quot;</code></p>
+<h2 id="使用GDB调试ROS程序"><a href="#使用GDB调试ROS程序" class="headerlink" title="使用GDB调试ROS程序"></a>使用GDB调试ROS程序</h2><p>配置好launch文件后，<code>roslaunch</code>运行ros节点，会弹出一个gdb窗口，接下来的操作和普通的cpp程序一致。GDB命令可以参考：</p>
+<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<li><a href="https://bluesat.com.au/a-dummys-guide-to-debugging-ros-systems/" target="_blank" rel="noopener">https://bluesat.com.au/a-dummys-guide-to-debugging-ros-systems/</a></li>
+<li><a href="http://wiki.ros.org/roslaunch/Tutorials/Roslaunch Nodes in Valgrind or GDB" target="_blank" rel="noopener">http://wiki.ros.org/roslaunch/Tutorials/Roslaunch%20Nodes%20in%20Valgrind%20or%20GDB</a></li>
+</ol>
 
       
     </div>
@@ -519,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/01/hexo/" rel="next" title="Hexo插入图片以及数学公式">
-                <i class="fa fa-chevron-left"></i> Hexo插入图片以及数学公式
+              <a href="/2019/08/19/c++ bind/" rel="next" title="C++ cheatsheet">
+                <i class="fa fa-chevron-left"></i> C++ cheatsheet
               </a>
             
           </div>
@@ -528,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/03/Jacobian&Hessian/" rel="prev" title="Jacobian和Hessian">
-                Jacobian和Hessian <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -718,7 +709,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ros-spin-和ros-spinOnce-的作用"><span class="nav-number">1.</span> <span class="nav-text">ros::spin()和ros::spinOnce()的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ros-spin-和ros-spinOnce-的区别"><span class="nav-number">2.</span> <span class="nav-text">ros::spin()和ros::spinOnce()的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置catkin-make"><span class="nav-number">2.</span> <span class="nav-text">配置catkin_make</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置launch文件"><span class="nav-number">3.</span> <span class="nav-text">配置launch文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用GDB调试ROS程序"><span class="nav-number">4.</span> <span class="nav-text">使用GDB调试ROS程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">4.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
             
 
           </div>
