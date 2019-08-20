@@ -108,20 +108,20 @@
 
 
 
-  <meta name="description" content="第6-7部分 事件处理与信号量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服务">
+  <meta name="description" content="第6-7部分 事件处理与条件变量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服">
 <meta name="keywords" content="c++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="&lt;翻译&gt; C++多线程编程(第6-10部分)">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/18/multithread2/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="第6-7部分 事件处理与信号量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服务">
+<meta property="og:description" content="第6-7部分 事件处理与条件变量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://thispointer.com//wp-content/uploads/2015/06/first.png">
 <meta property="og:image" content="https://thispointer.com//wp-content/uploads/2015/06/second_output.png">
-<meta property="og:updated_time" content="2019-08-18T16:10:06.933Z">
+<meta property="og:updated_time" content="2019-08-20T02:40:34.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&lt;翻译&gt; C++多线程编程(第6-10部分)">
-<meta name="twitter:description" content="第6-7部分 事件处理与信号量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服务">
+<meta name="twitter:description" content="第6-7部分 事件处理与条件变量现在我们需要设计一个网络应用，这个应用需要完成如下任务：  和服务器交互 从XML文件中加载一些数据 处理第2个任务中得到的数据  显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提高性能，我们可以将任务2设计成单独的子线程，而任务1和3设计成主线程。具体来说，线程1负责：  和服">
 <meta name="twitter:image" content="https://thispointer.com//wp-content/uploads/2015/06/first.png">
 
 
@@ -414,7 +414,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-19 00:10:06" itemprop="dateModified" datetime="2019-08-19T00:10:06+08:00">2019-08-19</time>
+                <time title="Modified: 2019-08-20 10:40:34" itemprop="dateModified" datetime="2019-08-20T10:40:34+08:00">2019-08-20</time>
               
             
           </span>
@@ -465,7 +465,7 @@
       
 
       
-        <h2 id="第6-7部分-事件处理与信号量"><a href="#第6-7部分-事件处理与信号量" class="headerlink" title="第6-7部分 事件处理与信号量"></a>第6-7部分 事件处理与信号量</h2><p>现在我们需要设计一个网络应用，这个应用需要完成如下任务：</p>
+        <h2 id="第6-7部分-事件处理与条件变量"><a href="#第6-7部分-事件处理与条件变量" class="headerlink" title="第6-7部分 事件处理与条件变量"></a>第6-7部分 事件处理与条件变量</h2><p>现在我们需要设计一个网络应用，这个应用需要完成如下任务：</p>
 <ol>
 <li>和服务器交互</li>
 <li>从XML文件中加载一些数据</li>
@@ -492,18 +492,18 @@
 <p><img src="https://thispointer.com//wp-content/uploads/2015/06/second_output.png" alt></p>
 <p>然而这种做法<strong>存在缺陷</strong>：</p>
 <p>反复的上锁和解锁会消耗大量不必要的时间。有没有更好的解决方法呢？</p>
-<h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><p>为了杜绝反复的轮询，我们希望线程1能够在事件未发生时阻塞，只有当事件发生后才继续。这种想法可以通过<code>信号量</code>实现。</p>
-<p>信号量是一种用于两个线程交互的变量。一个线程等待它被激活，另一个线程则负责激活它。</p>
-<p>使用信号量时需要添加头文件：</p>
+<h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><p>为了杜绝反复的轮询，我们希望线程1能够在事件未发生时阻塞，只有当事件发生后才继续。这种想法可以通过<code>条件变量</code>实现。</p>
+<p>条件变量是一种用于两个线程交互的变量。一个线程等待它被激活，另一个线程则负责激活它。</p>
+<p>使用条件变量时需要添加头文件：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;condition_variable&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<p>让我们看一下信号量如何工作：</p>
+<p>让我们看一下条件变量如何工作：</p>
 <ul>
-<li>首先定义一个互斥锁，用于信号量的工作。</li>
-<li>线程1调用信号量的<code>wait()</code>函数，这个函数在其内部查询互斥锁，检查是否满足了指定的条件。</li>
-<li>如果没有满足指定条件，信号量释放这个互斥锁并阻塞线程1。</li>
-<li>线程2负责在指定条件满足是，将信号量激活。</li>
-<li>一旦信号量激活，线程1恢复运转。它首先检查指定条件是否真正满足(因为一个更高等级的调用也可能使线程1恢复运转)。</li>
+<li>首先定义一个互斥锁，用于条件变量的工作。</li>
+<li>线程1调用条件变量的<code>wait()</code>函数，这个函数在其内部查询互斥锁，检查是否满足了指定的条件。</li>
+<li>如果没有满足指定条件，条件变量释放这个互斥锁并阻塞线程1。</li>
+<li>线程2负责在指定条件满足是，将条件变量激活。</li>
+<li>一旦条件变量激活，线程1恢复运转。它首先检查指定条件是否真正满足(因为一个更高等级的调用也可能使线程1恢复运转)。</li>
 <li>如果是一个更高级的调用，那么线程1再次调用<code>wait()</code>函数。</li>
 </ul>
 <p>具体的代码实现如下：</p>
@@ -744,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第6-7部分-事件处理与信号量"><span class="nav-number">1.</span> <span class="nav-text">第6-7部分 事件处理与信号量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种方法"><span class="nav-number">1.1.</span> <span class="nav-text">第一种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种方法"><span class="nav-number">1.2.</span> <span class="nav-text">第二种方法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第6-7部分-事件处理与条件变量"><span class="nav-number">1.</span> <span class="nav-text">第6-7部分 事件处理与条件变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种方法"><span class="nav-number">1.1.</span> <span class="nav-text">第一种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种方法"><span class="nav-number">1.2.</span> <span class="nav-text">第二种方法</span></a></li></ol></li></ol></div>
             
 
           </div>
