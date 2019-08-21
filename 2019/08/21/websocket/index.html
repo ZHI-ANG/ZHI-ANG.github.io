@@ -118,11 +118,11 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-5b71d794906f9db7c27b36cf11ede05c_hd.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-101193ed11bd882d59e9429dd8882cf3_hd.jpg">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-b0bc3974bd8b04c67d460d55d6945145_hd.jpg">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/08/21/websocket/streaming.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-361334a3f98fb379672d837d894c19fb_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-9063570c22d3e12a821ab8c07834f18f_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-7d294ad757603c74f233f4803d467103_hd.jpg">
-<meta property="og:updated_time" content="2019-08-21T02:05:18.224Z">
+<meta property="og:updated_time" content="2019-08-21T02:11:32.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&lt;转载&gt; WebSocket 与 Socket.IO">
 <meta name="twitter:description" content="转自：知乎专栏https://zhuanlan.zhihu.com/p/23467317，作者：编译青春  1. 什么是 WebSocket提到 WebSocket，我首先会想到 “及时通讯” 和 “推送” 这类词。在 WebSocket 以前，很多网站通过其他方式来推送信息，下面我们先看看以前的推送方式，这样，有比较才能看出 WebSocket 的优势。 1.1 （短）轮询（Polling）">
@@ -401,7 +401,7 @@
                 
               
 
-              <time title="Created: 2019-08-21 17:17:10 / Modified: 10:05:18" itemprop="dateCreated datePublished" datetime="2019-08-21T17:17:10+08:00">2019-08-21</time>
+              <time title="Created: 2019-08-21 17:17:10 / Modified: 10:11:32" itemprop="dateCreated datePublished" datetime="2019-08-21T17:17:10+08:00">2019-08-21</time>
             
 
             
@@ -471,7 +471,7 @@
 <p>当然了，如果 server 的数据长时间没有更新，一段时间后，请求便会超时，client 收到超时信息后，再立即发送一个新的请求给 server。</p>
 <p>如图所示，在长轮询机制下，client 向 server 发送了请求后，server会等数据更新完才会将数据返回，而不是像（短）轮询一样不管数据有没有更新然后立即返回。</p>
 <p>这种方式也有弊端。当 server 向 client 发送数据后，必须等待下一次请求才能将新的数据发送出去，这样 client 接收到新数据的间隔最短时间便是 2 * RTT（往返时间），这样便无法应对 server 端数据更新频率较快的情况。</p>
-<h4 id="1-2-2-流技术（Http-Streaming）"><a href="#1-2-2-流技术（Http-Streaming）" class="headerlink" title="1.2.2 流技术（Http Streaming）"></a>1.2.2 流技术（Http Streaming）</h4><p><img src="https://pic2.zhimg.com/80/v2-b0bc3974bd8b04c67d460d55d6945145_hd.jpg" alt></p>
+<h4 id="1-2-2-流技术（Http-Streaming）"><a href="#1-2-2-流技术（Http-Streaming）" class="headerlink" title="1.2.2 流技术（Http Streaming）"></a>1.2.2 流技术（Http Streaming）</h4><p><img src="streaming.png" alt></p>
 <p>流技术基于 Iframe。Iframe 是 HTML 标记，这个标记的 src 属性会保持对指定 server 的长连接请求，server 就可以不断地向 client 返回数据。</p>
 <p>可以看出，流技术与长轮询的区别是长轮询本质上还是一种轮询方式，只不过连接的时间有所增加，想要向 server 获取新的数据，client 只能一遍遍的发送请求；而流技术是一直保持连接，不需要 client 请求，当数据发生改变时，server 自动的将数据发送给 client。</p>
 <p>如图所示，client 与 server 建立连接之后，便不会断开。当数据发生变化，server 便将数据发送给 client。</p>
