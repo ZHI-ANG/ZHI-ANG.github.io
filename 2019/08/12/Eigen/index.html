@@ -456,13 +456,17 @@
 <h3 id="1-Combining-multiple-transformations-in-Eigen-into-one-transformation-matrix"><a href="#1-Combining-multiple-transformations-in-Eigen-into-one-transformation-matrix" class="headerlink" title="1. Combining multiple transformations in Eigen into one transformation matrix"></a><a href="https://stackoverflow.com/questions/18785938/combining-multiple-transformations-in-eigen-into-one-transformation-matrix" target="_blank" rel="noopener">1. Combining multiple transformations in Eigen into one transformation matrix</a></h3><p><strong>Q:</strong> I have several transformations in Eigen, in the form of translations (<code>Eigen::Vector3f</code>) and rotations (<code>Eigen::Quaternionf</code>). I would like to combine all these transformations, in an order of my choosing, into a 4x4 transformation matrix <code>Eigen::Matrix4f</code>.</p>
 <p>For example, I would like to apply the following transformations in the order A, B, C, D, E:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Eigen::Vector3f translation_A;</span><br><span class="line">Eigen::Quaternionf rotation_B;</span><br><span class="line">Eigen::Quaternionf rotation_C;</span><br><span class="line">Eigen::Quaternionf rotation_D;</span><br><span class="line">Eigen::Vector3f translation_E;</span><br></pre></td></tr></table></figure>
+
 <p><strong>A:</strong> </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Eigen::Vector3f trans_vec_A;</span><br><span class="line"><span class="comment">//note that you have to create a Translation because multiplying a </span></span><br><span class="line"><span class="comment">//Transform with a vector will _apply_ the transform to the vector</span></span><br><span class="line">Eigen::Translation&lt;<span class="keyword">float</span>,<span class="number">3</span>&gt; translation_A(trans_vec_A);</span><br><span class="line">Eigen::Quaternionf rotation_B;</span><br><span class="line">Eigen::Quaternionf rotation_C;</span><br><span class="line">Eigen::Quaternionf rotation_D;</span><br><span class="line">Eigen::Vector3f trans_vec_E;</span><br><span class="line">Eigen::Translation&lt;<span class="keyword">float</span>,<span class="number">3</span>&gt; translation_E(trans_vec_E);</span><br><span class="line">Eigen::Transform&lt;<span class="keyword">float</span>,<span class="number">3</span>,Affine&gt; combined = </span><br><span class="line">      translation_A * rotation_B * rotation_C * rotation_D * translation_E;</span><br></pre></td></tr></table></figure>
+
 <hr>
 <p>Note that</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined = A*B*C*D*E</span><br></pre></td></tr></table></figure>
+
 <p>so <code>combined</code> applied to a vector <code>v</code> is</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined*v = A*B*C*D*E*v = A*(B*(C*(D*(E*v))))</span><br></pre></td></tr></table></figure>
+
 <p>that is, <code>E</code> is applied first, then <code>D</code>, and so on. In my mind, this is the <em>correct</em> order, but that may be a matter of taste.</p>
 <p>then apply <code>pcl::transformPointCloud(*src_pointcloud, *dst_pointcloud, combined);</code></p>
 
@@ -511,8 +515,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/13/quaternion_vector/" rel="prev" title="四元数知识总结">
-                四元数知识总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/13/pf/" rel="prev" title="粒子滤波算法笔记(一):算法概述">
+                粒子滤波算法笔记(一):算法概述 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -585,7 +589,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -612,7 +616,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -643,7 +649,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
