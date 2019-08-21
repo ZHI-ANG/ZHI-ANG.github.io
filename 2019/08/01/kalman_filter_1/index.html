@@ -127,31 +127,29 @@
 
 
 
-  <meta name="description" content="一个线性时变系统，可以以下面的方程表示：  同时该系统可以被观测：  其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。 由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：    上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常">
+  <meta name="description" content="一个线性时变系统，可以以下面的方程表示：   同时该系统可以被观测：   其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。 由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：     上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵">
 <meta name="keywords" content="感知">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kalman Filter 简单理解1">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/01/kalman_filter_1/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="一个线性时变系统，可以以下面的方程表示：  同时该系统可以被观测：  其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。 由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：    上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常">
+<meta property="og:description" content="一个线性时变系统，可以以下面的方程表示：   同时该系统可以被观测：   其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。 由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：     上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{w_t}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{v_t}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{Q_t}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{R_t}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bw_t%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv_t%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BQ_t%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BR_t%7D">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{\tilde{x}_{t|t-1}} = \mathbf{F_t\tilde{x}_{t-1|t-1}}+\mathbf{B_tu_t}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BP_%7Bt%7Ct-1%7D%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BP_%7Bt%7Ct-1%7D%7D">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}_{t|t-1})(x_t-\hat{x}_{t|t-1})^T]">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = \mathbf{F_t}\mathbf{P_{t-1|t-1}}\mathbf{F_t}^T + \mathbf{Q_t}">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{\tilde{x}_{t|t}} = \mathbf{\hat{x}_{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = \mathbf{P_{t|t-1}}-\mathbf{K_tH_tP_{t|t-1}}">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{K_t} = \mathbf{P_{t|t-1}H_t^T(H_tP_{t|t-1}H_t^T+R_t)^{-1}}">
 <meta property="og:image" content="https://zhi-ang.github.io/2019/08/01/kalman_filter_1/kalman.png">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?y_1 \sim N(\mu_1, \sigma_1^2">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?y_2 \sim N(\mu_2, \sigma_2^2">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?y_{fused} \sim N(\mu_{fused}, \sigma_{fused}^2)\tag{9}">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mu_{fused} = \frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2} = \mu_1+\frac{\sigma_1^2(\mu_2-\mu_1)}{\sigma_1^2+\sigma_2^2} = \mu_1+K(\mu_2-H\mu_1)">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\sigma_{fused}^2 = \frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}=\sigma_1^2-\frac{\mu_1^4}{\sigma_1^2+\sigma_2^2} = \mu_1^2-KH\mu_1^2">
@@ -160,7 +158,7 @@
 <meta property="og:updated_time" content="2019-08-21T08:05:44.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kalman Filter 简单理解1">
-<meta name="twitter:description" content="一个线性时变系统，可以以下面的方程表示：  同时该系统可以被观测：  其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。 由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：    上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常">
+<meta name="twitter:description" content="一个线性时变系统，可以以下面的方程表示：   同时该系统可以被观测：   其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。 由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：     上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵">
 <meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}">
 
 
@@ -505,29 +503,40 @@
 
       
         <p>一个线性时变系统，可以以下面的方程表示：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}">
+
 <p>同时该系统可以被观测：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}"></p>
-<p>其中，<img src="http://latex.codecogs.com/gif.latex?\mathbf{w_t}" alt>和<img src="http://latex.codecogs.com/gif.latex?\mathbf{v_t}" alt>分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以<img src="http://latex.codecogs.com/gif.latex?\mathbf{Q_t}" alt>和<img src="http://latex.codecogs.com/gif.latex?\mathbf{R_t}" alt>表示。</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v_t}">
+
+<p>其中，<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bw_t%7D" alt>和<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv_t%7D" alt>分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BQ_t%7D" alt>和<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BR_t%7D" alt>表示。</p>
 <p>由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：  </p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{\tilde{x}_{t|t-1}} = \mathbf{F_t\tilde{x}_{t-1|t-1}}+\mathbf{B_tu_t}"></p>
-<p>上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常用<img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}}" alt>表示。<img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}}" alt>可以通过下式求得：  </p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}_{t|t-1})(x_t-\hat{x}_{t|t-1})^T]"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{\tilde{x}_{t|t-1}} = \mathbf{F_t\tilde{x}_{t-1|t-1}}+\mathbf{B_tu_t}">
+
+<p>上式仅仅对系统的均值进行了更新，为了准确的描述系统的状态分布，需要利用系统状态参数的协方差矩阵，通常用<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BP_%7Bt%7Ct-1%7D%7D" alt>表示。<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7BP_%7Bt%7Ct-1%7D%7D" alt>可以通过下式求得：  </p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = E[(x_t-\hat{x}_{t|t-1})(x_t-\hat{x}_{t|t-1})^T]">
+
 <p>利用(3)式，可以求出：  </p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = \mathbf{F_t}\mathbf{P_{t-1|t-1}}\mathbf{F_t}^T + \mathbf{Q_t}"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = \mathbf{F_t}\mathbf{P_{t-1|t-1}}\mathbf{F_t}^T + \mathbf{Q_t}">
+
 <p>利用观测方程更新状态方程可以写成如下公式，先不必纠结怎么得到：  </p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{\tilde{x}_{t|t}} = \mathbf{\hat{x}_{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}"></p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = \mathbf{P_{t|t-1}}-\mathbf{K_tH_tP_{t|t-1}}"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{\tilde{x}_{t|t}} = \mathbf{\hat{x}_{t|t-1}} + \mathbf{K_t(z_t-H_t\hat{x}_{t|t-1})}">
+
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{P_{t|t-1}} = \mathbf{P_{t|t-1}}-\mathbf{K_tH_tP_{t|t-1}}">
+
 <p>其中，  </p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{K_t} = \mathbf{P_{t|t-1}H_t^T(H_tP_{t|t-1}H_t^T+R_t)^{-1}}"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{K_t} = \mathbf{P_{t|t-1}H_t^T(H_tP_{t|t-1}H_t^T+R_t)^{-1}}">
+
 <p>为了理解(5)-(8)式，可以通过一个简单的例子来直观的说明其正确性。  </p>
 <p><img src="kalman.png" alt></p>
 <p>上图中，一个火车沿铁路前进，根据上一个状态，以及油门，可以估计当前的位置，如图中粉色高斯函数。而通过无线电设备，同样可以观测火车当前的位置，如图中蓝色的区域。为了更精确的描述火车的位置，我们将两个高斯函数相乘，得到最终的状态预测结果，如图中绿色的区域。</p>
-<p>更详细的，预测的概率密度函数服从<img src="http://latex.codecogs.com/gif.latex?y_1 \sim N(\mu_1, \sigma_1^2" alt>)，观测的概率密度函数服从<img src="http://latex.codecogs.com/gif.latex?y_2 \sim N(\mu_2, \sigma_2^2" alt>)。根据高斯函数相乘的性质，可以得到，</p>
-<p><img src="http://latex.codecogs.com/gif.latex?y_{fused} \sim N(\mu_{fused}, \sigma_{fused}^2)\tag{9}"></p>
+<p>更详细的，预测的概率密度函数服从![](<a href="http://latex.codecogs.com/gif.latex?y_1" target="_blank" rel="noopener">http://latex.codecogs.com/gif.latex?y_1</a> \sim N(\mu_1, \sigma_1^2))，观测的概率密度函数服从![](<a href="http://latex.codecogs.com/gif.latex?y_2" target="_blank" rel="noopener">http://latex.codecogs.com/gif.latex?y_2</a> \sim N(\mu_2, \sigma_2^2))。根据高斯函数相乘的性质，可以得到，</p>
+<img src="http://latex.codecogs.com/gif.latex?y_{fused} \sim N(\mu_{fused}, \sigma_{fused}^2)\tag{9}">
+
 <p>其中，</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mu_{fused} = \frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2} = \mu_1+\frac{\sigma_1^2(\mu_2-\mu_1)}{\sigma_1^2+\sigma_2^2} = \mu_1+K(\mu_2-H\mu_1)"></p>
-<p><img src="http://latex.codecogs.com/gif.latex?\sigma_{fused}^2 = \frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}=\sigma_1^2-\frac{\mu_1^4}{\sigma_1^2+\sigma_2^2} = \mu_1^2-KH\mu_1^2"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mu_{fused} = \frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2} = \mu_1+\frac{\sigma_1^2(\mu_2-\mu_1)}{\sigma_1^2+\sigma_2^2} = \mu_1+K(\mu_2-H\mu_1)">
+
+<img src="http://latex.codecogs.com/gif.latex?\sigma_{fused}^2 = \frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}=\sigma_1^2-\frac{\mu_1^4}{\sigma_1^2+\sigma_2^2} = \mu_1^2-KH\mu_1^2">
+
 <p>其中，<img src="http://latex.codecogs.com/gif.latex?K" alt>为卡尔曼增益，而<img src="http://latex.codecogs.com/gif.latex?H" alt>为转移矩阵，描述了观测方程和状态方程的映射关系。</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://synapticlab.co.kr/attachment/cfile1.uf@2737C54B590907BA0D46CE.pdf" target="_blank" rel="noopener">https://synapticlab.co.kr/attachment/cfile1.uf@2737C54B590907BA0D46CE.pdf</a></p>
 
