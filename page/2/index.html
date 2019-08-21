@@ -956,7 +956,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-08 00:06:00" itemprop="dateModified" datetime="2019-08-08T00:06:00+08:00">2019-08-08</time>
+                <time title="Modified: 2019-08-21 15:37:12" itemprop="dateModified" datetime="2019-08-21T15:37:12+08:00">2019-08-21</time>
               
             
           </span>
@@ -1009,8 +1009,14 @@
       
         
           
-          一个线性时变系统，可以以下面的方程表示：$$\mathbf{x_t} = \mathbf{F_tx_{t-1}}+\mathbf{B_tu_t}+\mathbf{w_t}\tag{1}$$
-同时该系统可以被观测：$$\mathbf{z_t} = \mathbf{H_tx_t} + \mathbf{v
+          一个线性时变系统，可以以下面的方程表示：
+
+
+同时该系统可以被观测：
+
+
+其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。
+由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：  
           ...
           <!--noindex-->
           
