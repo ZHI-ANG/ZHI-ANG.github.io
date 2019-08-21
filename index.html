@@ -810,9 +810,11 @@
 
 std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数：
 1f(a,b,c);
+
 但是我们有时只需要输入两个参数：
 1g(a,b) := f(a,4,b);
-这里的g就是f的偏函数
+
+这里的g就是f的偏
           ...
           <!--noindex-->
           
@@ -1169,11 +1171,9 @@ std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数�
           1 滤波方法对比
 
 
-
 方法
 优点
 缺点
-
 
 
 
@@ -1192,7 +1192,7 @@ Unscented Kalman filter
 非多模，难以处理非高斯/非线性
 
 
-Ex
+Exte
           ...
           <!--noindex-->
           
@@ -1302,12 +1302,24 @@ Ex
                 
               
 
-              <time title="Created: 2019-08-13 17:17:10 / Modified: 22:23:08" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
+              <time title="Created: 2019-08-13 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-21 16:03:03" itemprop="dateModified" datetime="2019-08-21T16:03:03+08:00">2019-08-21</time>
               
             
           </span>
@@ -1363,7 +1375,7 @@ Ex
           
 项目中遇到的四元数常见用法，持续更新……
 
-1. 四元数与向量相乘结论： 任意向量$\mathbf{v}$沿着以单位向量定义的旋转轴$\mathbf{u}$旋转$\theta$度之后的$\mathbf{v’}$可以使用四元数乘法获得。令$v=[0,\mathbf{v}], q=[\cos(\fra
+1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令![](http://latex.codecogs.com/gif.latex?v=[0,\mathbf{v}], q=[\cos(\frac{1}{2
           ...
           <!--noindex-->
           
@@ -1717,9 +1729,11 @@ Ex
           第1部分 创建多线程C++11创建新线程c++11中新增了对线程的支持，我们可以利用std::thread类添加新线程。
 编译时需要添加头文件：
 1#include &lt;thread&gt;
+
 并使用命令：
 1g++ -std=c++11 sample.cpp -lpthread
-std::thr
+
+std::t
           ...
           <!--noindex-->
           
