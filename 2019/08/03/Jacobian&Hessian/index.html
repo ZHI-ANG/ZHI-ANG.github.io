@@ -108,18 +108,39 @@
 
 
 
-  <meta name="description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：$$\begin{bmatrix}\frac{\partial y_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial y_1}{\partia">
+  <meta name="description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：  此矩阵表示为，或者 如果是中的一点，F在点可微，那么在这点的导数由给出。在这种情况下，由描述的线性算子就是接近点的F的最优线性逼近，逼近于：   Jacobian行列式对于Jacobian是方阵的函数F，Jacobian">
 <meta name="keywords" content="非线性优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jacobian和Hessian">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/03/Jacobian&Hessian/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：$$\begin{bmatrix}\frac{\partial y_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial y_1}{\partia">
+<meta property="og:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：  此矩阵表示为，或者 如果是中的一点，F在点可微，那么在这点的导数由给出。在这种情况下，由描述的线性算子就是接近点的F的最优线性逼近，逼近于：   Jacobian行列式对于Jacobian是方阵的函数F，Jacobian">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-19T13:10:46.244Z">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?F:R_n->R_m">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\begin{bmatrix}
+\frac{\partial y_1}{\partial x_1} & \cdots & \frac{\partial y_1}{\partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n} \\
+\end{bmatrix}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?J_F(x_1, \cdots, x_n)">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\frac{\partial(y_1,\cdots,y_m)}{\partial(x_1,\cdots,x_n)}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{p}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?R_n">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{p}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?J_F(\mathbf{p})">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?F(\mathbf{p})">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{p}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{x}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{p}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?F(\mathbf{x}) \approx F(\mathbf{p})+J_F(\mathbf{p})\cdot(\mathbf{x}-\mathbf{p})">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{p}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{p}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{p}">
+<meta property="og:updated_time" content="2019-08-21T08:20:03.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jacobian和Hessian">
-<meta name="twitter:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设$F:R_n-&amp;gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：$$\begin{bmatrix}\frac{\partial y_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial y_1}{\partia">
+<meta name="twitter:description" content="JacobianJacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。 假设是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：  此矩阵表示为，或者 如果是中的一点，F在点可微，那么在这点的导数由给出。在这种情况下，由描述的线性算子就是接近点的F的最优线性逼近，逼近于：   Jacobian行列式对于Jacobian是方阵的函数F，Jacobian">
+<meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?F:R_n->R_m">
 
 
 
@@ -411,7 +432,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-19 21:10:46" itemprop="dateModified" datetime="2019-08-19T21:10:46+08:00">2019-08-19</time>
+                <time title="Modified: 2019-08-21 16:20:03" itemprop="dateModified" datetime="2019-08-21T16:20:03+08:00">2019-08-21</time>
               
             
           </span>
@@ -463,9 +484,17 @@
 
       
         <h2 id="Jacobian"><a href="#Jacobian" class="headerlink" title="Jacobian"></a>Jacobian</h2><p>Jacobian矩阵体现了可微方程与给出点的最优线性逼近，功能类似于多元函数导数。</p>
-<p>假设$F:R_n-&gt;R_m$是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：<br>$$<br>\begin{bmatrix}<br>\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n} \<br>\vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_m}{\partial x_n} \<br>\end{bmatrix}<br>$$<br>此矩阵表示为$J_F(x_1, \cdots, x_n)$，或者$\frac{\partial(y_1,\cdots,y_m)}{\partial(x_1,\cdots,x_n)}$</p>
-<p>如果$\mathbf{p}$是$R_n$中的一点，$F$在$\mathbf{p}$点可微，那么在这点的导数由$J_F(\mathbf{p})$给出。在这种情况下，由$F(\mathbf{p})$描述的线性算子就是接近点$\mathbf{p}$的$F$的最优线性逼近，$\mathbf{x}$逼近于$\mathbf{p}$：<br>$$<br>F(\mathbf{x}) \approx F(\mathbf{p})+J_F(\mathbf{p})\cdot(\mathbf{x}-\mathbf{p})<br>$$</p>
-<h2 id="Jacobian行列式"><a href="#Jacobian行列式" class="headerlink" title="Jacobian行列式"></a>Jacobian行列式</h2><p>对于Jacobian是方阵的函数$F$，Jacobian行列式给出了$F$在接近给定点的重要信息。若$F$在$\mathbf{p}$点的Jacobian行列式不为0，则$F$在该点附近具有反函数。如果$\mathbf{p}$点的Jacobian行列式为正，则$F$在该点的取向不变，反之则改变。而行列式的绝对值反映了函数$F$在$\mathbf{p}$点的缩放因子。</p>
+<p>假设<img src="http://latex.codecogs.com/gif.latex?F:R_n->R_m">是一个从欧式n维空间转换到欧式m维空间的函数，其Jacobian矩阵为：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?\begin{bmatrix}
+\frac{\partial y_1}{\partial x_1} & \cdots & \frac{\partial y_1}{\partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n} \\
+\end{bmatrix}"></p>
+<p>此矩阵表示为<img src="http://latex.codecogs.com/gif.latex?J_F(x_1, \cdots, x_n)">，或者<img src="http://latex.codecogs.com/gif.latex?\frac{\partial(y_1,\cdots,y_m)}{\partial(x_1,\cdots,x_n)}"></p>
+<p>如果<img src="http://latex.codecogs.com/gif.latex?\mathbf{p}">是<img src="http://latex.codecogs.com/gif.latex?R_n">中的一点，F在<img src="http://latex.codecogs.com/gif.latex?\mathbf{p}">点可微，那么在这点的导数由<img src="http://latex.codecogs.com/gif.latex?J_F(\mathbf{p})">给出。在这种情况下，由<img src="http://latex.codecogs.com/gif.latex?F(\mathbf{p})">描述的线性算子就是接近点<img src="http://latex.codecogs.com/gif.latex?\mathbf{p}">的F的最优线性逼近，<img src="http://latex.codecogs.com/gif.latex?\mathbf{x}">逼近于<img src="http://latex.codecogs.com/gif.latex?\mathbf{p}">：</p>
+<img src="http://latex.codecogs.com/gif.latex?F(\mathbf{x}) \approx F(\mathbf{p})+J_F(\mathbf{p})\cdot(\mathbf{x}-\mathbf{p})">
+
+<h2 id="Jacobian行列式"><a href="#Jacobian行列式" class="headerlink" title="Jacobian行列式"></a>Jacobian行列式</h2><p>对于Jacobian是方阵的函数F，Jacobian行列式给出了F在接近给定点的重要信息。若F在<img src="http://latex.codecogs.com/gif.latex?\mathbf{p}">点的Jacobian行列式不为0，则F在该点附近具有反函数。如果<img src="http://latex.codecogs.com/gif.latex?\mathbf{p}">点的Jacobian行列式为正，则F在该点的取向不变，反之则改变。而行列式的绝对值反映了函数F在<img src="http://latex.codecogs.com/gif.latex?\mathbf{p}">点的缩放因子。</p>
 
       
     </div>
