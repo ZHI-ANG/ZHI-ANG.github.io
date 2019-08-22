@@ -127,41 +127,32 @@
 
 
 
-  <meta name="description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到：  如果想要获得旋转轴，只需要将的每一项除以就可以了。   具体的推导过程，见参">
+  <meta name="description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：   这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此">
 <meta name="keywords" content="SLAM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="四元数知识总结">
-<meta property="og:url" content="https://zhi-ang.github.io/2019/08/13/quaternion_vector/index.html">
+<meta property="og:title" content="视觉SLAM中的李群与李代数总结">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/22/Lie_Group/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到：  如果想要获得旋转轴，只需要将的每一项除以就可以了。   具体的推导过程，见参">
+<meta property="og:description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：   这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Ctheta">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv'%7D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?v'=qvq%5E*=qvq%5E%7B-1%7D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?v'=qvq%5E*">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?q=%5Ba,%5Cmathbf%7Bb%7D%5D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Ctheta%7D%7B2%7D=%5Ccos%5E%7B-1%7D(a)">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bb%7D">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Csin(%5Cfrac%7B%5Ctheta%7D%7B2%7D)%E2%80%8B">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}">
-<meta property="og:updated_time" content="2019-08-22T06:58:53.506Z">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\min_TJ(T)=\sum_i^N{||z_i-Tp_i||_2^2}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{R}(t) = \exp(\phi_0^{\land}t)">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Image_Tangent-plane.svg/330px-Image_Tangent-plane.svg.png">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\exp(\phi^\land) &= \exp(\theta\mathbf{a^\land})\\&=\cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{aa^T}+\sin\theta\mathbf{a^\land}">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/08/22/Lie_Group/so3.png">
+<meta property="og:updated_time" content="2019-08-22T07:09:53.182Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="四元数知识总结">
-<meta name="twitter:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到：  如果想要获得旋转轴，只需要将的每一项除以就可以了。   具体的推导过程，见参">
-<meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D">
+<meta name="twitter:title" content="视觉SLAM中的李群与李代数总结">
+<meta name="twitter:description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：   这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此">
+<meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?\min_TJ(T)=\sum_i^N{||z_i-Tp_i||_2^2}">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/13/quaternion_vector/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/22/Lie_Group/">
 
 
 
@@ -171,7 +162,7 @@
   };
 </script>
 
-  <title>四元数知识总结 | 極東魔術昼寝結社の夏</title>
+  <title>视觉SLAM中的李群与李代数总结 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -387,7 +378,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/quaternion_vector/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/22/Lie_Group/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -404,7 +395,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">四元数知识总结
+          <h1 class="post-title" itemprop="name headline">视觉SLAM中的李群与李代数总结
               
             
           </h1>
@@ -429,24 +420,12 @@
                 
               
 
-              <time title="Created: 2019-08-13 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
+              <time title="Created: 2019-08-22 17:17:10 / Modified: 15:09:53" itemprop="dateCreated datePublished" datetime="2019-08-22T17:17:10+08:00">2019-08-22</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-08-22 14:58:53" itemprop="dateModified" datetime="2019-08-22T14:58:53+08:00">2019-08-22</time>
               
             
           </span>
@@ -497,19 +476,30 @@
       
 
       
-        <blockquote>
-<p>项目中遇到的四元数常见用法，持续更新……</p>
-</blockquote>
-<h2 id="1-四元数与向量相乘"><a href="#1-四元数与向量相乘" class="headerlink" title="1. 四元数与向量相乘"></a>1. 四元数与向量相乘</h2><p>结论： 任意向量<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D" alt>沿着以单位向量定义的旋转轴<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D" alt>旋转<img src="http://latex.codecogs.com/gif.latex?%5Ctheta" alt>度之后的<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv'%7D" alt>可以使用四元数乘法获得。令<img src="http://latex.codecogs.com/gif.latex?v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">，那么：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?v'=qvq%5E*=qvq%5E%7B-1%7D" alt></p>
-<p>换句话说，如果有<img src="http://latex.codecogs.com/gif.latex?q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">，那么<img src="http://latex.codecogs.com/gif.latex?v'=qvq%5E*" alt>可以将<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D" alt>沿着<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D" alt>旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数<img src="http://latex.codecogs.com/gif.latex?q=%5Ba,%5Cmathbf%7Bb%7D%5D" alt>，如果想要提取对应的旋转的角度，那么我们可以直接得到：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Ctheta%7D%7B2%7D=%5Ccos%5E%7B-1%7D(a)" alt></p>
-<p>如果想要获得旋转轴，只需要将<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bb%7D" alt>的每一项除以<img src="http://latex.codecogs.com/gif.latex?%5Csin(%5Cfrac%7B%5Ctheta%7D%7B2%7D)%E2%80%8B" alt>就可以了。</p>
-<img src="http://latex.codecogs.com/gif.latex?\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}">
+        <h2 id="李群与李代数"><a href="#李群与李代数" class="headerlink" title="李群与李代数"></a>李群与李代数</h2><p>在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：</p>
+<img src="http://latex.codecogs.com/gif.latex?\min_TJ(T)=\sum_i^N{||z_i-Tp_i||_2^2}">
 
-<p>具体的推导过程，见参考文献1。</p>
+<p>这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。</p>
+<p>这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此我们可以<strong>通过对李代数求导来间接对旋转矩阵求导</strong>。</p>
+<h2 id="指数映射"><a href="#指数映射" class="headerlink" title="指数映射"></a>指数映射</h2><p>从《视觉SLAM十四讲》第4讲中，我们知道SO3和so3之间满足指数映射：</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{R}(t) = \exp(\phi_0^{\land}t)">
+
+<p>这个式子的是通过对旋转矩阵<strong>R</strong>在t=0附近一阶泰勒展开得到的，因此向量Φ反映了<strong>R</strong>的导数性质。可以理解为，李群空间中的任意一个旋转矩阵<strong>R</strong>都可以用一个向量的反对称矩阵的指数来近似。从微分几何的概念上看，向量Φ所属的空间是<strong>R</strong>所属的流形空间的正切空间，<strong>正切空间上的单位向量代表了流形空间上该点所有可能的移动方向，模长代表了移动的快慢</strong>。(图片来自<a href="https://en.wikipedia.org/wiki/Tangent_space" target="_blank" rel="noopener">Wikipedia</a>)</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Image_Tangent-plane.svg/330px-Image_Tangent-plane.svg.png" alt></p>
+<h2 id="Rodrigues’s-Formula"><a href="#Rodrigues’s-Formula" class="headerlink" title="Rodrigues’s Formula"></a>Rodrigues’s Formula</h2><p>从《视觉SLAM十四讲》第3讲中，我们知道旋转向量<strong>n</strong>和旋转矩阵<strong>R</strong>之间存在如下的对应关系：</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}">
+
+<p>这个公式被成为Rodrigues’s Formula。同时，书中第四讲中，给出了李群SO3和李代数so3之间的对应关系，和上面的公式类似：</p>
+<img src="http://latex.codecogs.com/gif.latex?\exp(\phi^\land) &= \exp(\theta\mathbf{a^\land})\\&=\cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{aa^T}+\sin\theta\mathbf{a^\land}">
+
+<p>因此，通过对比我们可以看出，旋转向量空间其实就是李代数空间。因此我们可以说<strong>旋转矩阵的导数可以由对应的旋转向量指定，指导如何在旋转矩阵中作微积分运算</strong>。</p>
+<h2 id="李代数求导与微扰"><a href="#李代数求导与微扰" class="headerlink" title="李代数求导与微扰"></a>李代数求导与微扰</h2><p>由于李代数由向量组成，因此对加法运算封闭。所以李代数可以根据我们熟悉的导数定义(加法)进行求导。然而这种求导的结果中有复杂的Jacobian，所以一般采用微扰法进行求导：对李群进行微扰然后对该扰动求导。如下图所示，红色代表对李代数求导，结果中有Jacobian；而黑色代表微扰法，结果很简洁。</p>
+<p><img src="so3.png" alt></p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
-<li><a href="https://github.com/Krasjet/quaternion" target="_blank" rel="noopener">https://github.com/Krasjet/quaternion</a></li>
+<li><p>知乎专栏<a href="https://zhuanlan.zhihu.com/p/47330137" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/47330137</a></p>
+</li>
+<li><p>高翔 视觉SLAM十四讲</p>
+</li>
 </ol>
 
       
@@ -547,19 +537,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/13/pf/" rel="next" title="粒子滤波算法笔记(一):算法概述">
-                <i class="fa fa-chevron-left"></i> 粒子滤波算法笔记(一):算法概述
-              </a>
+              <a href="/2019/08/21/websocket/" rel="next" title="<转载> WebSocket 与 Socket.IO">
+                <i class="fa fa-chevron-left"></i> <转载> WebSocket 与 Socket.IO
+              </转载></a>
             
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/18/multithread2/" rel="prev" title="<翻译> C++多线程编程(第6-10部分)">
-                <翻译> C++多线程编程(第6-10部分) <i class="fa fa-chevron-right"></i>
-              </翻译></a>
             
           </div>
         </div>
@@ -748,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-四元数与向量相乘"><span class="nav-number">1.</span> <span class="nav-text">1. 四元数与向量相乘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">1.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#李群与李代数"><span class="nav-number">1.</span> <span class="nav-text">李群与李代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数映射"><span class="nav-number">2.</span> <span class="nav-text">指数映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rodrigues’s-Formula"><span class="nav-number">3.</span> <span class="nav-text">Rodrigues’s Formula</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#李代数求导与微扰"><span class="nav-number">4.</span> <span class="nav-text">李代数求导与微扰</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">4.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
             
 
           </div>
