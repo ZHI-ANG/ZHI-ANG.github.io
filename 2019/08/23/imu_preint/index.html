@@ -127,25 +127,35 @@
 
 
 
-  <meta name="description" content="ros::spin()和ros::spinOnce()的作用ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。 很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。  以一定间隔处理回调 一般而言，你很少会希望ROS">
-<meta name="keywords" content="ROS">
+  <meta name="description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：   其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：   这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新">
+<meta name="keywords" content="SLAM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ros::spin()和ros::spinOnce()">
-<meta property="og:url" content="https://zhi-ang.github.io/2019/08/02/ros_spin/index.html">
+<meta property="og:title" content="VIO中的IMU预积分">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/08/23/imu_preint/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="ros::spin()和ros::spinOnce()的作用ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。 很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。  以一定间隔处理回调 一般而言，你很少会希望ROS">
+<meta property="og:description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：   其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：   这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-07T13:43:26.958Z">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\xi = \arg\min\limits_\xi\frac{1}{2}\sum_i\|\mathbf{r}_i\|_{\Sigma_i}^2">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{J^T\Sigma^{-1}J\delta\xi = -J^T\Sigma^{-1}r}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\Sigma^{-1}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\arg\min\limits_{\chi}(prior+imgerror+imuerror)">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\sum_{i\in B}\rho(\|\mathbf{r}_b(\mathbf{z}_{b_ib_{i+1}},\chi)\|_{\Sigma_{b_ib_{i+1}}}^2)">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{x=\hat{x}+\delta x}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{\delta x_k = \mathbf{F}\delta x_{k-1}+Gn_{k-1}}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\Sigma_k = F \Sigma_{k-1} F^T + GQG^T">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\Sigma_{b_ib_{i+1}}">
+<meta property="og:updated_time" content="2019-08-23T15:26:26.757Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ros::spin()和ros::spinOnce()">
-<meta name="twitter:description" content="ros::spin()和ros::spinOnce()的作用ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。 很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。  以一定间隔处理回调 一般而言，你很少会希望ROS">
+<meta name="twitter:title" content="VIO中的IMU预积分">
+<meta name="twitter:description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：   其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：   这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新">
+<meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?\xi = \arg\min\limits_\xi\frac{1}{2}\sum_i\|\mathbf{r}_i\|_{\Sigma_i}^2">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/02/ros_spin/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/08/23/imu_preint/">
 
 
 
@@ -155,7 +165,7 @@
   };
 </script>
 
-  <title>ros::spin()和ros::spinOnce() | 極東魔術昼寝結社の夏</title>
+  <title>VIO中的IMU预积分 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -371,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/02/ros_spin/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/23/imu_preint/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -388,7 +398,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ros::spin()和ros::spinOnce()
+          <h1 class="post-title" itemprop="name headline">VIO中的IMU预积分
               
             
           </h1>
@@ -413,24 +423,12 @@
                 
               
 
-              <time title="Created: 2019-08-02 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-02T17:17:10+08:00">2019-08-02</time>
+              <time title="Created: 2019-08-23 17:17:10 / Modified: 23:26:26" itemprop="dateCreated datePublished" datetime="2019-08-23T17:17:10+08:00">2019-08-23</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-08-07 21:43:26" itemprop="dateModified" datetime="2019-08-07T21:43:26+08:00">2019-08-07</time>
               
             
           </span>
@@ -447,7 +445,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ROS/" itemprop="url" rel="index"><span itemprop="name">ROS</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a></span>
 
                 
                 
@@ -481,28 +479,29 @@
       
 
       
-        <h3 id="ros-spin-和ros-spinOnce-的作用"><a href="#ros-spin-和ros-spinOnce-的作用" class="headerlink" title="ros::spin()和ros::spinOnce()的作用"></a>ros::spin()和ros::spinOnce()的作用</h3><p>ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。</p>
-<p>很少有应用场景适合直接采用ros::spinOnce()，下面的特殊情况需要特殊处理。</p>
-<ol>
-<li><p>以一定间隔处理回调</p>
-<p>一般而言，你很少会希望ROS回调函数只在固定的时间间隔被调用。比如一个消息的频率为100HZ，而ros::spinOnce()仅仅5HZ，而同时queue_size为1，那么你将丢失95/100的消息。</p>
-<p>这种情况下，使用ROS::Timer是一个更好的选择。</p>
-</li>
-<li><p>存在ROS以外的其他回调函数</p>
-<p>比如使用另一个需要处理异步消息的库，你就需要将这个库中类似于spinOnce()的函数同spinOnce()一起放到主循环函数中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ros::<span class="function">Rate <span class="title">r</span><span class="params">(<span class="number">100</span>)</span></span>;</span><br><span class="line"><span class="keyword">while</span> (ros::ok())</span><br><span class="line">&#123;</span><br><span class="line">  libusb_handle_events_timeout(...); <span class="comment">// Handle USB events</span></span><br><span class="line">  ros::spinOnce();                   <span class="comment">// Handle ROS events</span></span><br><span class="line">  r.sleep();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将ROS集成到其他框架中</p>
-<p>例如在使用OpenGL和GLUT时，一种集成ROS的方法是告诉GLUT的主循环，每10ms就调用以下ros::spinOnce()：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">timerCb</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; ros::spinOnce(); &#125;</span><br><span class="line"></span><br><span class="line">glutTimerFunc(<span class="number">10</span>, timerCb, <span class="number">0</span>);</span><br><span class="line">glutMainLoop(); <span class="comment">// Never returns</span></span><br></pre></td></tr></table></figure>
+        <h2 id="一般的最小二乘问题"><a href="#一般的最小二乘问题" class="headerlink" title="一般的最小二乘问题"></a>一般的最小二乘问题</h2><p>一般的最小二乘问题，都可以写成下面的形式：</p>
+<img src="http://latex.codecogs.com/gif.latex?\xi = \arg\min\limits_\xi\frac{1}{2}\sum_i\|\mathbf{r}_i\|_{\Sigma_i}^2">
 
-</li>
-</ol>
-<h3 id="ros-spin-和ros-spinOnce-的区别"><a href="#ros-spin-和ros-spinOnce-的区别" class="headerlink" title="ros::spin()和ros::spinOnce()的区别"></a>ros::spin()和ros::spinOnce()的区别</h3><p>ros::spin()再调用之后不会返回，因此主程序不会继续执行，所以循环没有意义。而ros::spinOnce()在调用之后会返回，继续执行后面的程序。</p>
-<p>ros::spin()函数一般不会出现在循环中，因为程序执行到spin()后就不调用其他语句了，也就是说该循环没有任何意义，还有就是spin()函数后面一定不能有其他语句(return 0 除外)，有也是白搭，不会执行的。ros::spinOnce()的用法相对来说很灵活，但往往需要考虑调用消息的时机，调用频率，以及消息池的大小，这些都要根据现实情况协调好，不然会造成数据丢包或者延迟的错误。</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://answers.ros.org/question/11887/significance-of-rosspinonce/" target="_blank" rel="noopener">https://answers.ros.org/question/11887/significance-of-rosspinonce/</a></p>
-<p>[<a href="http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning]" target="_blank" rel="noopener">http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning]</a>(<a href="http://wiki.ros.org/roscpp/Overview/Callbacks" target="_blank" rel="noopener">http://wiki.ros.org/roscpp/Overview/Callbacks</a> and Spinning)</p>
-<p><a href="https://www.cnblogs.com/liu-fa/p/5925381.html" target="_blank" rel="noopener">https://www.cnblogs.com/liu-fa/p/5925381.html</a></p>
+<p>其中，ξ是优化变量，<strong>r</strong>是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{J^T\Sigma^{-1}J\delta\xi = -J^T\Sigma^{-1}r}">
+
+<p>这里的<img src="http://latex.codecogs.com/gif.latex?\Sigma^{-1}">是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新权重的作用。</p>
+<h2 id="VIO中的BA"><a href="#VIO中的BA" class="headerlink" title="VIO中的BA"></a>VIO中的BA</h2><p>VIO的优化问题，对应到上一节中，需要求解的方程是：</p>
+<img src="http://latex.codecogs.com/gif.latex?\arg\min\limits_{\chi}(prior+imgerror+imuerror)">
+
+<p>这三个残差项分别是边缘化的先验信息，IMU测量误差，视觉重投影误差。现在只关注IMU测量误差：</p>
+<img src="http://latex.codecogs.com/gif.latex?\sum_{i\in B}\rho(\|\mathbf{r}_b(\mathbf{z}_{b_ib_{i+1}},\chi)\|_{\Sigma_{b_ib_{i+1}}}^2)">
+
+<p>从上述表达式中看出，为了构建优化方程，我们需要知道IMU测量误差对于状态量的Jacobian，以及协方差矩阵。</p>
+<h2 id="IMU预积分"><a href="#IMU预积分" class="headerlink" title="IMU预积分"></a>IMU预积分</h2><p>IMU预积分的目的在于得到相机在相邻两个视频帧之间的运动，作为系统的预测值；同时得到IMU在两个视频帧之间的误差传递(协方差矩阵)，作为VI紧耦合优化时的权重矩阵。</p>
+<h3 id="1-预积分的变量分离"><a href="#1-预积分的变量分离" class="headerlink" title="1. 预积分的变量分离"></a>1. 预积分的变量分离</h3><p>IMU积分公式是求得当前视频帧时刻，IMU在世界坐标系中的位移(p)，旋转(q)以及速度(v)。既然是世界坐标系下的变量，就一定带有从当前IMU坐标系到世界坐标系的变换矩阵。而这个变换矩阵是需要优化的变量，当该变量每次在后端优化更新后，IMU积分公式都需要重新积分。于是，IMU预积分从希望求得当前视频帧时刻IMU的世界坐标系的[p,q,v]，变成了求得当前视频帧时刻的IMU相对于上一视频帧时刻的[p,q,v]。这样就将变换矩阵从积分中分离出来。</p>
+<h3 id="2-预积分的协方差矩阵"><a href="#2-预积分的协方差矩阵" class="headerlink" title="2. 预积分的协方差矩阵"></a>2. 预积分的协方差矩阵</h3><p>为了求得IMU在预积分中的协方差矩阵，就要得到IMU在预积分过程中误差的传递方程。可以通过对状态向量<img src="http://latex.codecogs.com/gif.latex?\mathbf{x=\hat{x}+\delta x}">进行泰勒展开，得到如下的形式：</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{\delta x_k = \mathbf{F}\delta x_{k-1}+Gn_{k-1}}">
+
+<p>这个式子是从上一时刻的误差预测当前误差，得到的是误差的均值。协方差矩阵则是</p>
+<img src="http://latex.codecogs.com/gif.latex?\Sigma_k = F \Sigma_{k-1} F^T + GQG^T">
+
+<p>这个$\Sigma_k$便是用于求解当前时刻状态量的协方差矩阵，即第一节中的<img src="http://latex.codecogs.com/gif.latex?\Sigma_{b_ib_{i+1}}"></p>
 
       
     </div>
@@ -526,7 +525,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ROS/" rel="tag"># ROS</a>
+            <a href="/tags/SLAM/" rel="tag"># SLAM</a>
           
         </div>
       
@@ -539,8 +538,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/01/kalman_filter_1/" rel="next" title="Kalman Filter 简单理解1">
-                <i class="fa fa-chevron-left"></i> Kalman Filter 简单理解1
+              <a href="/2019/08/22/Lie_Group/" rel="next" title="视觉SLAM中的李群与李代数总结">
+                <i class="fa fa-chevron-left"></i> 视觉SLAM中的李群与李代数总结
               </a>
             
           </div>
@@ -548,10 +547,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/03/Jacobian&Hessian/" rel="prev" title="Jacobian和Hessian">
-                Jacobian和Hessian <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -740,7 +735,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ros-spin-和ros-spinOnce-的作用"><span class="nav-number">1.</span> <span class="nav-text">ros::spin()和ros::spinOnce()的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ros-spin-和ros-spinOnce-的区别"><span class="nav-number">2.</span> <span class="nav-text">ros::spin()和ros::spinOnce()的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一般的最小二乘问题"><span class="nav-number">1.</span> <span class="nav-text">一般的最小二乘问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIO中的BA"><span class="nav-number">2.</span> <span class="nav-text">VIO中的BA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IMU预积分"><span class="nav-number">3.</span> <span class="nav-text">IMU预积分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-预积分的变量分离"><span class="nav-number">3.1.</span> <span class="nav-text">1. 预积分的变量分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-预积分的协方差矩阵"><span class="nav-number">3.2.</span> <span class="nav-text">2. 预积分的协方差矩阵</span></a></li></ol></li></ol></div>
             
 
           </div>
