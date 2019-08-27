@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
 <meta property="og:description" content="总结工程实践常用的Eigen库应用，持续更新…  1. Combining multiple transformations in Eigen into one transformation matrixQ: I have several transformations in Eigen, in the form of translations (Eigen::Vector3f) and rot">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-12T14:32:10.655Z">
+<meta property="og:updated_time" content="2019-08-27T07:21:06.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Eigen常见用法总结">
 <meta name="twitter:description" content="总结工程实践常用的Eigen库应用，持续更新…  1. Combining multiple transformations in Eigen into one transformation matrixQ: I have several transformations in Eigen, in the form of translations (Eigen::Vector3f) and rot">
@@ -413,12 +413,24 @@
                 
               
 
-              <time title="Created: 2019-08-12 17:17:10 / Modified: 22:32:10" itemprop="dateCreated datePublished" datetime="2019-08-12T17:17:10+08:00">2019-08-12</time>
+              <time title="Created: 2019-08-12 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-12T17:17:10+08:00">2019-08-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-27 15:21:06" itemprop="dateModified" datetime="2019-08-27T15:21:06+08:00">2019-08-27</time>
               
             
           </span>
@@ -488,6 +500,39 @@
 
 <p>that is, <code>E</code> is applied first, then <code>D</code>, and so on. In my mind, this is the <em>correct</em> order, but that may be a matter of taste.</p>
 <p>then apply <code>pcl::transformPointCloud(*src_pointcloud, *dst_pointcloud, combined);</code></p>
+<h3 id="2-Cast-Eigen-MatrixXd-to-Eigen-MatrixXf"><a href="#2-Cast-Eigen-MatrixXd-to-Eigen-MatrixXf" class="headerlink" title="2. Cast Eigen::MatrixXd to Eigen::MatrixXf"></a><a href="https://stackoverflow.com/questions/24764031/cast-eigenmatrixxd-to-eigenmatrixxf" target="_blank" rel="noopener">2. Cast Eigen::MatrixXd to Eigen::MatrixXf</a></h3><p>*<em>Q: *</em>I am using <a href="http://eigen.tuxfamily.org/index.php?title=Main_Page" target="_blank" rel="noopener">Eigen</a> on a C++ program.</p>
+<p>I wonder if there is a way to cast from <code>Eigen::MatrixXd</code> to <code>Eigen::MatrixXf</code>.<br><code>static_cast &lt;Eigen::MatrixXf&gt;</code> doesn’t seem to work and neither <code>A.cast&lt;MatrixXf&gt;</code> (this is the cast method from Eigen).</p>
+<p>Any solution for this type of cast?</p>
+<p>*<em>A: *</em>Try this:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Eigen::MatrixXd d;                       <span class="comment">// Matrix of doubles.</span></span><br><span class="line">Eigen::MatrixXf f = d.cast &lt;<span class="keyword">float</span>&gt; ();   <span class="comment">// Matrix of floats.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-template-function-casting"><a href="#3-template-function-casting" class="headerlink" title="3. template function casting"></a><a href="https://stackoverflow.com/questions/30339239/eigen-c-casting" target="_blank" rel="noopener">3. template function casting</a></h3><p>*<em>Q: *</em>I’m having trouble multiplying two matrices using the Eigen library. I have the following function. Here is a small example of what I would like to do :</p>
+<p>Program name: testMatOp.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> DerivedA, <span class="keyword">typename</span> DerivedB&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">multiply</span><span class="params">(<span class="keyword">const</span> Eigen::MatrixBase&lt;DerivedA&gt; &amp;A,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">const</span> Eigen::ArrayBase&lt;DerivedB&gt; &amp;B)</span></span>&#123;</span><br><span class="line">  Eigen::<span class="function">MatrixXf <span class="title">C</span><span class="params">(<span class="number">2</span>,<span class="number">4</span>)</span></span>;</span><br><span class="line">  C.<span class="built_in">array</span>() = A.<span class="built_in">array</span>().rowwise() * B.cast&lt;<span class="keyword">float</span>&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Eigen::<span class="function">MatrixXf <span class="title">A</span><span class="params">(<span class="number">2</span>,<span class="number">4</span>)</span></span>;</span><br><span class="line">  Eigen::<span class="function">MatrixXf <span class="title">C</span><span class="params">(<span class="number">2</span>,<span class="number">4</span>)</span></span>;</span><br><span class="line">  <span class="comment">//igen::VectorXf v(4);</span></span><br><span class="line">  Eigen::Array&lt;<span class="keyword">int</span>,<span class="number">1</span>,Eigen::Dynamic&gt;B;</span><br><span class="line">  B.resize(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">  A &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">9</span>,</span><br><span class="line">         <span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  B &lt;&lt; <span class="number">0</span>,</span><br><span class="line">       <span class="number">1</span>,</span><br><span class="line">       <span class="number">0</span>,</span><br><span class="line">       <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  multiply(A,B);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>I would like to pass Matrix A and Vector B to multiply. I understand that Eigen does not do automatic promotion and that B needs to be casted as a float vector in order for the multiplication to happen. When I compile, I get the following compilation error among others</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">testMatOp.cpp:34:44: error: expected primary-expression before 'float'</span><br><span class="line">testMatOp.cpp:34:44: error: expected ';' before 'float'</span><br><span class="line">testMatOp.cpp: In instantiation of 'void multiply(const Eigen::MatrixBase&lt;Derived&gt;&amp;, const Eigen::ArrayBase&lt;DerivedB&gt;&amp;) [with DerivedA = Eigen::Matrix&lt;float, -1, -1&gt;; DerivedB = Eigen::Array&lt;int, 1, -1&gt;]':</span><br><span class="line">testMatOp.cpp:<span class="number">54</span>:<span class="number">15</span>:   required from here</span><br><span class="line">testMatOp.cpp:34:3: error: no match for 'operator*' in '((const Eigen::DenseBase&lt;Eigen::ArrayWrapper&lt;const Eigen::Matrix&lt;float, -1, -1&gt; &gt; &gt;*)(&amp;(&amp; A)-&gt;Eigen::MatrixBase&lt;Derived&gt;::array&lt;Eigen::Matrix&lt;float, -1, -1&gt; &gt;()))-&gt;Eigen::DenseBase&lt;Derived&gt;::rowwise&lt;Eigen::ArrayWrapper&lt;const Eigen::Matrix&lt;float, -1, -1&gt; &gt; &gt;() * B.Eigen::ArrayBase&lt;Derived&gt;::cast&lt;NewType&gt;'</span><br><span class="line">testMatOp.cpp:<span class="number">34</span>:<span class="number">3</span>: note: candidates are:</span><br><span class="line">In file included from ../<span class="number">3</span>rdparty/Eigen/Core:<span class="number">336</span>:<span class="number">0</span>,</span><br><span class="line">                 from ../<span class="number">3</span>rdparty/Eigen/Dense:<span class="number">1</span>,</span><br><span class="line">                 from testMatOp.cpp:<span class="number">26</span>:</span><br></pre></td></tr></table></figure>
+
+<p>What might I be doing wrong. I did take a look at this post : <a href="https://stackoverflow.com/questions/24764031/cast-eigenmatrixxd-to-eigenmatrixxf" target="_blank" rel="noopener">Cast Eigen::MatrixXd to Eigen::MatrixXf</a>which correctly describes how to cast, but I’m unable to make it work for this example.</p>
+<p>*<em>A: *</em><code>B</code> is a <a href="http://en.cppreference.com/w/cpp/language/dependent_name" target="_blank" rel="noopener">dependent name</a>. To access its template member <code>cast</code>, you have to write</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B.<span class="keyword">template</span> cast</span><br></pre></td></tr></table></figure>
+
+<p>C++ is context-sensitive. When encountering a <code>&lt;</code>, it tries to figure out if it is <code>operator&lt;</code> or angle bracket.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// std::vector is a template, so &lt; is an angle bracket</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span> &lt; <span class="keyword">float</span> &gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3 is not a template, so &lt; is operator&lt;</span></span><br><span class="line"><span class="number">3</span> &lt; <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>However, the type of <code>B</code> is <code>const Eigen::ArrayBase&lt;DerivedB&gt;&amp;</code>, which depends on the template parameter <code>DerivedB</code>. C++ cannot decide if <code>B.cast</code> is a template. When this happens, C++ always guess that it is not a template and interprets the following <code>&lt;</code> as <code>operator&lt;</code>.</p>
+<p>Why C++ is so <em>stupid</em> that it cannot recognize previously declared template <code>ArrayBase::cast</code>? Well, someone may specialize <code>ArrayBase&lt;int&gt;</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArrayBase</span>&lt;int&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> cast = <span class="number">3</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Therefore one cannot deduce that <code>B.cast</code> is a template.</p>
+<h3 id="4-Using-an-aligned-allocator"><a href="#4-Using-an-aligned-allocator" class="headerlink" title="4. Using an aligned allocator"></a><a href="https://eigen.tuxfamily.org/dox/group__TopicStlContainers.html" target="_blank" rel="noopener">4. Using an aligned allocator</a></h3><p>STL containers take an optional template parameter, the allocator type. When using STL containers on <a href="https://eigen.tuxfamily.org/dox/group__TopicFixedSizeVectorizable.html" target="_blank" rel="noopener">fixed-size vectorizable Eigen types</a>, you need tell the container to use an allocator that will always allocate memory at 16-byte-aligned locations. Fortunately, <a href="https://eigen.tuxfamily.org/dox/namespaceEigen.html" target="_blank" rel="noopener">Eigen</a> does provide such an allocator: <a href="https://eigen.tuxfamily.org/dox/classEigen_1_1aligned__allocator.html" target="_blank" rel="noopener">Eigen::aligned_allocator</a>.</p>
+<p>For example, instead of</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">int</span>, Eigen::Vector4f&gt;</span><br></pre></td></tr></table></figure>
+
+<p>you need to use</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">int</span>, Eigen::Vector4f, <span class="built_in">std</span>::less&lt;<span class="keyword">int</span>&gt;, Eigen::aligned_allocator &gt; &gt;</span><br></pre></td></tr></table></figure>
+
+<p>Note that the third parameter “std::less<int>“ is just the default value, but we have to include it because we want to specify the fourth parameter, which is the allocator type.</int></p>
 
       
     </div>
@@ -534,8 +579,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/13/quaternion_vector/" rel="prev" title="四元数知识总结">
-                四元数知识总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/13/pf/" rel="prev" title="粒子滤波算法笔记(一):算法概述">
+                粒子滤波算法笔记(一):算法概述 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -725,7 +770,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Combining-multiple-transformations-in-Eigen-into-one-transformation-matrix"><span class="nav-number">1.</span> <span class="nav-text">1. Combining multiple transformations in Eigen into one transformation matrix</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Combining-multiple-transformations-in-Eigen-into-one-transformation-matrix"><span class="nav-number">1.</span> <span class="nav-text">1. Combining multiple transformations in Eigen into one transformation matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Cast-Eigen-MatrixXd-to-Eigen-MatrixXf"><span class="nav-number">2.</span> <span class="nav-text">2. Cast Eigen::MatrixXd to Eigen::MatrixXf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-template-function-casting"><span class="nav-number">3.</span> <span class="nav-text">3. template function casting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Using-an-aligned-allocator"><span class="nav-number">4.</span> <span class="nav-text">4. Using an aligned allocator</span></a></li></ol></div>
             
 
           </div>
