@@ -127,20 +127,27 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="極東魔術昼寝結社の夏">
-<meta property="og:url" content="https://zhi-ang.github.io/archives/2018/11/index.html">
+  <meta name="description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
+<meta name="keywords" content="SLAM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lego LOAM论文笔记">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/09/05/lego_loam/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
+<meta property="og:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam/overview.png">
+<meta property="og:updated_time" content="2019-09-05T15:34:14.246Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="極東魔術昼寝結社の夏">
+<meta name="twitter:title" content="Lego LOAM论文笔记">
+<meta name="twitter:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
+<meta name="twitter:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam/overview.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/archives/2018/11/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/09/05/lego_loam/">
 
 
 
@@ -150,7 +157,7 @@
   };
 </script>
 
-  <title>Archive | 極東魔術昼寝結社の夏</title>
+  <title>Lego LOAM论文笔记 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -199,7 +206,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -304,7 +311,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -346,104 +353,229 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 19 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/05/lego_loam/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/11/18/First-Page/" itemprop="url">
-              
-                <span itemprop="name">建站纪念</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Lego LOAM论文笔记
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-18T17:17:10+08:00" content="2018-11-18">
-          11-18
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
 
+              
+                
+              
+
+              <time title="Created: 2019-09-05 17:17:10 / Modified: 23:34:14" itemprop="dateCreated datePublished" datetime="2019-09-05T17:17:10+08:00">2019-09-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>LOAM</th>
+<th>LeGO-LOAM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>特征提取</td>
+<td>从原始点云中直接计算特征</td>
+<td>先进行地面分割，再对分割点云计算特征</td>
+</tr>
+<tr>
+<td>特征匹配</td>
+<td>直接对原始点云进行匹配</td>
+<td>label相同的点才匹配，LM两步优化</td>
+</tr>
+<tr>
+<td>局部地图</td>
+<td>选100M以内的特征点集作为局部地图</td>
+<td>选k帧内的特征点集作为局部地图</td>
+</tr>
+</tbody></table>
+<p>这些改进都是为了提高计算速度，以达到在嵌入式平台上实现实时建图的效果。</p>
+<p>LeGO-LOAM的系统框架如图所示：</p>
+<p><img src="overview.png" alt></p>
+<p>可以看出LeGO-LOAM由四个部分构成：</p>
+<ol>
+<li><strong>点云分割</strong>：将原始点云进行聚类，分为地面簇和非地面簇，非地面中又有很多簇，其中小于30个点的簇被移除。剩余的点云簇都有自己独特的标签。这样做排除了一些噪点和不稳定的小物体，提高了激光特征的稳定性。</li>
+<li><strong>特征提取</strong>：首先将激光一扫分成6部分，对每个部分中的点云簇进行光滑度计算，得到面和边两种特征集${\mathbb{F_p,F_e}}$。光滑度高的为平面，反之的为边。分别对面和边进一步筛选出最光滑的面和最陡峭的边用做下一步的匹配特征集${\mathbf{F_p,F_e}}$。</li>
+<li><strong>激光里程计</strong>：将上一步得到的${\mathbf{F_p^t,F_e^t}}$，和前一时刻的特征集${\mathbb{F_p^{t-1},F_e^{t-1}}}$进行匹配。同样是边和边匹配，面和面匹配。LM算法分别优化两种匹配结果并得到位姿估计$\mathbf{T} = (t_x, t_y, t_z, \theta_{roll}, \theta_{pitch}, \theta_{yaw})$。优化面和面的匹配得到$t_x,\theta_{roll},\theta_{pitch}$，优化边与边的匹配得到$t_y, t_z,\theta_{yaw} $。</li>
+<li><strong>建图和位姿图优化</strong>：用上一步得到的位姿作为节点，加入到位姿图中。当存在回环检测时，进行全局位姿优化。同时用前$k$时刻的激光特征点集${\mathbb{F_p^{t-k},F_e^{t-k},…F_p^{t-1},F_e^{t-1}}}$构成局部地图，和当前时刻的匹配点集进行匹配，并LM优化，得到当前的位姿估计。</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/tree/master/LeGO-LOAM" target="_blank" rel="noopener">https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/tree/master/LeGO-LOAM</a></p>
+
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/01/JS_Iterator/" rel="next" title="<摘录> ES6中的迭代器和生成器">
+                <i class="fa fa-chevron-left"></i> <摘录> ES6中的迭代器和生成器
+              </摘录></a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -464,8 +596,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -593,6 +734,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -728,6 +885,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
