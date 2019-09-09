@@ -136,7 +136,17 @@
 <meta property="og:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/overview.png">
-<meta property="og:updated_time" content="2019-09-05T15:34:14.246Z">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{F_p,F_e\}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p,F_e}\}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p^t,F_e^t}\}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{F_p^{t-1},F_e^{t-1}\}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{T} = (t_x, t_y, t_z, \theta_{roll}, \theta_{pitch}, \theta_{yaw})">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?t_x,\theta_{roll},\theta_{pitch}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?t_y, t_z,\theta_{yaw} ">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{F_p^{t-k},F_e^{t-k},...F_p^{t-1},F_e^{t-1}\}">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/lego_loam_node.png">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/lego_loam_tf.png">
+<meta property="og:updated_time" content="2019-09-09T02:29:23.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lego LOAM论文笔记">
 <meta name="twitter:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
@@ -415,12 +425,24 @@
                 
               
 
-              <time title="Created: 2019-09-05 17:17:10 / Modified: 23:34:14" itemprop="dateCreated datePublished" datetime="2019-09-05T17:17:10+08:00">2019-09-05</time>
+              <time title="Created: 2019-09-05 17:17:10" itemprop="dateCreated datePublished" datetime="2019-09-05T17:17:10+08:00">2019-09-05</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-09 10:29:23" itemprop="dateModified" datetime="2019-09-09T10:29:23+08:00">2019-09-09</time>
               
             
           </span>
@@ -502,10 +524,14 @@
 <p>可以看出LeGO-LOAM由四个部分构成：</p>
 <ol>
 <li><strong>点云分割</strong>：将原始点云进行聚类，分为地面簇和非地面簇，非地面中又有很多簇，其中小于30个点的簇被移除。剩余的点云簇都有自己独特的标签。这样做排除了一些噪点和不稳定的小物体，提高了激光特征的稳定性。</li>
-<li><strong>特征提取</strong>：首先将激光一扫分成6部分，对每个部分中的点云簇进行光滑度计算，得到面和边两种特征集${\mathbb{F_p,F_e}}$。光滑度高的为平面，反之的为边。分别对面和边进一步筛选出最光滑的面和最陡峭的边用做下一步的匹配特征集${\mathbf{F_p,F_e}}$。</li>
-<li><strong>激光里程计</strong>：将上一步得到的${\mathbf{F_p^t,F_e^t}}$，和前一时刻的特征集${\mathbb{F_p^{t-1},F_e^{t-1}}}$进行匹配。同样是边和边匹配，面和面匹配。LM算法分别优化两种匹配结果并得到位姿估计$\mathbf{T} = (t_x, t_y, t_z, \theta_{roll}, \theta_{pitch}, \theta_{yaw})$。优化面和面的匹配得到$t_x,\theta_{roll},\theta_{pitch}$，优化边与边的匹配得到$t_y, t_z,\theta_{yaw} $。</li>
-<li><strong>建图和位姿图优化</strong>：用上一步得到的位姿作为节点，加入到位姿图中。当存在回环检测时，进行全局位姿优化。同时用前$k$时刻的激光特征点集${\mathbb{F_p^{t-k},F_e^{t-k},…F_p^{t-1},F_e^{t-1}}}$构成局部地图，和当前时刻的匹配点集进行匹配，并LM优化，得到当前的位姿估计。</li>
+<li><strong>特征提取</strong>：首先将激光一扫分成6部分，对每个部分中的点云簇进行光滑度计算，得到面和边两种特征集<img src="http://latex.codecogs.com/gif.latex?\{F_p,F_e\}">。光滑度高的为平面，反之的为边。分别对面和边进一步筛选出最光滑的面和最陡峭的边用做下一步的匹配特征集<img src="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p,F_e}\}">。</li>
+<li><strong>激光里程计</strong>：将上一步得到的<img src="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p^t,F_e^t}\}">，和前一时刻的特征集<img src="http://latex.codecogs.com/gif.latex?\{F_p^{t-1},F_e^{t-1}\}">进行匹配。同样是边和边匹配，面和面匹配。LM算法分别优化两种匹配结果并得到位姿估计<img src="http://latex.codecogs.com/gif.latex?\mathbf{T} = (t_x, t_y, t_z, \theta_{roll}, \theta_{pitch}, \theta_{yaw})">。优化面和面的匹配得到<img src="http://latex.codecogs.com/gif.latex?t_x,\theta_{roll},\theta_{pitch}">，优化边与边的匹配得到<img src="http://latex.codecogs.com/gif.latex?t_y, t_z,\theta_{yaw} ">。</li>
+<li><strong>建图和位姿图优化</strong>：用上一步得到的位姿作为节点，加入到位姿图中。当存在回环检测时，进行全局位姿优化。同时用前<em>k</em>时刻的激光特征点集<img src="http://latex.codecogs.com/gif.latex?\{F_p^{t-k},F_e^{t-k},...F_p^{t-1},F_e^{t-1}\}">构成局部地图，和当前时刻的匹配点集进行匹配，并LM优化，得到当前的位姿估计。</li>
 </ol>
+<h3 id="ROS-Node节点图"><a href="#ROS-Node节点图" class="headerlink" title="ROS Node节点图"></a>ROS Node节点图</h3><p>节点图如下，可以看出程序和论文中叙述的流程基本一致。</p>
+<p><img src="lego_loam_node.png" alt></p>
+<h3 id="ROS-tf树"><a href="#ROS-tf树" class="headerlink" title="ROS tf树"></a>ROS tf树</h3><p>tf树如下，其中虚线并不属于tf树，只是为了说明坐标系之间的关系，方便理解。</p>
+<p><img src="lego_loam_tf.png" alt></p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/tree/master/LeGO-LOAM" target="_blank" rel="noopener">https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/tree/master/LeGO-LOAM</a></p>
 
       
@@ -744,7 +770,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS-Node节点图"><span class="nav-number">1.</span> <span class="nav-text">ROS Node节点图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS-tf树"><span class="nav-number">2.</span> <span class="nav-text">ROS tf树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
