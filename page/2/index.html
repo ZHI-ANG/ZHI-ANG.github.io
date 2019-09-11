@@ -367,7 +367,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/pf/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/quaternion_vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -387,7 +387,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/13/pf/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">粒子滤波算法笔记(一):算法概述</a>
+                <a href="/2019/08/13/quaternion_vector/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">四元数知识总结</a>
               
             
           </h1>
@@ -412,12 +412,24 @@
                 
               
 
-              <time title="Created: 2019-08-13 17:17:10 / Modified: 22:22:50" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
+              <time title="Created: 2019-08-13 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-22 14:58:53" itemprop="dateModified" datetime="2019-08-22T14:58:53+08:00">2019-08-22</time>
               
             
           </span>
@@ -434,7 +446,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/感知/" itemprop="url" rel="index"><span itemprop="name">感知</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a></span>
 
                 
                 
@@ -470,36 +482,17 @@
       
         
           
-          1 滤波方法对比
+          
+项目中遇到的四元数常见用法，持续更新……
 
+1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：
 
-方法
-优点
-缺点
-
-
-
-Discrete Bayes filter
-多模，非线性
-离散，单变量
-
-
-Kalman filter
-单模线性最优估计
-线性，单变量
-
-
-Unscented Kalman filter
-非线性，连续，多变量
-非多模，难以处理非高斯/非线性
-
-
-Exte
+换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那
           ...
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/13/pf/#more" rel="contents">
+              <a class="btn" href="/2019/08/13/quaternion_vector/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
