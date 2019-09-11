@@ -127,20 +127,29 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="極東魔術昼寝結社の夏">
-<meta property="og:url" content="https://zhi-ang.github.io/tags/JS/index.html">
+  <meta name="description" content="局部传感器(如相机，IMU，激光雷达等)被广泛应用于建图和定位算法。尽管这些传感器能够在没有GPS信息的区域，实现良好的局部定位和局部建图效果，但是这些传感器只能提供局部观测，限制了其应用场景：  第一个问题是局部观测数据缺乏全局约束，当我们每次在不同的位置运行算法时，都会得到不同坐标系下的定位和建图结果，因而难以将这些测量结果结合起来，形成全局效果。 第二个问题是基于局部观测的估计算法必然存在累">
+<meta name="keywords" content="SLAM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VINS Fusion论文阅读笔记">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/09/11/vins_fusion/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
+<meta property="og:description" content="局部传感器(如相机，IMU，激光雷达等)被广泛应用于建图和定位算法。尽管这些传感器能够在没有GPS信息的区域，实现良好的局部定位和局部建图效果，但是这些传感器只能提供局部观测，限制了其应用场景：  第一个问题是局部观测数据缺乏全局约束，当我们每次在不同的位置运行算法时，都会得到不同坐标系下的定位和建图结果，因而难以将这些测量结果结合起来，形成全局效果。 第二个问题是基于局部观测的估计算法必然存在累">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/09/11/vins_fusion/vins_fusion.png">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/09/11/vins_fusion/constraints.PNG">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{z}_t^{GPS}-h_t^{GPS}(X) = \mathbf{z}_t^{GPS}-h_t^{GPS}(\mathbf{x_t})=\mathbf{P}_t^{GPS}-\mathbf{P}_t^{w}">
+<meta property="og:updated_time" content="2019-09-11T09:48:20.599Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="極東魔術昼寝結社の夏">
+<meta name="twitter:title" content="VINS Fusion论文阅读笔记">
+<meta name="twitter:description" content="局部传感器(如相机，IMU，激光雷达等)被广泛应用于建图和定位算法。尽管这些传感器能够在没有GPS信息的区域，实现良好的局部定位和局部建图效果，但是这些传感器只能提供局部观测，限制了其应用场景：  第一个问题是局部观测数据缺乏全局约束，当我们每次在不同的位置运行算法时，都会得到不同坐标系下的定位和建图结果，因而难以将这些测量结果结合起来，形成全局效果。 第二个问题是基于局部观测的估计算法必然存在累">
+<meta name="twitter:image" content="https://zhi-ang.github.io/2019/09/11/vins_fusion/vins_fusion.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/tags/JS/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/09/11/vins_fusion/">
 
 
 
@@ -150,7 +159,7 @@
   };
 </script>
 
-  <title>Tag: JS | 極東魔術昼寝結社の夏</title>
+  <title>VINS Fusion论文阅读笔记 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -199,7 +208,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -270,7 +279,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -346,82 +355,216 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JS<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/11/vins_fusion/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/09/01/JS_Iterator/" itemprop="url">
-              
-                <span itemprop="name"><摘录> ES6中的迭代器和生成器</摘录></span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">VINS Fusion论文阅读笔记
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-01T17:17:10+08:00" content="2019-09-01">
-          09-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-11 17:17:10 / Modified: 17:48:20" itemprop="dateCreated datePublished" datetime="2019-09-11T17:17:10+08:00">2019-09-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>局部传感器(如相机，IMU，激光雷达等)被广泛应用于建图和定位算法。尽管这些传感器能够在没有GPS信息的区域，实现良好的局部定位和局部建图效果，但是这些传感器只能提供局部观测，限制了其应用场景：</p>
+<ol>
+<li>第一个问题是局部观测数据缺乏全局约束，当我们每次在不同的位置运行算法时，都会得到不同坐标系下的定位和建图结果，因而难以将这些测量结果结合起来，形成全局效果。</li>
+<li>第二个问题是基于局部观测的估计算法必然存在累计漂移，尽管回环检测可以一定程度上消除漂移，但是对于数据量较大的大范围场景，算法依然难以处理。</li>
+</ol>
+<p>相比于局部传感器，全局传感器(如GPS，气压计和磁力计等)可以提供全局观测。这些传感器以地球为坐标系，并且输出的观测数据的方差不随时间累计而增加。但这些传感器也存在一些问题，导致无法直接用于精确定位和建图。以GPS为例，GPS数据通常不平滑，存在噪声，且输出速率低。</p>
+<p>因此，一个简单而直观的想法是将局部传感器和全局传感器结合起来，以达到局部精确全局零漂的效果。这也就是vins fusion这篇论文的核心内容。</p>
+<p>vins fusion的算法架构如图所示：</p>
+<p><img src="vins_fusion.png" alt></p>
+<p>下图以因子图的方式表示观测和状态之间的约束：</p>
+<p><img src="constraints.PNG" alt></p>
+<p>其中圆形为状态，黄色正方形为局部观测的约束，即来自VO/VIO的相对位姿变换，而其他矩形为全局观测的约束，比如紫色为来自GPS的约束。</p>
+<p>局部约束(残差)的构建参考vins mono论文，计算的是相邻两帧之间的位姿残差。这里只讨论GPS带来的全局约束。首先当然是将GPS坐标，也就是经纬度转换为大地坐标系。习惯上选择右手坐标系，x,y,z轴正方向分别是北东地或东北天方向。接下来就可以计算得到全局约束的残差：</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{z}_t^{GPS}-h_t^{GPS}(X) = \mathbf{z}_t^{GPS}-h_t^{GPS}(\mathbf{x_t})=\mathbf{P}_t^{GPS}-\mathbf{P}_t^{w}">
+
+<p>其中z为GPS测量值，X为状态预测，h方程为观测方程。X可以通过上一时刻状态以及当前时刻与上一时刻的局部约束计算出来。X的坐标系在全局坐标系下，以起点为远点。通过观测方程h，也就是GPS-全局坐标系的坐标变换转换到GPS坐标系下。这样就构建了一个全局约束。</p>
+<p>之后的优化就交给BA优化器进行迭代优化，vins fusion沿用了ceres作为优化器。</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<li><p>Tong Qin, Shaozu Cao, Jie Pan, and Shaojie Shen. “A General Optimization-based Framework for Global Pose Estimation with Multiple Sensors”</p>
+</li>
+<li><p><a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion" target="_blank" rel="noopener">https://github.com/HKUST-Aerial-Robotics/VINS-Fusion</a></p>
+</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/05/lego_loam_1/" rel="next" title="Lego LOAM论文笔记">
+                <i class="fa fa-chevron-left"></i> Lego LOAM论文笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -442,8 +585,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -571,6 +723,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -706,6 +874,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
