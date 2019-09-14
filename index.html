@@ -387,7 +387,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/09/11/vins_fusion/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">VINS Fusion论文阅读笔记</a>
+                <a href="/2019/09/11/vins_fusion/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">VINS Fusion算法解读</a>
               
             
           </h1>
@@ -412,12 +412,24 @@
                 
               
 
-              <time title="Created: 2019-09-11 17:17:10 / Modified: 17:48:20" itemprop="dateCreated datePublished" datetime="2019-09-11T17:17:10+08:00">2019-09-11</time>
+              <time title="Created: 2019-09-11 17:17:10" itemprop="dateCreated datePublished" datetime="2019-09-11T17:17:10+08:00">2019-09-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-14 13:01:03" itemprop="dateModified" datetime="2019-09-14T13:01:03+08:00">2019-09-14</time>
               
             
           </span>
@@ -470,9 +482,8 @@
       
         
           
-          局部传感器(如相机，IMU，激光雷达等)被广泛应用于建图和定位算法。尽管这些传感器能够在没有GPS信息的区域，实现良好的局部定位和局部建图效果，但是这些传感器只能提供局部观测，限制了其应用场景：
-
-第一个问题是局部观测数据缺乏全局约束，当我们每次在不同的位置运行算法时，都会得到不同坐标系下的定位和建
+          VINS Fusion简介VINS Fusion在VINS Mono的基础上，添加了GPS等可以获取全局观测信息的传感器，使得VINS可以利用全局信息消除累计误差，进而减小闭环依赖。此外，全局信息可以统一多机运行VINS Mono的坐标系，从而方便多机协同建图和定位。
+Fusion的思路局部传感器(
           ...
           <!--noindex-->
           
