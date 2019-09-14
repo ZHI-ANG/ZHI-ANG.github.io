@@ -138,7 +138,9 @@
 <meta property="og:image" content="https://zhi-ang.github.io/2019/09/11/vins_fusion/vins_fusion.png">
 <meta property="og:image" content="https://zhi-ang.github.io/2019/09/11/vins_fusion/constraints.PNG">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{z}_t^{GPS}-h_t^{GPS}(X) = \mathbf{z}_t^{GPS}-h_t^{GPS}(\mathbf{x_t})=\mathbf{P}_t^{GPS}-\mathbf{P}_t^{w}">
-<meta property="og:updated_time" content="2019-09-14T05:01:03.619Z">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?T_{GPS2VIO} = T_{world2GPS}^{-1}*T_{world2VIO}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?T_{GPS} = T_{GPS2VIO}*T_{VIO}">
+<meta property="og:updated_time" content="2019-09-14T05:04:47.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VINS Fusion算法解读">
 <meta name="twitter:description" content="VINS Fusion简介VINS Fusion在VINS Mono的基础上，添加了GPS等可以获取全局观测信息的传感器，使得VINS可以利用全局信息消除累计误差，进而减小闭环依赖。此外，全局信息可以统一多机运行VINS Mono的坐标系，从而方便多机协同建图和定位。 Fusion的思路局部传感器(如相机，IMU，激光雷达等)被广泛应用于建图和定位算法。尽管这些传感器能够在没有GPS信息的区域，实">
@@ -434,7 +436,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-09-14 13:01:03" itemprop="dateModified" datetime="2019-09-14T13:01:03+08:00">2019-09-14</time>
+                <time title="Modified: 2019-09-14 13:04:47" itemprop="dateModified" datetime="2019-09-14T13:04:47+08:00">2019-09-14</time>
               
             
           </span>
@@ -509,8 +511,11 @@
 <h3 id="2-GPS和VIO融合"><a href="#2-GPS和VIO融合" class="headerlink" title="2. GPS和VIO融合"></a>2. GPS和VIO融合</h3><p>VINS Fusion融合GPS和VIO数据的代码在<code>global_fusion/src/globalOpt.cpp</code>文件中，关键代码如下。</p>
 <h4 id="a-接收GPS数据，接收VIO数据并转到GPS坐标系"><a href="#a-接收GPS数据，接收VIO数据并转到GPS坐标系" class="headerlink" title="a. 接收GPS数据，接收VIO数据并转到GPS坐标系"></a>a. 接收GPS数据，接收VIO数据并转到GPS坐标系</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接收上面输入的vio数据</span></span><br><span class="line"><span class="keyword">void</span> GlobalOptimization::inputOdom(<span class="keyword">double</span> t, Eigen::Vector3d OdomP, Eigen::Quaterniond OdomQ)&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; localPose&#123;OdomP.x(), OdomP.y(), OdomP.z(), </span><br><span class="line">    					     OdomQ.w(), OdomQ.x(), OdomQ.y(), OdomQ.z()&#125;;</span><br><span class="line">    localPoseMap[t] = localPose;</span><br><span class="line">    <span class="comment">// 利用vio的局部坐标进行坐标变换，得到当前帧的全局位姿</span></span><br><span class="line">    Eigen::Quaterniond globalQ;</span><br><span class="line">    globalQ = WGPS_T_WVIO.block&lt;<span class="number">3</span>, <span class="number">3</span>&gt;(<span class="number">0</span>, <span class="number">0</span>) * OdomQ;</span><br><span class="line">    Eigen::Vector3d globalP = WGPS_T_WVIO.block&lt;<span class="number">3</span>, <span class="number">3</span>&gt;(<span class="number">0</span>, <span class="number">0</span>) * OdomP + WGPS_T_WVIO.block&lt;<span class="number">3</span>, <span class="number">1</span>&gt;(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; globalPose&#123;globalP.x(), globalP.y(), globalP.z(),</span><br><span class="line">                              globalQ.w(), globalQ.x(), globalQ.y(), globalQ.z()&#125;;</span><br><span class="line">    globalPoseMap[t] = globalPose;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收上面输入的gps数据</span></span><br><span class="line"><span class="keyword">void</span> GlobalOptimization::inputGPS(<span class="keyword">double</span> t, <span class="keyword">double</span> latitude, <span class="keyword">double</span> longitude, <span class="keyword">double</span> altitude, <span class="keyword">double</span> posAccuracy)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">double</span> xyz[<span class="number">3</span>];</span><br><span class="line">	GPS2XYZ(latitude, longitude, altitude, xyz); <span class="comment">// 将GPS的经纬度转到地面笛卡尔坐标系</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; tmp&#123;xyz[<span class="number">0</span>], xyz[<span class="number">1</span>], xyz[<span class="number">2</span>], posAccuracy&#125;;</span><br><span class="line">	GPSPositionMap[t] = tmp;</span><br><span class="line">    newGPS = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>上面出现了VIO数据的局部坐标转到GPS坐标的计算过程，其公式如下：<br>$$<br>T_{GPS2VIO} = T_{world2GPS}^{-1}*T_{world2VIO}<br>$$</p>
-<p>$$<br>T_{GPS} = T_{GPS2VIO}*T_{VIO}<br>$$</p>
+<p>上面出现了VIO数据的局部坐标转到GPS坐标的计算过程，其公式如下：</p>
+<img src="http://latex.codecogs.com/gif.latex?T_{GPS2VIO} = T_{world2GPS}^{-1}*T_{world2VIO}">
+
+<img src="http://latex.codecogs.com/gif.latex?T_{GPS} = T_{GPS2VIO}*T_{VIO}">
+
 <h4 id="b-融合优化"><a href="#b-融合优化" class="headerlink" title="b. 融合优化"></a>b. 融合优化</h4><p>这里是融合的关键代码，可以看出其流程如下：</p>
 <ol>
 <li>构建t_array和q_array，用来存入平移和旋转变量，方便输入优化方程，以及在优化后取出。</li>
