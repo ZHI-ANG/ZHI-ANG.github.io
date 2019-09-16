@@ -127,17 +127,18 @@
 
 
 
-  <meta name="description" content="ceres学习笔记 —— 以pose_graph_3d为例本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
+  <meta name="description" content="本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
+<meta name="keywords" content="SLAM,ceres">
 <meta property="og:type" content="article">
-<meta property="og:title" content="極東魔術昼寝結社の夏">
+<meta property="og:title" content="ceres学习笔记 —— 以pose_graph_3d为例">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/09/16/ceres_slam/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="ceres学习笔记 —— 以pose_graph_3d为例本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
+<meta property="og:description" content="本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-16T01:45:57.122Z">
+<meta property="og:updated_time" content="2019-09-16T03:40:56.266Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="極東魔術昼寝結社の夏">
-<meta name="twitter:description" content="ceres学习笔记 —— 以pose_graph_3d为例本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
+<meta name="twitter:title" content="ceres学习笔记 —— 以pose_graph_3d为例">
+<meta name="twitter:description" content="本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
 
 
 
@@ -154,7 +155,7 @@
   };
 </script>
 
-  <title> | 極東魔術昼寝結社の夏</title>
+  <title>ceres学习笔记 —— 以pose_graph_3d为例 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -387,7 +388,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">ceres学习笔记 —— 以pose_graph_3d为例
               
             
           </h1>
@@ -412,7 +413,7 @@
                 
               
 
-              <time title="Created: 2019-09-16 09:34:23 / Modified: 09:45:57" itemprop="dateCreated datePublished" datetime="2019-09-16T09:34:23+08:00">2019-09-16</time>
+              <time title="Created: 2019-09-16 17:17:10 / Modified: 11:40:56" itemprop="dateCreated datePublished" datetime="2019-09-16T17:17:10+08:00">2019-09-16</time>
             
 
             
@@ -422,6 +423,31 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/ceres/" itemprop="url" rel="index"><span itemprop="name">ceres</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -450,7 +476,7 @@
       
 
       
-        <h1 id="ceres学习笔记-——-以pose-graph-3d为例"><a href="#ceres学习笔记-——-以pose-graph-3d为例" class="headerlink" title="ceres学习笔记 —— 以pose_graph_3d为例"></a>ceres学习笔记 —— 以pose_graph_3d为例</h1><h2 id="本文目的"><a href="#本文目的" class="headerlink" title="本文目的"></a>本文目的</h2><p>参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。</p>
+        <h2 id="本文目的"><a href="#本文目的" class="headerlink" title="本文目的"></a>本文目的</h2><p>参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。</p>
 <h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2>
       
     </div>
@@ -472,6 +498,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+          
+            <a href="/tags/ceres/" rel="tag"># ceres</a>
+          
+        </div>
+      
 
       
       
@@ -481,19 +515,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/11/vins_fusion/" rel="next" title="VINS Fusion算法解读">
-                <i class="fa fa-chevron-left"></i> VINS Fusion算法解读
-              </a>
+              <a href="/2019/09/16/vio_concepts/" rel="next" title="<摘录>VIO基本概念学习">
+                <i class="fa fa-chevron-left"></i> <摘录>VIO基本概念学习
+              </摘录></a>
             
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/16/vio_concepts/" rel="prev" title="<摘录>VIO基本概念学习">
-                <摘录>VIO基本概念学习 <i class="fa fa-chevron-right"></i>
-              </摘录></a>
             
           </div>
         </div>
@@ -596,7 +626,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -633,7 +665,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -690,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ceres学习笔记-——-以pose-graph-3d为例"><span class="nav-number">1.</span> <span class="nav-text">ceres学习笔记 —— 以pose_graph_3d为例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文目的"><span class="nav-number">1.1.</span> <span class="nav-text">本文目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">功能介绍</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文目的"><span class="nav-number">1.</span> <span class="nav-text">本文目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能介绍"><span class="nav-number">2.</span> <span class="nav-text">功能介绍</span></a></li></ol></div>
             
 
           </div>
