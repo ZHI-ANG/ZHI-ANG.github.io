@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
 <meta property="og:description" content="记录学习代码过程中遇到的一些c++用法，方便以后查询，持续更新……    1. std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数： 1f(a,b,c);  但是我们有时只需要输入两个参数： 1g(a,b) := f(a,4,b);  这里的g就是f的偏函数。我们可以利用std::bind()实现这种用法： 1auto g = bind(f, _">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-16T02:39:44.533Z">
+<meta property="og:updated_time" content="2019-09-16T04:05:08.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ cheatsheet">
 <meta name="twitter:description" content="记录学习代码过程中遇到的一些c++用法，方便以后查询，持续更新……    1. std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数： 1f(a,b,c);  但是我们有时只需要输入两个参数： 1g(a,b) := f(a,4,b);  这里的g就是f的偏函数。我们可以利用std::bind()实现这种用法： 1auto g = bind(f, _">
@@ -430,7 +430,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-09-16 10:39:44" itemprop="dateModified" datetime="2019-09-16T10:39:44+08:00">2019-09-16</time>
+                <time title="Modified: 2019-09-16 12:05:08" itemprop="dateModified" datetime="2019-09-16T12:05:08+08:00">2019-09-16</time>
               
             
           </span>
@@ -514,6 +514,10 @@
 <li>new对象指针用途广泛，比如作为函数返回值、函数参数等</li>
 <li>频繁调用场合并不适合new，就像new申请和释放内存一样</li>
 </ul>
+<h3 id="3-C-调用C函数"><a href="#3-C-调用C函数" class="headerlink" title="3. C++调用C函数"></a>3. C++调用C函数</h3><p>*<em>Q: *</em>项目中遇到了使用ROS调用一些其他公司编译好的驱动库。这就涉及到使用C++调用C函数的问题。通常会遇到一个常见问题：LNK2019：无法解析的外部符号。这是因为C和C++编译生成函数的机制不一样，对于一个函数<code>foo(int, int)</code>，C编译器会为其生成<code>_foo</code>的符号，而C++为了支持重载，生成类似<code>_foo_int_int</code>的符号，这就造成符号不匹配。那么要如何解决？</p>
+<p>*<em>A: *</em>在C++头文件中，使用<code>extern &quot;C&quot;</code>修饰符，将C函数或头文件包含进去。代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus  <span class="comment">//在C++编译环境下</span></span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cheader.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cfoo</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -763,7 +767,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-std-bind"><span class="nav-number">1.</span> <span class="nav-text">1. std::bind()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对象实例化时，有没有new的区别"><span class="nav-number">2.</span> <span class="nav-text">2. 对象实例化时，有没有new的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-std-bind"><span class="nav-number">1.</span> <span class="nav-text">1. std::bind()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对象实例化时，有没有new的区别"><span class="nav-number">2.</span> <span class="nav-text">2. 对象实例化时，有没有new的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-C-调用C函数"><span class="nav-number">3.</span> <span class="nav-text">3. C++调用C函数</span></a></li></ol></div>
             
 
           </div>
