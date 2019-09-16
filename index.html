@@ -367,6 +367,334 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/16/vio_concepts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/16/vio_concepts/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html"><摘录>VIO基本概念学习</摘录></a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-16 17:17:10 / Modified: 11:31:58" itemprop="dateCreated datePublished" datetime="2019-09-16T17:17:10+08:00">2019-09-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM-VIO/" itemprop="url" rel="index"><span itemprop="name">SLAM,VIO</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          紧耦合与松耦合松耦合：将视觉约束                   加入联合优化
+紧耦合：将视觉约束得到的位姿加入联合优化
+如图所示：
+
+    
+
+
+优化与滤波
+滤波相当于单次优化，区别是滤波仅考虑上一帧的影响，而优化则考虑所有帧的影响；
+滤波比单次优化的精度高，因滤波是通过协方差来计算增量，而
+          ...
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/16/vio_concepts/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/16/ceres_slam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/16/ceres_slam/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-16 09:34:23 / Modified: 09:45:57" itemprop="dateCreated datePublished" datetime="2019-09-16T09:34:23+08:00">2019-09-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          ceres学习笔记 —— 以pose_graph_3d为例本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。
+功能
+          ...
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/16/ceres_slam/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/11/vins_fusion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -667,11 +995,9 @@ Fusion的思路局部传
 
 
 
-
 方案
 LOAM
 LeGO-LOAM
-
 
 
 
@@ -685,7 +1011,7 @@ LeGO-LOAM
 label相同的点才匹配，LM两步优化
 
 
-局
+局部地
           ...
           <!--noindex-->
           
@@ -1023,9 +1349,11 @@ label相同的点才匹配，LM两步优化
           
           一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：
 
+
 其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：
 
-这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对
+
+这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的
           ...
           <!--noindex-->
           
@@ -1195,8 +1523,9 @@ label相同的点才匹配，LM两步优化
           
           李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：
 
+
 这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。
-这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用
+这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利
           ...
           <!--noindex-->
           
@@ -1665,7 +1994,7 @@ label相同的点才匹配，LM两步优化
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-27 15:21:12" itemprop="dateModified" datetime="2019-08-27T15:21:12+08:00">2019-08-27</time>
+                <time title="Modified: 2019-09-16 10:39:44" itemprop="dateModified" datetime="2019-09-16T10:39:44+08:00">2019-09-16</time>
               
             
           </span>
@@ -1723,9 +2052,11 @@ label相同的点才匹配，LM两步优化
 
 1. std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数：
 1f(a,b,c);
+
 但是我们有时只需要输入两个参数：
 1g(a,b) := f(a,4,b);
-这里的g就是f的
+
+这里的g就是
           ...
           <!--noindex-->
           
@@ -1775,391 +2106,11 @@ label相同的点才匹配，LM两步优化
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/18/multithread2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHI-ANG">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="極東魔術昼寝結社の夏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/18/multithread2/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html"><翻译> C++多线程编程(第6-10部分)</翻译></a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-08-18 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-18T17:17:10+08:00">2019-08-18</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-08-20 10:40:34" itemprop="dateModified" datetime="2019-08-20T10:40:34+08:00">2019-08-20</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          第6-7部分 事件处理与条件变量现在我们需要设计一个网络应用，这个应用需要完成如下任务：
-
-和服务器交互
-从XML文件中加载一些数据
-处理第2个任务中得到的数据
-
-显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提
-          ...
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/18/multithread2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/pf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHI-ANG">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="極東魔術昼寝結社の夏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/13/pf/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">粒子滤波算法笔记(一):算法概述</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-08-13 17:17:10 / Modified: 22:22:50" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/感知/" itemprop="url" rel="index"><span itemprop="name">感知</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1 滤波方法对比
-
-
-
-方法
-优点
-缺点
-
-
-
-
-Discrete Bayes filter
-多模，非线性
-离散，单变量
-
-
-Kalman filter
-单模线性最优估计
-线性，单变量
-
-
-Unscented Kalman filter
-非线性，连续，多变量
-非多模，难以处理非高斯/非线性
-
-
-Ex
-          ...
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/13/pf/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2204,7 +2155,7 @@ Ex
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2233,7 +2184,9 @@ Ex
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2268,7 +2221,9 @@ Ex
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

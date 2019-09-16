@@ -495,12 +495,13 @@
 <li><p>将ROS集成到其他框架中</p>
 <p>例如在使用OpenGL和GLUT时，一种集成ROS的方法是告诉GLUT的主循环，每10ms就调用以下ros::spinOnce()：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">timerCb</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; ros::spinOnce(); &#125;</span><br><span class="line"></span><br><span class="line">glutTimerFunc(<span class="number">10</span>, timerCb, <span class="number">0</span>);</span><br><span class="line">glutMainLoop(); <span class="comment">// Never returns</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <h3 id="ros-spin-和ros-spinOnce-的区别"><a href="#ros-spin-和ros-spinOnce-的区别" class="headerlink" title="ros::spin()和ros::spinOnce()的区别"></a>ros::spin()和ros::spinOnce()的区别</h3><p>ros::spin()再调用之后不会返回，因此主程序不会继续执行，所以循环没有意义。而ros::spinOnce()在调用之后会返回，继续执行后面的程序。</p>
 <p>ros::spin()函数一般不会出现在循环中，因为程序执行到spin()后就不调用其他语句了，也就是说该循环没有任何意义，还有就是spin()函数后面一定不能有其他语句(return 0 除外)，有也是白搭，不会执行的。ros::spinOnce()的用法相对来说很灵活，但往往需要考虑调用消息的时机，调用频率，以及消息池的大小，这些都要根据现实情况协调好，不然会造成数据丢包或者延迟的错误。</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://answers.ros.org/question/11887/significance-of-rosspinonce/" target="_blank" rel="noopener">https://answers.ros.org/question/11887/significance-of-rosspinonce/</a></p>
-<p><a href="http://wiki.ros.org/roscpp/Overview/Callbacks and Spinning" target="_blank" rel="noopener">http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning</a></p>
+<p>[<a href="http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning]" target="_blank" rel="noopener">http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning]</a>(<a href="http://wiki.ros.org/roscpp/Overview/Callbacks" target="_blank" rel="noopener">http://wiki.ros.org/roscpp/Overview/Callbacks</a> and Spinning)</p>
 <p><a href="https://www.cnblogs.com/liu-fa/p/5925381.html" target="_blank" rel="noopener">https://www.cnblogs.com/liu-fa/p/5925381.html</a></p>
 
       
@@ -538,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/01/kalman_filter_1/" rel="next" title="Kalman Filter 简单理解1">
-                <i class="fa fa-chevron-left"></i> Kalman Filter 简单理解1
+              <a href="/2019/08/01/hexo/" rel="next" title="Hexo插入图片以及数学公式">
+                <i class="fa fa-chevron-left"></i> Hexo插入图片以及数学公式
               </a>
             
           </div>
@@ -622,7 +623,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -651,7 +652,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -686,7 +689,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

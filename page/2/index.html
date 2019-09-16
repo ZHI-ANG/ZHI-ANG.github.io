@@ -367,6 +367,384 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/18/multithread2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/18/multithread2/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html"><翻译> C++多线程编程(第6-10部分)</翻译></a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-18 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-18T17:17:10+08:00">2019-08-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-20 10:40:34" itemprop="dateModified" datetime="2019-08-20T10:40:34+08:00">2019-08-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          第6-7部分 事件处理与条件变量现在我们需要设计一个网络应用，这个应用需要完成如下任务：
+
+和服务器交互
+从XML文件中加载一些数据
+处理第2个任务中得到的数据
+
+显然任务1不依赖于其他两个任务，而任务3依赖于任务2。如果这个应用只有一个线程，那么任务2中读取XML文件的操作会拖慢应用的速度。为了提
+          ...
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/18/multithread2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/pf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/13/pf/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">粒子滤波算法笔记(一):算法概述</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-13 17:17:10 / Modified: 22:22:50" itemprop="dateCreated datePublished" datetime="2019-08-13T17:17:10+08:00">2019-08-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/感知/" itemprop="url" rel="index"><span itemprop="name">感知</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1 滤波方法对比
+
+
+方法
+优点
+缺点
+
+
+
+Discrete Bayes filter
+多模，非线性
+离散，单变量
+
+
+Kalman filter
+单模线性最优估计
+线性，单变量
+
+
+Unscented Kalman filter
+非线性，连续，多变量
+非多模，难以处理非高斯/非线性
+
+
+Exte
+          ...
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/13/pf/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/quaternion_vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -853,9 +1231,11 @@
           第1部分 创建多线程C++11创建新线程c++11中新增了对线程的支持，我们可以利用std::thread类添加新线程。
 编译时需要添加头文件：
 1#include &lt;thread&gt;
+
 并使用命令：
 1g++ -std=c++11 sample.cpp -lpthread
-std::thr
+
+std::t
           ...
           <!--noindex-->
           
@@ -1105,7 +1485,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/05/C++ Lambda/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/05/Lambda/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -1125,7 +1505,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/05/C++ Lambda/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">C++ 11 中的Lambda表达式</a>
+                <a href="/2019/08/05/Lambda/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">C++ 11 中的Lambda表达式</a>
               
             
           </h1>
@@ -1226,7 +1606,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/05/C++ Lambda/#more" rel="contents">
+              <a class="btn" href="/2019/08/05/Lambda/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1651,193 +2031,6 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/01/kalman_filter_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHI-ANG">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="極東魔術昼寝結社の夏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/01/kalman_filter_1/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">Kalman Filter 简单理解1</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-08-01 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-01T17:17:10+08:00">2019-08-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-08-21 16:05:44" itemprop="dateModified" datetime="2019-08-21T16:05:44+08:00">2019-08-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/感知/" itemprop="url" rel="index"><span itemprop="name">感知</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一个线性时变系统，可以以下面的方程表示：
-
-同时该系统可以被观测：
-
-其中，和分别是状态传递噪声和观测噪声。一般假定服从均值为0的高斯分布，协方差矩阵分别以和表示。
-由于系统的真实状态不能直接获得，KF算法通过将状态转移模型和观测模型结合起来，提供了对系统状态的不断更新。预测阶段的公式如下：  
-
-
-          ...
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/01/kalman_filter_1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/01/hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1956,7 +2149,8 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
           Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。
 1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问：
 1![](/images/image.jpg)
-这种方法，图片在网页的任何位置都可以访问。但是
+
+这种方法，图片在网页的任何位置都可以访问。但
           ...
           <!--noindex-->
           
@@ -2006,192 +2200,11 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2018/11/18/First-Page/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHI-ANG">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="極東魔術昼寝結社の夏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/18/First-Page/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">建站纪念</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-11-18 17:17:10" itemprop="dateCreated datePublished" datetime="2018-11-18T17:17:10+08:00">2018-11-18</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-08-08 09:29:11" itemprop="dateModified" datetime="2019-08-08T09:29:11+08:00">2019-08-08</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          建站撒花，第一个个人博客。之前使用的自己的服务器，但是总是由于一些原因无法访问，因此搬到github，虽然慢了点，但是比较稳定。以后在这个上面写一些论文的学习心得和收获。
-
-          
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/18/First-Page/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2236,7 +2249,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2265,7 +2278,9 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2300,7 +2315,9 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

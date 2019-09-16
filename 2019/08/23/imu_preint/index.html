@@ -127,13 +127,13 @@
 
 
 
-  <meta name="description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：  其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：  这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新权重">
+  <meta name="description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：   其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：   这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新">
 <meta name="keywords" content="SLAM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VIO中的IMU预积分">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/23/imu_preint/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：  其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：  这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新权重">
+<meta property="og:description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：   其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：   这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\xi = \arg\min\limits_\xi\frac{1}{2}\sum_i\|\mathbf{r}_i\|_{\Sigma_i}^2">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{J^T\Sigma^{-1}J\delta\xi = -J^T\Sigma^{-1}r}">
@@ -147,7 +147,7 @@
 <meta property="og:updated_time" content="2019-08-23T15:32:58.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VIO中的IMU预积分">
-<meta name="twitter:description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：  其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：  这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新权重">
+<meta name="twitter:description" content="一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：   其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：   这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新">
 <meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?\xi = \arg\min\limits_\xi\frac{1}{2}\sum_i\|\mathbf{r}_i\|_{\Sigma_i}^2">
 
 
@@ -480,21 +480,27 @@
 
       
         <h2 id="一般的最小二乘问题"><a href="#一般的最小二乘问题" class="headerlink" title="一般的最小二乘问题"></a>一般的最小二乘问题</h2><p>一般的最小二乘问题，都可以写成下面的形式：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\xi = \arg\min\limits_\xi\frac{1}{2}\sum_i\|\mathbf{r}_i\|_{\Sigma_i}^2"></p>
+<img src="http://latex.codecogs.com/gif.latex?\xi = \arg\min\limits_\xi\frac{1}{2}\sum_i\|\mathbf{r}_i\|_{\Sigma_i}^2">
+
 <p>其中，ξ是优化变量，<strong>r</strong>是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{J^T\Sigma^{-1}J\delta\xi = -J^T\Sigma^{-1}r}"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{J^T\Sigma^{-1}J\delta\xi = -J^T\Sigma^{-1}r}">
+
 <p>这里的<img src="http://latex.codecogs.com/gif.latex?\Sigma^{-1}">是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对值没有意义，相对值才有意义。信息矩阵决定了那个观测更可信，因此，权重矩阵在紧耦合优化中起到了更新权重的作用。</p>
 <h2 id="VIO中的BA"><a href="#VIO中的BA" class="headerlink" title="VIO中的BA"></a>VIO中的BA</h2><p>VIO的优化问题，对应到上一节中，需要求解的方程是：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\arg\min\limits_{\chi}(prior+imgerror+imuerror)"></p>
+<img src="http://latex.codecogs.com/gif.latex?\arg\min\limits_{\chi}(prior+imgerror+imuerror)">
+
 <p>这三个残差项分别是边缘化的先验信息，IMU测量误差，视觉重投影误差。现在只关注IMU测量误差：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\sum_{i\in B}\rho(\|\mathbf{r}_b(\mathbf{z}_{b_ib_{i+1}},\chi)\|_{\Sigma_{b_ib_{i+1}}}^2)"></p>
+<img src="http://latex.codecogs.com/gif.latex?\sum_{i\in B}\rho(\|\mathbf{r}_b(\mathbf{z}_{b_ib_{i+1}},\chi)\|_{\Sigma_{b_ib_{i+1}}}^2)">
+
 <p>从上述表达式中看出，为了构建优化方程，我们需要知道IMU测量误差对于状态量的Jacobian，以及协方差矩阵。</p>
 <h2 id="IMU预积分"><a href="#IMU预积分" class="headerlink" title="IMU预积分"></a>IMU预积分</h2><p>IMU预积分的目的在于得到相机在相邻两个视频帧之间的运动，作为系统的预测值；同时得到IMU在两个视频帧之间的误差传递(协方差矩阵)，作为VI紧耦合优化时的权重矩阵。</p>
 <h3 id="1-预积分的变量分离"><a href="#1-预积分的变量分离" class="headerlink" title="1. 预积分的变量分离"></a>1. 预积分的变量分离</h3><p>IMU积分公式是求得当前视频帧时刻，IMU在世界坐标系中的位移(p)，旋转(q)以及速度(v)。既然是世界坐标系下的变量，就一定带有从当前IMU坐标系到世界坐标系的变换矩阵。而这个变换矩阵是需要优化的变量，当该变量每次在后端优化更新后，IMU积分公式都需要重新积分。于是，IMU预积分从希望求得当前视频帧时刻IMU的世界坐标系的[p,q,v]，变成了求得当前视频帧时刻的IMU相对于上一视频帧时刻的[p,q,v]。这样就将变换矩阵从积分中分离出来。</p>
 <h3 id="2-预积分的协方差矩阵"><a href="#2-预积分的协方差矩阵" class="headerlink" title="2. 预积分的协方差矩阵"></a>2. 预积分的协方差矩阵</h3><p>为了求得IMU在预积分中的协方差矩阵，就要得到IMU在预积分过程中误差的传递方程。可以通过对状态向量<img src="http://latex.codecogs.com/gif.latex?\mathbf{x=\hat{x}+\delta x}">进行泰勒展开，得到如下的形式：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{\delta x_k = \mathbf{F}\delta x_{k-1}+Gn_{k-1}}"></p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{\delta x_k = \mathbf{F}\delta x_{k-1}+Gn_{k-1}}">
+
 <p>这个式子是从上一时刻的误差预测当前误差，得到的是误差的均值。协方差矩阵则是</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\Sigma_k = F \Sigma_{k-1} F^T + GQG^T"></p>
+<img src="http://latex.codecogs.com/gif.latex?\Sigma_k = F \Sigma_{k-1} F^T + GQG^T">
+
 <p>这个结果被用于求解当前时刻状态量的协方差矩阵，即第一节中的<img src="http://latex.codecogs.com/gif.latex?\Sigma_{b_ib_{i+1}}"></p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
 <li><p><a href="https://github.com/StevenCui/VIO-Doc" target="_blank" rel="noopener">https://github.com/StevenCui/VIO-Doc</a></p>
@@ -622,7 +628,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -651,7 +657,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -686,7 +694,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
