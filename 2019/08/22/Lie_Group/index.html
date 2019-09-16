@@ -127,13 +127,13 @@
 
 
 
-  <meta name="description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：   这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此">
+  <meta name="description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：  这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此我">
 <meta name="keywords" content="SLAM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="视觉SLAM中的李群与李代数总结">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/22/Lie_Group/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：   这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此">
+<meta property="og:description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：  这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此我">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\min_TJ(T)=\sum_i^N{||z_i-Tp_i||_2^2}">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{R}(t) = \exp(\phi_0^{\land}t)">
@@ -144,7 +144,7 @@
 <meta property="og:updated_time" content="2019-08-22T07:09:53.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="视觉SLAM中的李群与李代数总结">
-<meta name="twitter:description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：   这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此">
+<meta name="twitter:description" content="李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：  这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。 这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此我">
 <meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?\min_TJ(T)=\sum_i^N{||z_i-Tp_i||_2^2}">
 
 
@@ -477,21 +477,17 @@
 
       
         <h2 id="李群与李代数"><a href="#李群与李代数" class="headerlink" title="李群与李代数"></a>李群与李代数</h2><p>在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：</p>
-<img src="http://latex.codecogs.com/gif.latex?\min_TJ(T)=\sum_i^N{||z_i-Tp_i||_2^2}">
-
+<p><img src="http://latex.codecogs.com/gif.latex?\min_TJ(T)=\sum_i^N{||z_i-Tp_i||_2^2}"></p>
 <p>这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。</p>
 <p>这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用最小二乘求最小化误差的过程中，不能直接对旋转矩阵求导。但是，李代数是由向量组成的，对加法封闭，因此我们可以<strong>通过对李代数求导来间接对旋转矩阵求导</strong>。</p>
 <h2 id="指数映射"><a href="#指数映射" class="headerlink" title="指数映射"></a>指数映射</h2><p>从《视觉SLAM十四讲》第4讲中，我们知道SO3和so3之间满足指数映射：</p>
-<img src="http://latex.codecogs.com/gif.latex?\mathbf{R}(t) = \exp(\phi_0^{\land}t)">
-
+<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{R}(t) = \exp(\phi_0^{\land}t)"></p>
 <p>这个式子的是通过对旋转矩阵<strong>R</strong>在t=0附近一阶泰勒展开得到的，因此向量Φ反映了<strong>R</strong>的导数性质。可以理解为，李群空间中的任意一个旋转矩阵<strong>R</strong>都可以用一个向量的反对称矩阵的指数来近似。从微分几何的概念上看，向量Φ所属的空间是<strong>R</strong>所属的流形空间的正切空间，<strong>正切空间上的单位向量代表了流形空间上该点所有可能的移动方向，模长代表了移动的快慢</strong>。(图片来自<a href="https://en.wikipedia.org/wiki/Tangent_space" target="_blank" rel="noopener">Wikipedia</a>)</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Image_Tangent-plane.svg/330px-Image_Tangent-plane.svg.png" alt></p>
 <h2 id="Rodrigues’s-Formula"><a href="#Rodrigues’s-Formula" class="headerlink" title="Rodrigues’s Formula"></a>Rodrigues’s Formula</h2><p>从《视觉SLAM十四讲》第3讲中，我们知道旋转向量<strong>n</strong>和旋转矩阵<strong>R</strong>之间存在如下的对应关系：</p>
-<img src="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}">
-
+<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}"></p>
 <p>这个公式被成为Rodrigues’s Formula。同时，书中第四讲中，给出了李群SO3和李代数so3之间的对应关系，和上面的公式类似：</p>
-<img src="http://latex.codecogs.com/gif.latex?\exp(\phi^\land) &= \exp(\theta\mathbf{a^\land})\\&=\cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{aa^T}+\sin\theta\mathbf{a^\land}">
-
+<p><img src="http://latex.codecogs.com/gif.latex?\exp(\phi^\land) &= \exp(\theta\mathbf{a^\land})\\&=\cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{aa^T}+\sin\theta\mathbf{a^\land}"></p>
 <p>因此，通过对比我们可以看出，旋转向量空间其实就是李代数空间。因此我们可以说<strong>旋转矩阵的导数可以由对应的旋转向量指定，指导如何在旋转矩阵中作微积分运算</strong>。</p>
 <h2 id="李代数求导与微扰"><a href="#李代数求导与微扰" class="headerlink" title="李代数求导与微扰"></a>李代数求导与微扰</h2><p>由于李代数由向量组成，因此对加法运算封闭。所以李代数可以根据我们熟悉的导数定义(加法)进行求导。然而这种求导的结果中有复杂的Jacobian，所以一般采用微扰法进行求导：对李群进行微扰然后对该扰动求导。如下图所示，红色代表对李代数求导，结果中有Jacobian；而黑色代表微扰法，结果很简洁。</p>
 <p><img src="so3.png" alt></p>
