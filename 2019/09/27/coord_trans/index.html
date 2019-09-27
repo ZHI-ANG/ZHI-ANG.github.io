@@ -127,25 +127,59 @@
 
 
 
-  <meta name="description" content="本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
-<meta name="keywords" content="SLAM,ceres">
+  <meta name="description" content="移动机器人中的坐标变换真是又累又绕。向量的平移旋转，欧拉角，位姿变换……纠结了好久。记录一下，方便自查。 坐标系统及约定本文讨论的所有坐标系均为右手系，并使用其次坐标系。坐标体系采用ROS的规定，前左上为XYZ轴正方向，欧拉角选定ZYX顺规。 本文涉及到的坐标系有：  NED坐标系和ENU坐标系 里程计初始坐标系(init) 载体坐标系(body) 激光坐标系(lidar)  其中NED和ENU坐">
+<meta name="keywords" content="坐标变换">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ceres学习笔记 —— 以pose_graph_3d为例">
-<meta property="og:url" content="https://zhi-ang.github.io/2019/09/16/ceres_slam/index.html">
+<meta property="og:title" content="移动机器人中的坐标转换">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/09/27/coord_trans/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
+<meta property="og:description" content="移动机器人中的坐标变换真是又累又绕。向量的平移旋转，欧拉角，位姿变换……纠结了好久。记录一下，方便自查。 坐标系统及约定本文讨论的所有坐标系均为右手系，并使用其次坐标系。坐标体系采用ROS的规定，前左上为XYZ轴正方向，欧拉角选定ZYX顺规。 本文涉及到的坐标系有：  NED坐标系和ENU坐标系 里程计初始坐标系(init) 载体坐标系(body) 激光坐标系(lidar)  其中NED和ENU坐">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-16T03:40:56.266Z">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?
+P^{3d} = (x,y,z,pitch,yaw,roll) \\P^{2d} = (x,y,\theta)">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?T_{body}^{odom} = \begin{bmatrix}R & t\\0 & 1\end{bmatrix}">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/09/27/coord_trans/coord_trans.jpg">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?P = (1,1,45°) \\
+T_{body}^{odom} = 
+\begin{bmatrix}
+\cos45° & -\sin45° & 1 \\
+\sin45° &  \cos45° & 1 \\
+0 & 0 & 1
+\end{bmatrix}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?
+P = (2,2,45°) \\
+T_{odom}^{ENU} = 
+\begin{bmatrix}
+\cos45° & -\sin45° & 2 \\
+\sin45° &  \cos45° & 2 \\
+0 & 0 & 1
+\end{bmatrix}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?
+T_{body}^{ENU} = T_{odom}^{ENU} \cdot T_{body}^{odom}
+=
+\begin{bmatrix}
+\cos90° & -\sin90° & 2 \\
+\sin90° &  \cos90° & 2+\sqrt{2} \\
+0 & 0 & 1
+\end{bmatrix}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?
+P = (2,2+\sqrt{2},90°)">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?
+T{ij} := T{i}^{-1} \cdot T_{j}">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/09/27/coord_trans/body_lidar.jpg">
+<meta property="og:updated_time" content="2019-09-27T07:08:02.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ceres学习笔记 —— 以pose_graph_3d为例">
-<meta name="twitter:description" content="本文目的参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。 功能介绍">
+<meta name="twitter:title" content="移动机器人中的坐标转换">
+<meta name="twitter:description" content="移动机器人中的坐标变换真是又累又绕。向量的平移旋转，欧拉角，位姿变换……纠结了好久。记录一下，方便自查。 坐标系统及约定本文讨论的所有坐标系均为右手系，并使用其次坐标系。坐标体系采用ROS的规定，前左上为XYZ轴正方向，欧拉角选定ZYX顺规。 本文涉及到的坐标系有：  NED坐标系和ENU坐标系 里程计初始坐标系(init) 载体坐标系(body) 激光坐标系(lidar)  其中NED和ENU坐">
+<meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?
+P^{3d} = (x,y,z,pitch,yaw,roll) \\P^{2d} = (x,y,\theta)">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/2019/09/16/ceres_slam/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/09/27/coord_trans/">
 
 
 
@@ -155,7 +189,7 @@
   };
 </script>
 
-  <title>ceres学习笔记 —— 以pose_graph_3d为例 | 極東魔術昼寝結社の夏</title>
+  <title>移动机器人中的坐标转换 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -371,7 +405,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/16/ceres_slam/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/27/coord_trans/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -388,7 +422,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ceres学习笔记 —— 以pose_graph_3d为例
+          <h1 class="post-title" itemprop="name headline">移动机器人中的坐标转换
               
             
           </h1>
@@ -413,7 +447,7 @@
                 
               
 
-              <time title="Created: 2019-09-16 17:17:10 / Modified: 11:40:56" itemprop="dateCreated datePublished" datetime="2019-09-16T17:17:10+08:00">2019-09-16</time>
+              <time title="Created: 2019-09-27 17:17:10 / Modified: 15:08:02" itemprop="dateCreated datePublished" datetime="2019-09-27T17:17:10+08:00">2019-09-27</time>
             
 
             
@@ -435,14 +469,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/ceres/" itemprop="url" rel="index"><span itemprop="name">ceres</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/坐标变换/" itemprop="url" rel="index"><span itemprop="name">坐标变换</span></a></span>
 
                 
                 
@@ -476,8 +503,80 @@
       
 
       
-        <h2 id="本文目的"><a href="#本文目的" class="headerlink" title="本文目的"></a>本文目的</h2><p>参考ceres官方提供的pose_graph_3d样例，学习使用ceres构建位姿图优化的过程。同时，可以学习到自动求导，四元数参数块，位姿图数据结构的构建技巧。对于ceres简介和一般用法，直接看文档，没什么好说的，不再记录。</p>
-<h2 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h2>
+        <p>移动机器人中的坐标变换真是又累又绕。向量的平移旋转，欧拉角，位姿变换……纠结了好久。记录一下，方便自查。</p>
+<h2 id="坐标系统及约定"><a href="#坐标系统及约定" class="headerlink" title="坐标系统及约定"></a>坐标系统及约定</h2><p>本文讨论的所有坐标系均为右手系，并使用其次坐标系。坐标体系采用ROS的规定，前左上为XYZ轴正方向，欧拉角选定ZYX顺规。</p>
+<p>本文涉及到的坐标系有：</p>
+<ol>
+<li>NED坐标系和ENU坐标系</li>
+<li>里程计初始坐标系(init)</li>
+<li>载体坐标系(body)</li>
+<li>激光坐标系(lidar)</li>
+</ol>
+<p>其中NED和ENU坐标系是站心坐标系，选定地面某点作为原点，坐标轴方向分别是NED和ENU；里程计坐标系以里程计上电为原点，坐标轴方向分别是上电时刻载体的前左上；载体坐标系以当前位置为原点，坐标轴方向分别为当前载体的前左上，激光坐标系以激光传感器当前位置为原点，坐标轴方向为激光传感器的前左上。其坐标关系如图所示，RGB三种颜色分别代表XYZ坐标轴：</p>
+<p><img src alt></p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在自主移动机器人中，有两种很常见的坐标变换需求：一个是求出当前的车体相对于里程计坐标系的位姿变换，这也就是里程计问题；另一个是求出当前车体相对于ENU坐标系的位姿变换，这也就是全局定位问题。</p>
+<p>首先讨论最一般的场景，即连续坐标变换，对应上面的第二个问题。我们的需求是：已知载体在里程计坐标系下的位姿，求出载体在ENU坐标系下的位姿。位姿包括位置和朝向，不仅要变换载体的位置，朝向也要做相应的变换，即对一个6d向量(三维)或者3d向量(二维)进行变换：<br><img src="http://latex.codecogs.com/gif.latex?
+P^{3d} = (x,y,z,pitch,yaw,roll) \\P^{2d} = (x,y,\theta)"></p>
+<p>其中，xyz为位置，pith-yaw-roll和theta为朝向，一般用欧拉角表示，也可以用四元数。对位置的变换比较好理解，就是对向量进行变换；而朝向是绕坐标系旋转的角度，让人无从下手。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>实际上，我们可以换一个思路，既然载体的朝向表示为载体绕着里程计坐标系三个轴的旋转，那么可以用一个旋转矩阵乘以里程计坐标系来表示这个姿态。同理，载体的位置实际上是表示载体在里程计坐标系下的平移变换，那么可以对里程计坐标系进行平移变换来表示这个向量。因此，位姿可以表示为：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?T_{body}^{odom} = \begin{bmatrix}R & t\\0 & 1\end{bmatrix}"></p>
+<p>其中，R对应pitch-yaw-roll的旋转矩阵，t对应xyz。这样我们就建立了位姿和坐标转换的联系。这种思路，实际上是将载体的位姿，等效为坐标系的变换。这样的好处是，既然我们是求位姿的在不同坐标系下的连续变换，那么将位姿也看作坐标系，形式上就统一了，理解也就更简单。</p>
+<p>下面以一个具体的例子做说明。下图中存在三个坐标系ENU、odom、body，分别对应ENU坐标系，里程计坐标系和载坐标系(这里为了直观，只有二维，三维的情况类似)。从图中可以看出三个坐标系统相互之间的变换关系。</p>
+<p><img src="coord_trans.jpg" alt></p>
+<p>在odom坐标系下，body的位姿可以分别用向量和变换矩阵表示为：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?P = (1,1,45°) \\
+T_{body}^{odom} = 
+\begin{bmatrix}
+\cos45° & -\sin45° & 1 \\
+\sin45° &  \cos45° & 1 \\
+0 & 0 & 1
+\end{bmatrix}"></p>
+<p>同理，odom坐标系在ENU坐标系下的位姿，可以表示为：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?
+P = (2,2,45°) \\
+T_{odom}^{ENU} = 
+\begin{bmatrix}
+\cos45° & -\sin45° & 2 \\
+\sin45° &  \cos45° & 2 \\
+0 & 0 & 1
+\end{bmatrix}"></p>
+<p>要求body在ENU坐标系下的位姿，直接利用矩阵乘法：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?
+T_{body}^{ENU} = T_{odom}^{ENU} \cdot T_{body}^{odom}
+=
+\begin{bmatrix}
+\cos90° & -\sin90° & 2 \\
+\sin90° &  \cos90° & 2+\sqrt{2} \\
+0 & 0 & 1
+\end{bmatrix}"></p>
+<p>可以得出向量表示为：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?
+P = (2,2+\sqrt{2},90°)"></p>
+<p>验证了变换矩阵的正确性。</p>
+<h2 id="使用Eigen进行坐标变换："><a href="#使用Eigen进行坐标变换：" class="headerlink" title="使用Eigen进行坐标变换："></a>使用Eigen进行坐标变换：</h2><p>Eigen的Isometry3d表示欧式变换，是一个4x4的矩阵，方便我们表示变换矩阵。我们可以通过下面的代码，设置变换矩阵的旋转和平移分量：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Eigen::Quaterniond qRot; <span class="comment">// 表示传感器得到的载体旋转</span></span><br><span class="line">Eigen::Vector3d vTrans; <span class="comment">// 表示传感器得到的载体位置</span></span><br><span class="line">Eigen::Isometry3d T_body_in_odom = Eigen::Isometry3d::Identity(); <span class="comment">// 初始化</span></span><br><span class="line"><span class="comment">// 等价于 T_body_in_odom.matrix.block&lt;3,1&gt;(0,3) = vTrans;</span></span><br><span class="line">T_body_in_odom.translate(vTrans); <span class="comment">// 先平移</span></span><br><span class="line"><span class="comment">// 等价于 T_body_in_odom.matrix.block&lt;3,3&gt;(0,0) = Eigen::Matrix3d(qRot);</span></span><br><span class="line">T_body_in_odom.rotate(qRot); <span class="comment">// 再旋转</span></span><br></pre></td></tr></table></figure>
+<p>我们将传感器中得到的位置和四元数旋转信息传到Isometry3d矩阵中时，存在一个旋转平移的顺序问题，是先平移后旋转，还是先旋转后平移？一般先平移后旋转，这等价于直接通过block设置平移旋转。</p>
+<p>求出变换矩阵后，剩下的就是利用变换矩阵进行变换，利用矩阵的左乘即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Eigen::Vector3d vBody; <span class="comment">// body坐标系下的向量</span></span><br><span class="line">Eigen::Vector3d vOdom = T_body_in_odom * vBody; <span class="comment">// 转换到odom坐标系下</span></span><br></pre></td></tr></table></figure>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>举一个具体的里程计问题的例子：</p>
+<p>在SLAM的后端优化中，我们经常遇到下面的公式：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?
+T{ij} := T{i}^{-1} \cdot T_{j}"></p>
+<p>Ti和Tj分别是载体在第i帧和第j帧的位姿。等式左边是通过预测得到相邻两帧的相对位姿变换，等式右边是观测得到这两帧的位姿在某坐标系下的位姿。由于存在测量误差，两边不一定相等。因此可以构建最小二乘问题进行优化。</p>
+<p>再举一个具体的例子：</p>
+<blockquote>
+<p>问题：在一辆自动驾驶的车上，装载GPS-IMU组合导航传感器和激光传感器，两个传感器在x轴(车前方向)相差-1.83米。GPS-IMU传感器在第一帧时给出车辆在ENU坐标系下的位置，以及NED坐标系下的朝向，随机失灵。现需要根据当前时刻车载激光里程计的读数，求当前车辆在ENU坐标系下的位姿表示。(车体坐标系与GPS-IMU坐标系重合)</p>
+</blockquote>
+<p>看起来有很多坐标系，很复杂，实际上就四个坐标系：ENU，NED，lidar，body。步骤如下：</p>
+<ol>
+<li>首先当然是求出第一帧的车体朝向在ENU坐标系下的表示，得到第一帧在ENU坐标系下的位姿T_bodyinit_in_ENU。此后NED坐标系就没用了。</li>
+<li>然后利用激光里程计的读数，得到当前时刻激光相对于第一帧激光的位姿T_lidar_in_lidarinit。</li>
+<li>接着利用激光坐标系和GPS-IMU坐标系的位置关系T_lidar_in_bodyinit，求出当前时刻T_body_in_bodyinit。</li>
+<li>最后利用T_bodyinit_in_ENU，得到T_body_in_ENU。</li>
+</ol>
+<p>每一步都是单纯的坐标变换，需要注意的是第三步，实际上包含了两次变换，如下图所示。我们已知的是黑线连接的坐标系，要求红线连接的坐标变换。第一步先不管body坐标系，利用T_lidar_in_lidar_init和T_lidar_in_body求出lidar坐标系在body_init坐标系下的位姿表示T_lidar_in_body_init(如左图)。然后lidar_init就没用了，现在简化成三个坐标系(如右图)，和之前的讨论一致。现在再求出body坐标系在body_init坐标系下的变换即可。</p>
+<p><img src="body_lidar.jpg" alt></p>
+
       
     </div>
 
@@ -500,9 +599,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SLAM/" rel="tag"># SLAM</a>
-          
-            <a href="/tags/ceres/" rel="tag"># ceres</a>
+            <a href="/tags/坐标变换/" rel="tag"># 坐标变换</a>
           
         </div>
       
@@ -515,19 +612,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/16/vio_concepts/" rel="next" title="<摘录>VIO基本概念学习">
-                <i class="fa fa-chevron-left"></i> <摘录>VIO基本概念学习
-              </摘录></a>
+              <a href="/2019/09/16/ceres_slam/" rel="next" title="ceres学习笔记 —— 以pose_graph_3d为例">
+                <i class="fa fa-chevron-left"></i> ceres学习笔记 —— 以pose_graph_3d为例
+              </a>
             
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/27/coord_trans/" rel="prev" title="移动机器人中的坐标转换">
-                移动机器人中的坐标转换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -732,7 +825,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文目的"><span class="nav-number">1.</span> <span class="nav-text">本文目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能介绍"><span class="nav-number">2.</span> <span class="nav-text">功能介绍</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#坐标系统及约定"><span class="nav-number">1.</span> <span class="nav-text">坐标系统及约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Eigen进行坐标变换："><span class="nav-number">4.</span> <span class="nav-text">使用Eigen进行坐标变换：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">5.</span> <span class="nav-text">应用场景</span></a></li></ol></div>
             
 
           </div>

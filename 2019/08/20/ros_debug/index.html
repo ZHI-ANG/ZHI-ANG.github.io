@@ -478,7 +478,6 @@
 <p>但是对于需要launch文件配置参数的节点程序，采用上述方法就不太方便。不过ROS已经想到了这一点，只需我们在launch文件中设置一个参数，ROS就可自动完成上述三个步骤。</p>
 <h2 id="配置catkin-make"><a href="#配置catkin-make" class="headerlink" title="配置catkin_make"></a>配置catkin_make</h2><p>使用如下指令编译ros节点：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make -DCMAKE_BUILD_TYPE=Debug</span><br></pre></td></tr></table></figure>
-
 <h2 id="配置launch文件"><a href="#配置launch文件" class="headerlink" title="配置launch文件"></a>配置launch文件</h2><p>在launch文件中，根据以下需要，在该节点的<code>&lt;node&gt;</code>标签中添加对应指令：</p>
 <ul>
 <li><code>launch-prefix=&quot;xterm -e gdb --args&quot;</code> : run your node in a gdb in a separate xterm window, manually type <code>run</code> to start it</li>
@@ -489,16 +488,14 @@
 </ul>
 <p>比如说，原本的节点写法如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">"bdxt"</span> <span class="attr">type</span>=<span class="string">"bdxt"</span> <span class="attr">name</span>=<span class="string">"bdxt"</span> <span class="attr">output</span>=<span class="string">"screen"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>现在需要改为：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">"bdxt"</span> <span class="attr">type</span>=<span class="string">"bdxt"</span> <span class="attr">name</span>=<span class="string">"bdxt"</span> <span class="attr">output</span>=<span class="string">"screen"</span> <span class="attr">launch-prefix</span>=<span class="string">"xterm -e gdb --args"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>另外，如果是<code>python</code>脚本，需要修改为pdb，<code>launch-prefix=&quot;xterm -e python -m pdb &quot;</code></p>
 <h2 id="使用GDB调试ROS程序"><a href="#使用GDB调试ROS程序" class="headerlink" title="使用GDB调试ROS程序"></a>使用GDB调试ROS程序</h2><p>配置好launch文件后，<code>roslaunch</code>运行ros节点，会弹出一个gdb窗口，接下来的操作和普通的cpp程序一致。GDB命令可以参考：</p>
 <p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html</a></p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
 <li><a href="https://bluesat.com.au/a-dummys-guide-to-debugging-ros-systems/" target="_blank" rel="noopener">https://bluesat.com.au/a-dummys-guide-to-debugging-ros-systems/</a></li>
-<li>[<a href="http://wiki.ros.org/roslaunch/Tutorials/Roslaunch%20Nodes%20in%20Valgrind%20or%20GDB]" target="_blank" rel="noopener">http://wiki.ros.org/roslaunch/Tutorials/Roslaunch%20Nodes%20in%20Valgrind%20or%20GDB]</a>(<a href="http://wiki.ros.org/roslaunch/Tutorials/Roslaunch" target="_blank" rel="noopener">http://wiki.ros.org/roslaunch/Tutorials/Roslaunch</a> Nodes in Valgrind or GDB)</li>
+<li><a href="http://wiki.ros.org/roslaunch/Tutorials/Roslaunch Nodes in Valgrind or GDB" target="_blank" rel="noopener">http://wiki.ros.org/roslaunch/Tutorials/Roslaunch%20Nodes%20in%20Valgrind%20or%20GDB</a></li>
 </ol>
 
       
@@ -620,7 +617,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -653,7 +650,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -692,7 +691,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

@@ -367,6 +367,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/27/coord_trans/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/27/coord_trans/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">移动机器人中的坐标转换</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-27 17:17:10 / Modified: 15:08:02" itemprop="dateCreated datePublished" datetime="2019-09-27T17:17:10+08:00">2019-09-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/坐标变换/" itemprop="url" rel="index"><span itemprop="name">坐标变换</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          移动机器人中的坐标变换真是又累又绕。向量的平移旋转，欧拉角，位姿变换……纠结了好久。记录一下，方便自查。
+坐标系统及约定本文讨论的所有坐标系均为右手系，并使用其次坐标系。坐标体系采用ROS的规定，前左上为XYZ轴正方向，欧拉角选定ZYX顺规。
+本文涉及到的坐标系有：
+
+NED坐标系和ENU坐标系
+里
+          ...
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/27/coord_trans/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/16/ceres_slam/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1027,9 +1200,11 @@ Fusion的思路局部传
 
 
 
+
 方案
 LOAM
 LeGO-LOAM
+
 
 
 
@@ -1043,7 +1218,7 @@ LeGO-LOAM
 label相同的点才匹配，LM两步优化
 
 
-局部地
+局
           ...
           <!--noindex-->
           
@@ -1381,11 +1556,9 @@ label相同的点才匹配，LM两步优化
           
           一般的最小二乘问题一般的最小二乘问题，都可以写成下面的形式：
 
-
 其中，ξ是优化变量，r是残差。对于这样一个最小二乘问题，对应的高斯牛顿求解方程为：
 
-
-这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的
+这里的是信息矩阵，同时也是协方差矩阵Σ的逆。当系统中某个变量的观测噪声相对其他变量较大时，其信息矩阵就越小，意味着该观测越不可信。这里的信息矩阵的绝对
           ...
           <!--noindex-->
           
@@ -1555,9 +1728,8 @@ label相同的点才匹配，LM两步优化
           
           李群与李代数在视觉SLAM的后端求解中，我们是想要得到一个最佳位姿T，使得整体的误差最小化，即满足：
 
-
 这是一个典型的非线性最小二乘问题。因此我们需要求解变幻矩阵T的导数。
-这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利
+这里为了简单起见，假设没有平移，只有旋转。我们知道，旋转矩阵对加法不封闭，就是说两个旋转矩阵相加并不是一个旋转矩阵。因此在利用
           ...
           <!--noindex-->
           
@@ -1949,195 +2121,6 @@ label相同的点才匹配，LM两步优化
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/19/c_cheatsheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHI-ANG">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="極東魔術昼寝結社の夏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/19/c_cheatsheet/" class="post-title-link" itemprop="https://zhi-ang.github.io/index.html">C++ cheatsheet</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-08-19 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-19T17:17:10+08:00">2019-08-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-09-16 12:05:08" itemprop="dateModified" datetime="2019-09-16T12:05:08+08:00">2019-09-16</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-记录学习代码过程中遇到的一些c++用法，方便以后查询，持续更新……  
-
-1. std::bind()std::bind()是一种偏函数的用法。例如我们有一个函数体f，它由三个参数：
-1f(a,b,c);
-
-但是我们有时只需要输入两个参数：
-1g(a,b) := f(a,4,b);
-
-这里的g就是
-          ...
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/19/c_cheatsheet/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2187,7 +2170,7 @@ label相同的点才匹配，LM两步优化
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2220,7 +2203,9 @@ label相同的点才匹配，LM两步优化
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2259,7 +2244,9 @@ label相同的点才匹配，LM两步优化
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
