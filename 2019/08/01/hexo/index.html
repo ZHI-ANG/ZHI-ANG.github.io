@@ -127,18 +127,18 @@
 
 
 
-  <meta name="description" content="Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。 1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问： 1![](/images/image.jpg) 这种方法，图片在网页的任何位置都可以访问。但是当图片数量较多，这种方法不便于管理。因此推荐下面的方法。 2. 相对路径除了放在统一的images文">
+  <meta name="description" content="Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。 1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问： 1![](/images/image.jpg)  这种方法，图片在网页的任何位置都可以访问。但是当图片数量较多，这种方法不便于管理。因此推荐下面的方法。 2. 相对路径除了放在统一的images">
 <meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo插入图片以及数学公式">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/01/hexo/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。 1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问： 1![](/images/image.jpg) 这种方法，图片在网页的任何位置都可以访问。但是当图片数量较多，这种方法不便于管理。因此推荐下面的方法。 2. 相对路径除了放在统一的images文">
+<meta property="og:description" content="Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。 1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问： 1![](/images/image.jpg)  这种方法，图片在网页的任何位置都可以访问。但是当图片数量较多，这种方法不便于管理。因此推荐下面的方法。 2. 相对路径除了放在统一的images">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-08-07T15:40:22.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo插入图片以及数学公式">
-<meta name="twitter:description" content="Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。 1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问： 1![](/images/image.jpg) 这种方法，图片在网页的任何位置都可以访问。但是当图片数量较多，这种方法不便于管理。因此推荐下面的方法。 2. 相对路径除了放在统一的images文">
+<meta name="twitter:description" content="Hexo 插入图片Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。 1. 绝对路径最简单的方法是将图片统一放到source/images文件夹中，通过markdown语法访问： 1![](/images/image.jpg)  这种方法，图片在网页的任何位置都可以访问。但是当图片数量较多，这种方法不便于管理。因此推荐下面的方法。 2. 相对路径除了放在统一的images">
 
 
 
@@ -484,36 +484,49 @@
         <h2 id="Hexo-插入图片"><a href="#Hexo-插入图片" class="headerlink" title="Hexo 插入图片"></a>Hexo 插入图片</h2><p>Hexo支持多种插入本地图片的方式，一种是引用绝对路径，一种是引用相对路径。</p>
 <h3 id="1-绝对路径"><a href="#1-绝对路径" class="headerlink" title="1. 绝对路径"></a>1. 绝对路径</h3><p>最简单的方法是将图片统一放到<code>source/images</code>文件夹中，通过markdown语法访问：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](/images/image.jpg)</span><br></pre></td></tr></table></figure>
+
 <p>这种方法，图片在网页的任何位置都可以访问。但是当图片数量较多，这种方法不便于管理。因此推荐下面的方法。</p>
 <h3 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2. 相对路径"></a>2. 相对路径</h3><p>除了放在统一的<code>images</code>文件夹，还可以放到文章自己的目录中。文章目录可以通过配置<code>_config.yml</code>来生成。</p>
 <p>将<code>_config.yml</code>文件中的配置项<code>post_asset_folder</code>设置为<code>true</code>，执行<code>$ hexo new post_name</code>命令时，在<code>source/_posts</code>中会生成和<code>post_name.md</code>同名的文件夹。将图片放入该文件夹下，引用相对路径即可访问图片资源。</p>
 <p>上述markdown引用方式，在其他文章和首页中无法显示。</p>
 <h3 id="3-CDN引用"><a href="#3-CDN引用" class="headerlink" title="3. CDN引用"></a>3. CDN引用</h3><p>除了上述本地图片存储图片，还可以将图片上传CDN服务，如Cloudinary。上传图片后，Cloudinary会生成对应的url地址，可以直接拿来引用。</p>
 <h2 id="Hexo-插入TEX数学公式"><a href="#Hexo-插入TEX数学公式" class="headerlink" title="Hexo 插入TEX数学公式"></a>Hexo 插入TEX数学公式</h2><h3 id="1-使用Kramed代替Marked"><a href="#1-使用Kramed代替Marked" class="headerlink" title="1. 使用Kramed代替Marked"></a>1. 使用Kramed代替Marked</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+
 <p>然后，更改/node_modules/hexo-renderer-kramed/lib/renderer.js，更改：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Change inline math rule</span><br><span class="line">function formatText(text) &#123;</span><br><span class="line">    // Fit kramed's rule: $$ + \1 + $$</span><br><span class="line">    return text.replace(/`\$(.*?)\$`/g, '$$$$$1$$$$');</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>为：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Change inline math rule</span><br><span class="line">function formatText(text) &#123;</span><br><span class="line">    return text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="2-停止使用-hexo-math"><a href="#2-停止使用-hexo-math" class="headerlink" title="2. 停止使用 hexo-math"></a>2. 停止使用 hexo-math</h3><p>首先，如果你已经安装 <code>hexo-math</code>, 请卸载它：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-math --save</span><br></pre></td></tr></table></figure>
+
 <p>然后安装 <a href="https://github.com/phoenixcw/hexo-renderer-mathjax" target="_blank" rel="noopener">hexo-renderer-mathjax</a> 包：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-mathjax --save</span><br></pre></td></tr></table></figure>
+
 <h3 id="3-更新-Mathjax-的-CDN-链接"><a href="#3-更新-Mathjax-的-CDN-链接" class="headerlink" title="3. 更新 Mathjax 的 CDN 链接"></a>3. 更新 Mathjax 的 CDN 链接</h3><p>首先，打开/node_modules/hexo-renderer-mathjax/mathjax.html</p>
 <p>然后，把<code>&lt;script&gt;</code>更改为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
 <h3 id="4-更改默认转义规则"><a href="#4-更改默认转义规则" class="headerlink" title="4. 更改默认转义规则"></a>4. 更改默认转义规则</h3><p>因为 <code>hexo</code> 默认的转义规则会将一些字符进行转义，比如 <code>_</code> 转为 <code>&lt;em&gt;</code>, 所以我们需要对默认的规则进行修改.<br>首先， 打开<path-to-your-project>/node_modules/kramed/lib/rules、inline.js,</path-to-your-project></p>
 <p>然后，把:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">escape: /^\\([\\`*&#123;&#125;\[\]()#$+\-.!_&gt;])/,</span><br></pre></td></tr></table></figure>
+
 <p>更改为:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">escape: /^\\([`*\[\]()# +\-.!_&gt;])/,</span><br></pre></td></tr></table></figure>
+
 <p>把</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br></pre></td></tr></table></figure>
+
 <p>更改为:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br></pre></td></tr></table></figure>
+
 <h3 id="5-开启mathjax"><a href="#5-开启mathjax" class="headerlink" title="5. 开启mathjax"></a>5. 开启mathjax</h3><p>在主题 <code>_config.yml</code> 中开启 Mathjax， 找到 <code>mathjax</code> 字段添加如下代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mathjax:</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
+
 <p>这一步可选，在博客中开启 <code>Mathjax</code>，， 添加以下内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Testing Mathjax with Hexo</span><br><span class="line">category: Uncategorized</span><br><span class="line">date: 2017/05/03</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
 <p>通过以上步骤，我们就可以在 <code>hexo</code> 中使用 <code>Mathjax</code> 来书写数学公式。</p>
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/" target="_blank" rel="noopener">https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/</a></p>
 <p><a href="https://ranmaosong.github.io/2017/11/29/hexo-support-mathjax/" target="_blank" rel="noopener">https://ranmaosong.github.io/2017/11/29/hexo-support-mathjax/</a></p>
@@ -553,8 +566,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/18/First-Page/" rel="next" title="建站纪念">
-                <i class="fa fa-chevron-left"></i> 建站纪念
+              <a href="/2019/08/01/kalman_filter_1/" rel="next" title="Kalman Filter 简单理解1">
+                <i class="fa fa-chevron-left"></i> Kalman Filter 简单理解1
               </a>
             
           </div>
@@ -563,8 +576,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/01/kalman_filter_1/" rel="prev" title="Kalman Filter 简单理解1">
-                Kalman Filter 简单理解1 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/02/ros_spin/" rel="prev" title="ros::spin()和ros::spinOnce()">
+                ros::spin()和ros::spinOnce() <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

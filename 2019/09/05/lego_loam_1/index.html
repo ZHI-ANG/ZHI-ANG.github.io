@@ -127,13 +127,13 @@
 
 
 
-  <meta name="description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：     方案 LOAM LeGO-LOAM     特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图     这些改进都是为">
+  <meta name="description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
 <meta name="keywords" content="SLAM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lego LOAM论文笔记">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：     方案 LOAM LeGO-LOAM     特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图     这些改进都是为">
+<meta property="og:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/overview.png">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{F_p,F_e\}">
@@ -149,7 +149,7 @@
 <meta property="og:updated_time" content="2019-09-11T09:59:22.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lego LOAM论文笔记">
-<meta name="twitter:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：     方案 LOAM LeGO-LOAM     特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图     这些改进都是为">
+<meta name="twitter:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
 <meta name="twitter:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/overview.png">
 
 
@@ -494,7 +494,6 @@
 
       
         <p>LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -503,8 +502,7 @@
 <th>LeGO-LOAM</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>特征提取</td>
 <td>从原始点云中直接计算特征</td>
 <td>先进行地面分割，再对分割点云计算特征</td>
@@ -519,9 +517,7 @@
 <td>选100M以内的特征点集作为局部地图</td>
 <td>选k帧内的特征点集作为局部地图</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>这些改进都是为了提高计算速度，以达到在嵌入式平台上实现实时建图的效果。</p>
 <p>LeGO-LOAM的系统框架如图所示：</p>
 <p><img src="overview.png" alt></p>

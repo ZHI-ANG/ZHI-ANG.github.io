@@ -127,34 +127,34 @@
 
 
 
-  <meta name="description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到： ) 如果想要获得旋转轴，只需要将的每一项除以​)就可以了。  具体的推导过程，">
+  <meta name="description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到：  如果想要获得旋转轴，只需要将的每一项除以就可以了。   具体的推导过程，见参">
 <meta name="keywords" content="SLAM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="四元数知识总结">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/08/13/quaternion_vector/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到： ) 如果想要获得旋转轴，只需要将的每一项除以​)就可以了。  具体的推导过程，">
+<meta property="og:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到：  如果想要获得旋转轴，只需要将的每一项除以就可以了。   具体的推导过程，见参">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{v}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{u}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\theta">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{v'}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Ctheta">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv'%7D">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?v'=qvq^*=qvq^{-1}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?v'=qvq%5E*=qvq%5E%7B-1%7D">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?v'=qvq^*">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{v}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{u}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?q=[a,\mathbf{b}]">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\frac{\theta}{2}=\cos^{-1}(a">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{b}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\sin(\frac{\theta}{2}">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?v'=qvq%5E*">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?q=%5Ba,%5Cmathbf%7Bb%7D%5D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Ctheta%7D%7B2%7D=%5Ccos%5E%7B-1%7D(a)">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bb%7D">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?%5Csin(%5Cfrac%7B%5Ctheta%7D%7B2%7D)%E2%80%8B">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}">
 <meta property="og:updated_time" content="2019-08-22T06:58:53.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="四元数知识总结">
-<meta name="twitter:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到： ) 如果想要获得旋转轴，只需要将的每一项除以​)就可以了。  具体的推导过程，">
-<meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?\mathbf{v}">
+<meta name="twitter:description" content="项目中遇到的四元数常见用法，持续更新……  1. 四元数与向量相乘结论： 任意向量沿着以单位向量定义的旋转轴旋转度之后的可以使用四元数乘法获得。令，那么：  换句话说，如果有，那么可以将沿着旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数，如果想要提取对应的旋转的角度，那么我们可以直接得到：  如果想要获得旋转轴，只需要将的每一项除以就可以了。   具体的推导过程，见参">
+<meta name="twitter:image" content="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D">
 
 
 
@@ -500,12 +500,13 @@
         <blockquote>
 <p>项目中遇到的四元数常见用法，持续更新……</p>
 </blockquote>
-<h2 id="1-四元数与向量相乘"><a href="#1-四元数与向量相乘" class="headerlink" title="1. 四元数与向量相乘"></a>1. 四元数与向量相乘</h2><p>结论： 任意向量<img src="http://latex.codecogs.com/gif.latex?\mathbf{v}" alt>沿着以单位向量定义的旋转轴<img src="http://latex.codecogs.com/gif.latex?\mathbf{u}" alt>旋转<img src="http://latex.codecogs.com/gif.latex?\theta" alt>度之后的<img src="http://latex.codecogs.com/gif.latex?\mathbf{v&#39;}" alt>可以使用四元数乘法获得。令<img src="http://latex.codecogs.com/gif.latex?v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">，那么：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?v&#39;=qvq^*=qvq^{-1}" alt></p>
-<p>换句话说，如果有<img src="http://latex.codecogs.com/gif.latex?q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">，那么<img src="http://latex.codecogs.com/gif.latex?v&#39;=qvq^*" alt>可以将<img src="http://latex.codecogs.com/gif.latex?\mathbf{v}" alt>沿着<img src="http://latex.codecogs.com/gif.latex?\mathbf{u}" alt>旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数<img src="http://latex.codecogs.com/gif.latex?q=[a,\mathbf{b}]" alt>，如果想要提取对应的旋转的角度，那么我们可以直接得到：</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\frac{\theta}{2}=\cos^{-1}(a" alt>)</p>
-<p>如果想要获得旋转轴，只需要将<img src="http://latex.codecogs.com/gif.latex?\mathbf{b}" alt>的每一项除以<img src="http://latex.codecogs.com/gif.latex?\sin(\frac{\theta}{2}" alt>​)就可以了。</p>
-<p><img src="http://latex.codecogs.com/gif.latex?\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}"></p>
+<h2 id="1-四元数与向量相乘"><a href="#1-四元数与向量相乘" class="headerlink" title="1. 四元数与向量相乘"></a>1. 四元数与向量相乘</h2><p>结论： 任意向量<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D" alt>沿着以单位向量定义的旋转轴<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D" alt>旋转<img src="http://latex.codecogs.com/gif.latex?%5Ctheta" alt>度之后的<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv'%7D" alt>可以使用四元数乘法获得。令<img src="http://latex.codecogs.com/gif.latex?v=[0,\mathbf{v}], q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">，那么：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?v'=qvq%5E*=qvq%5E%7B-1%7D" alt></p>
+<p>换句话说，如果有<img src="http://latex.codecogs.com/gif.latex?q=[\cos(\frac{1}{2}\theta), \sin(\frac{1}{2}\theta)\mathbf{u}]">，那么<img src="http://latex.codecogs.com/gif.latex?v'=qvq%5E*" alt>可以将<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bv%7D" alt>沿着<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bu%7D" alt>旋转。另外，因为所有的四元数的实部都是一个角度的余弦，假设有一个单位四元数<img src="http://latex.codecogs.com/gif.latex?q=%5Ba,%5Cmathbf%7Bb%7D%5D" alt>，如果想要提取对应的旋转的角度，那么我们可以直接得到：</p>
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Ctheta%7D%7B2%7D=%5Ccos%5E%7B-1%7D(a)" alt></p>
+<p>如果想要获得旋转轴，只需要将<img src="http://latex.codecogs.com/gif.latex?%5Cmathbf%7Bb%7D" alt>的每一项除以<img src="http://latex.codecogs.com/gif.latex?%5Csin(%5Cfrac%7B%5Ctheta%7D%7B2%7D)%E2%80%8B" alt>就可以了。</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{u}=\frac{\mathbf{b}}{\sin(\cos^{-1}(a))}">
+
 <p>具体的推导过程，见参考文献1。</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
 <li><a href="https://github.com/Krasjet/quaternion" target="_blank" rel="noopener">https://github.com/Krasjet/quaternion</a></li>
@@ -546,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/13/pf/" rel="next" title="粒子滤波算法笔记(一):算法概述">
-                <i class="fa fa-chevron-left"></i> 粒子滤波算法笔记(一):算法概述
+              <a href="/2019/08/12/Eigen/" rel="next" title="Eigen常见用法总结">
+                <i class="fa fa-chevron-left"></i> Eigen常见用法总结
               </a>
             
           </div>
@@ -556,9 +557,9 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/18/multithread2/" rel="prev" title="<翻译> C++多线程编程(第6-10部分)">
-                <翻译> C++多线程编程(第6-10部分) <i class="fa fa-chevron-right"></i>
-              </翻译></a>
+              <a href="/2019/08/13/pf/" rel="prev" title="粒子滤波算法笔记(一):算法概述">
+                粒子滤波算法笔记(一):算法概述 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
