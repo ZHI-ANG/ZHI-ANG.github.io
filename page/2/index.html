@@ -367,6 +367,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/20/ros_debug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZHI-ANG">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="極東魔術昼寝結社の夏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/20/ros_debug/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">使用gdb调试ros程序</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-20 17:17:10 / Modified: 16:34:28" itemprop="dateCreated datePublished" datetime="2019-08-20T17:17:10+08:00">2019-08-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ROS/" itemprop="url" rel="index"><span itemprop="name">ROS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          问题描述首先需要明白catkin_make生成的可执行文件在什么地方。一般${catkin_ws}/devel/lib文件夹下。因此，对于直接rosrun，不需要launch文件的节点程序，我们可以按照下面的步骤进行调试：
+
+运行roscore
+使用gdb打开${catkin_ws}/devel/l
+          ...
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/20/ros_debug/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/19/c_cheatsheet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -934,7 +1105,7 @@ Exte
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/quaternion_vector/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/13/quaternion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -954,7 +1125,7 @@ Exte
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/13/quaternion_vector/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">四元数知识总结</a>
+                <a href="/2019/08/13/quaternion/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">四元数知识总结</a>
               
             
           </h1>
@@ -996,7 +1167,7 @@ Exte
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-22 14:58:53" itemprop="dateModified" datetime="2019-08-22T14:58:53+08:00">2019-08-22</time>
+                <time title="Modified: 2019-10-09 16:05:36" itemprop="dateModified" datetime="2019-10-09T16:05:36+08:00">2019-10-09</time>
               
             
           </span>
@@ -1059,7 +1230,7 @@ Exte
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/13/quaternion_vector/#more" rel="contents">
+              <a class="btn" href="/2019/08/13/quaternion/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2024,187 +2195,6 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/08/02/ros_spin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZHI-ANG">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="極東魔術昼寝結社の夏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/02/ros_spin/" class="post-title-link" itemprop="https://zhi-ang.github.io/page/2/index.html">ros::spin()和ros::spinOnce()</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-08-02 17:17:10" itemprop="dateCreated datePublished" datetime="2019-08-02T17:17:10+08:00">2019-08-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-08-07 21:43:26" itemprop="dateModified" datetime="2019-08-07T21:43:26+08:00">2019-08-07</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ROS/" itemprop="url" rel="index"><span itemprop="name">ROS</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          ros::spin()和ros::spinOnce()的作用ROS monitor socket负责接受所有订阅的消息。当一个新消息到来，ROS将其对应的回调函数放到队列中。ROS不会立即调用这些回调函数，而是等到ros::spinOnce()到来时才会处理。
-很少有应用场景适合直接采用ros::s
-          ...
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/02/ros_spin/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2254,7 +2244,7 @@ RAII这个名字不够直观，实际上另一个名字更能体现这种思想�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
