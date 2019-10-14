@@ -135,13 +135,13 @@
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
 <meta property="og:description" content="某些表述不准确，需要验证和更新  旋转的表示我们知道，旋转有多种表示形式，常用的有欧拉角，旋转向量，单位四元数和旋转矩阵。在不同的场景下，四种表示形式的直观程度不同。我们可以根据需要，将旋转表示为一种直观的形式，然后转换成我们需要的形式。另外，在Eigen库中，四种形式都提供了接口，因此可以方便我们验证。 应用场景下面以一个具体的应用场景，理解旋转的不同表示形式。场景如下：  现有一位姿未知的激">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://zhi-ang.github.io/2019/10/14/rotation/rotation/rot.png">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/10/14/rotation/rot.png">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}">
-<meta property="og:updated_time" content="2019-10-14T03:57:09.736Z">
+<meta property="og:updated_time" content="2019-10-14T03:58:57.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三维空间的旋转">
 <meta name="twitter:description" content="某些表述不准确，需要验证和更新  旋转的表示我们知道，旋转有多种表示形式，常用的有欧拉角，旋转向量，单位四元数和旋转矩阵。在不同的场景下，四种表示形式的直观程度不同。我们可以根据需要，将旋转表示为一种直观的形式，然后转换成我们需要的形式。另外，在Eigen库中，四种形式都提供了接口，因此可以方便我们验证。 应用场景下面以一个具体的应用场景，理解旋转的不同表示形式。场景如下：  现有一位姿未知的激">
-<meta name="twitter:image" content="https://zhi-ang.github.io/2019/10/14/rotation/rotation/rot.png">
+<meta name="twitter:image" content="https://zhi-ang.github.io/2019/10/14/rotation/rot.png">
 
 
 
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="Created: 2019-10-14 17:17:10 / Modified: 11:57:09" itemprop="dateCreated datePublished" datetime="2019-10-14T17:17:10+08:00">2019-10-14</time>
+              <time title="Created: 2019-10-14 17:17:10 / Modified: 11:58:57" itemprop="dateCreated datePublished" datetime="2019-10-14T17:17:10+08:00">2019-10-14</time>
             
 
             
@@ -487,7 +487,7 @@
 <li>根据旋转矩阵得到欧拉角。</li>
 </ol>
 <h3 id="旋转向量的表示"><a href="#旋转向量的表示" class="headerlink" title="旋转向量的表示"></a>旋转向量的表示</h3><p>大学我们就学过，向量的点乘得到两个向量的夹角，叉乘得到两个向量在右手系的法向量。所以，向量的旋转可以利用这个向量和夹角表示。其实这是旋转向量中最直观的表示形式。我们还可以选择不同的旋转向量，通过不同的转角，将这两个向量中的一个旋转到另一个的位置。如图所示，旋转向量的表示有无数种。</p>
-<p><img src="rotation/rot.png" alt></p>
+<p><img src="rot.png" alt></p>
 <p>无论哪种表示，最终的旋转结果都一样。所以我们就采用最简单的，用点乘和叉乘表示这个旋转。</p>
 <h3 id="罗德里格斯公式"><a href="#罗德里格斯公式" class="headerlink" title="罗德里格斯公式"></a>罗德里格斯公式</h3><p>得到了旋转向量，我们可以通过如下的罗德里格斯公式，得到旋转矩阵：</p>
 <img src="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}">
