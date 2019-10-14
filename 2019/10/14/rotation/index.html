@@ -127,37 +127,28 @@
 
 
 
-  <meta name="description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
-<meta name="keywords" content="SLAM">
+  <meta name="description" content="某些表述不准确，需要验证和更新  旋转的表示我们知道，旋转有多种表示形式，常用的有欧拉角，旋转向量，单位四元数和旋转矩阵。在不同的场景下，四种表示形式的直观程度不同。我们可以根据需要，将旋转表示为一种直观的形式，然后转换成我们需要的形式。另外，在Eigen库中，四种形式都提供了接口，因此可以方便我们验证。 应用场景下面以一个具体的应用场景，理解旋转的不同表示形式。场景如下：  现有一位姿未知的激">
+<meta name="keywords" content="几何变换">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lego LOAM论文笔记">
-<meta property="og:url" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/index.html">
+<meta property="og:title" content="三维空间的旋转">
+<meta property="og:url" content="https://zhi-ang.github.io/2019/10/14/rotation/index.html">
 <meta property="og:site_name" content="極東魔術昼寝結社の夏">
-<meta property="og:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
+<meta property="og:description" content="某些表述不准确，需要验证和更新  旋转的表示我们知道，旋转有多种表示形式，常用的有欧拉角，旋转向量，单位四元数和旋转矩阵。在不同的场景下，四种表示形式的直观程度不同。我们可以根据需要，将旋转表示为一种直观的形式，然后转换成我们需要的形式。另外，在Eigen库中，四种形式都提供了接口，因此可以方便我们验证。 应用场景下面以一个具体的应用场景，理解旋转的不同表示形式。场景如下：  现有一位姿未知的激">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/overview.png">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{F_p,F_e\}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p,F_e}\}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p^t,F_e^t}\}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{F_p^{t-1},F_e^{t-1}\}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{T} = (t_x, t_y, t_z, \theta_{roll}, \theta_{pitch}, \theta_{yaw})">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?t_x,\theta_{roll},\theta_{pitch}">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?t_y, t_z,\theta_{yaw} ">
-<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\{F_p^{t-k},F_e^{t-k},...F_p^{t-1},F_e^{t-1}\}">
-<meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/lego_loam_node.png">
-<meta property="og:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/lego_loam_tf.png">
-<meta property="og:updated_time" content="2019-09-11T09:59:22.134Z">
+<meta property="og:image" content="https://zhi-ang.github.io/2019/10/14/rotation/rotation/rot.png">
+<meta property="og:image" content="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}">
+<meta property="og:updated_time" content="2019-10-14T03:57:09.736Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lego LOAM论文笔记">
-<meta name="twitter:description" content="LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：    方案 LOAM LeGO-LOAM    特征提取 从原始点云中直接计算特征 先进行地面分割，再对分割点云计算特征   特征匹配 直接对原始点云进行匹配 label相同的点才匹配，LM两步优化   局部地图 选100M以内的特征点集作为局部地图 选k帧内的特征点集作为局部地图   这些改进都是为了提高计">
-<meta name="twitter:image" content="https://zhi-ang.github.io/2019/09/05/lego_loam_1/overview.png">
+<meta name="twitter:title" content="三维空间的旋转">
+<meta name="twitter:description" content="某些表述不准确，需要验证和更新  旋转的表示我们知道，旋转有多种表示形式，常用的有欧拉角，旋转向量，单位四元数和旋转矩阵。在不同的场景下，四种表示形式的直观程度不同。我们可以根据需要，将旋转表示为一种直观的形式，然后转换成我们需要的形式。另外，在Eigen库中，四种形式都提供了接口，因此可以方便我们验证。 应用场景下面以一个具体的应用场景，理解旋转的不同表示形式。场景如下：  现有一位姿未知的激">
+<meta name="twitter:image" content="https://zhi-ang.github.io/2019/10/14/rotation/rotation/rot.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zhi-ang.github.io/2019/09/05/lego_loam_1/">
+  <link rel="canonical" href="https://zhi-ang.github.io/2019/10/14/rotation/">
 
 
 
@@ -167,7 +158,7 @@
   };
 </script>
 
-  <title>Lego LOAM论文笔记 | 極東魔術昼寝結社の夏</title>
+  <title>三维空间的旋转 | 極東魔術昼寝結社の夏</title>
   
 
 
@@ -383,7 +374,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/09/05/lego_loam_1/">
+    <link itemprop="mainEntityOfPage" href="https://zhi-ang.github.io/2019/10/14/rotation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZHI-ANG">
@@ -400,7 +391,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Lego LOAM论文笔记
+          <h1 class="post-title" itemprop="name headline">三维空间的旋转
               
             
           </h1>
@@ -425,24 +416,12 @@
                 
               
 
-              <time title="Created: 2019-09-05 17:17:10" itemprop="dateCreated datePublished" datetime="2019-09-05T17:17:10+08:00">2019-09-05</time>
+              <time title="Created: 2019-10-14 17:17:10 / Modified: 11:57:09" itemprop="dateCreated datePublished" datetime="2019-10-14T17:17:10+08:00">2019-10-14</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-09-11 17:59:22" itemprop="dateModified" datetime="2019-09-11T17:59:22+08:00">2019-09-11</time>
               
             
           </span>
@@ -459,7 +438,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/几何变换/" itemprop="url" rel="index"><span itemprop="name">几何变换</span></a></span>
 
                 
                 
@@ -493,46 +472,41 @@
       
 
       
-        <p>LeGO-LOAM在LOAM的基础上进行了改进，并添加了回环检测。和LOAM的区别如下：</p>
-<table>
-<thead>
-<tr>
-<th>方案</th>
-<th>LOAM</th>
-<th>LeGO-LOAM</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>特征提取</td>
-<td>从原始点云中直接计算特征</td>
-<td>先进行地面分割，再对分割点云计算特征</td>
-</tr>
-<tr>
-<td>特征匹配</td>
-<td>直接对原始点云进行匹配</td>
-<td>label相同的点才匹配，LM两步优化</td>
-</tr>
-<tr>
-<td>局部地图</td>
-<td>选100M以内的特征点集作为局部地图</td>
-<td>选k帧内的特征点集作为局部地图</td>
-</tr>
-</tbody></table>
-<p>这些改进都是为了提高计算速度，以达到在嵌入式平台上实现实时建图的效果。</p>
-<p>LeGO-LOAM的系统框架如图所示：</p>
-<p><img src="overview.png" alt></p>
-<p>可以看出LeGO-LOAM由四个部分构成：</p>
+        <blockquote>
+<p>某些表述不准确，需要验证和更新</p>
+</blockquote>
+<h2 id="旋转的表示"><a href="#旋转的表示" class="headerlink" title="旋转的表示"></a>旋转的表示</h2><p>我们知道，旋转有多种表示形式，常用的有欧拉角，旋转向量，单位四元数和旋转矩阵。在不同的场景下，四种表示形式的直观程度不同。我们可以根据需要，将旋转表示为一种直观的形式，然后转换成我们需要的形式。另外，在Eigen库中，四种形式都提供了接口，因此可以方便我们验证。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>下面以一个具体的应用场景，理解旋转的不同表示形式。场景如下：</p>
+<blockquote>
+<p>现有一位姿未知的激光雷达，扫描一水平面(法向量为(0,0,1))，得到点云。通过RANSAC拟合得到该点云的法向量，求这个激光雷达的位姿，用欧拉角表示。(平移不需要考虑)</p>
+</blockquote>
+<p>现在已知两个法向量，我们希望求出一个旋转，将水平面的法向量旋转到点云拟合平面的法向量上。这个旋转就是激光雷达的位姿。尽管向量的旋转很简单，高中就学过，但是我们无法直接得到该旋转的欧拉角。所以可以利用旋转的不同表示形式之间的关系，通过下面的步骤，一步步得到最终的欧拉角：</p>
 <ol>
-<li><strong>点云分割</strong>：将原始点云进行聚类，分为地面簇和非地面簇，非地面中又有很多簇，其中小于30个点的簇被移除。剩余的点云簇都有自己独特的标签。这样做排除了一些噪点和不稳定的小物体，提高了激光特征的稳定性。</li>
-<li><strong>特征提取</strong>：首先将激光一扫分成6部分，对每个部分中的点云簇进行光滑度计算，得到面和边两种特征集<img src="http://latex.codecogs.com/gif.latex?\{F_p,F_e\}">光滑度高的为平面，反之的为边。分别对面和边进一步筛选出最光滑的面和最陡峭的边用做下一步的匹配特征集<img src="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p,F_e}\}"></li>
-<li><strong>激光里程计</strong>：将上一步得到的<img src="http://latex.codecogs.com/gif.latex?\{\mathbf{F_p^t,F_e^t}\}">和前一时刻的特征集<img src="http://latex.codecogs.com/gif.latex?\{F_p^{t-1},F_e^{t-1}\}">进行匹配。同样是边和边匹配，面和面匹配。LM算法分别优化两种匹配结果并得到位姿估计<img src="http://latex.codecogs.com/gif.latex?\mathbf{T} = (t_x, t_y, t_z, \theta_{roll}, \theta_{pitch}, \theta_{yaw})">优化面和面的匹配得到<img src="http://latex.codecogs.com/gif.latex?t_x,\theta_{roll},\theta_{pitch}">，优化边与边的匹配得到<img src="http://latex.codecogs.com/gif.latex?t_y, t_z,\theta_{yaw} "></li>
-<li><strong>建图和位姿图优化</strong>：用上一步得到的位姿作为节点，加入到位姿图中。当存在回环检测时，进行全局位姿优化。同时用前<em>k</em>时刻的激光特征点集<img src="http://latex.codecogs.com/gif.latex?\{F_p^{t-k},F_e^{t-k},...F_p^{t-1},F_e^{t-1}\}">构成局部地图，和当前时刻的匹配点集进行匹配，并LM优化，得到当前的位姿估计。</li>
+<li>先用旋转向量表示这个旋转；</li>
+<li>通过罗德里格斯公式，由旋转向量得到旋转矩阵；</li>
+<li>根据旋转矩阵得到欧拉角。</li>
 </ol>
-<h3 id="ROS-Node节点图"><a href="#ROS-Node节点图" class="headerlink" title="ROS Node节点图"></a>ROS Node节点图</h3><p>节点图如下，可以看出程序和论文中叙述的流程基本一致。</p>
-<p><img src="lego_loam_node.png" alt></p>
-<h3 id="ROS-tf树"><a href="#ROS-tf树" class="headerlink" title="ROS tf树"></a>ROS tf树</h3><p>tf树如下，其中虚线并不属于tf树，只是为了说明坐标系之间的关系，方便理解。</p>
-<p><img src="lego_loam_tf.png" alt></p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/tree/master/LeGO-LOAM" target="_blank" rel="noopener">https://github.com/RobustFieldAutonomyLab/LeGO-LOAM/tree/master/LeGO-LOAM</a></p>
+<h3 id="旋转向量的表示"><a href="#旋转向量的表示" class="headerlink" title="旋转向量的表示"></a>旋转向量的表示</h3><p>大学我们就学过，向量的点乘得到两个向量的夹角，叉乘得到两个向量在右手系的法向量。所以，向量的旋转可以利用这个向量和夹角表示。其实这是旋转向量中最直观的表示形式。我们还可以选择不同的旋转向量，通过不同的转角，将这两个向量中的一个旋转到另一个的位置。如图所示，旋转向量的表示有无数种。</p>
+<p><img src="rotation/rot.png" alt></p>
+<p>无论哪种表示，最终的旋转结果都一样。所以我们就采用最简单的，用点乘和叉乘表示这个旋转。</p>
+<h3 id="罗德里格斯公式"><a href="#罗德里格斯公式" class="headerlink" title="罗德里格斯公式"></a>罗德里格斯公式</h3><p>得到了旋转向量，我们可以通过如下的罗德里格斯公式，得到旋转矩阵：</p>
+<img src="http://latex.codecogs.com/gif.latex?\mathbf{R} = \cos\theta\mathbf{I}+(1-\cos\theta)\mathbf{nn^T}+\sin\theta\mathbf{n^\land{}}">
+
+<p>观察这个公式，我们发现，即使选取不同的旋转轴和旋转角，最终得到的旋转矩阵都一样。</p>
+<h3 id="获得欧拉角"><a href="#获得欧拉角" class="headerlink" title="获得欧拉角"></a>获得欧拉角</h3><p>欧拉角的顺规不同，得到的三个数值也不同。ROS中使用的是ZYX顺规，本文也延续这种表示。同时，需要注意的是，我们在用欧拉角表示向量的旋转时，默认选取了一个不随旋转变化的坐标系，并在这个坐标系下分多次旋转。这种表示形式是外参的。作为对比，之前的博客中提到的ENU到NED坐标系的旋转，坐标系随着旋转而旋转。每次旋转后，下次的旋转都在新的坐标系下旋转。这种表示形式是内参的。</p>
+<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>示例代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;Eigen/Core&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;Eigen/Geometry&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="number">3.14159265</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> x,y,z;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"input normal x y z"</span>; <span class="comment">// 输入法向量的x y z分量，注意归一化</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"x,y,z: "</span>&lt;&lt;x&lt;&lt;<span class="string">'\t'</span>&lt;&lt;y&lt;&lt;<span class="string">'\t'</span>&lt;&lt;z&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    Eigen::Vector3d z_unit = Eigen::Vector3d(<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1.0</span>); <span class="comment">// 平面的法向量，就是z轴方向单位向量</span></span><br><span class="line">    Eigen::Vector3d normal = Eigen::Vector3d(x,y,z);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 叉乘得到转轴，而且是从z_axis转到normal</span></span><br><span class="line">    Eigen::Vector3d rot_axis = z_unit.cross(normal); </span><br><span class="line">    rot_axis.normalize(); <span class="comment">// 不要忘了归一化</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"axis': \n"</span>&lt;&lt;rot_axis2&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 点乘得到转角</span></span><br><span class="line">    <span class="keyword">double</span> rot_angle = <span class="built_in">acos</span>(z_unit.dot(normal));</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"angle: \n"</span>&lt;&lt;rot_angle*<span class="number">180.0</span>/<span class="number">3.1416</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 得到旋转矩阵</span></span><br><span class="line">    Eigen::Matrix3d m_rot = Eigen::Matrix3d(Eigen::AngleAxisd(rot_angle, rot_axis));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ZYX顺规，得到欧拉角</span></span><br><span class="line">    Eigen::Vector3d v_RPY = m_rot.eulerAngles(<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"eulerAngle: \n"</span>&lt;&lt;v_RPY*<span class="number">180.0</span>/<span class="number">3.1416</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过一个具体的应用场景，熟悉了旋转的不同表示形式。其中需要注意的是：</p>
+<ol>
+<li>欧拉角表示需要分清顺规，是内参还是外参，实质上没有区别</li>
+<li>欧拉角，旋转向量，单位四元数和旋转矩阵想要表示一个有效的旋转，都有约束。旋转向量和四元数需要归一化，而旋转矩阵需要满足特定的形式</li>
+<li>欧拉角，四元数，旋转向量都有多重表示，最终得到的旋转矩阵并没有区别。可以选取最直观和最简单的表示方式</li>
+</ol>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<li>四元数详解(强烈推荐) <a href="https://github.com/Krasjet/quaternion" target="_blank" rel="noopener">https://github.com/Krasjet/quaternion</a></li>
+<li>高翔, 张涛等. 视觉SLAM十四讲</li>
+</ol>
 
       
     </div>
@@ -556,7 +530,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+            <a href="/tags/几何变换/" rel="tag"># 几何变换</a>
           
         </div>
       
@@ -569,19 +543,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/01/JS_Iterator/" rel="next" title="<摘录> ES6中的迭代器和生成器">
-                <i class="fa fa-chevron-left"></i> <摘录> ES6中的迭代器和生成器
-              </摘录></a>
+              <a href="/2019/10/07/CS/" rel="next" title="SICP学习资源">
+                <i class="fa fa-chevron-left"></i> SICP学习资源
+              </a>
             
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/11/vins_fusion/" rel="prev" title="VINS Fusion算法解读">
-                VINS Fusion算法解读 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -790,7 +760,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS-Node节点图"><span class="nav-number">1.</span> <span class="nav-text">ROS Node节点图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS-tf树"><span class="nav-number">2.</span> <span class="nav-text">ROS tf树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转的表示"><span class="nav-number">1.</span> <span class="nav-text">旋转的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转向量的表示"><span class="nav-number">2.1.</span> <span class="nav-text">旋转向量的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#罗德里格斯公式"><span class="nav-number">2.2.</span> <span class="nav-text">罗德里格斯公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得欧拉角"><span class="nav-number">2.3.</span> <span class="nav-text">获得欧拉角</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序"><span class="nav-number">3.</span> <span class="nav-text">程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">4.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
             
 
           </div>

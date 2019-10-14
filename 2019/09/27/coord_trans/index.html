@@ -128,7 +128,7 @@
 
 
   <meta name="description" content="移动机器人中的坐标变换真是又累又绕。向量的平移旋转，欧拉角，位姿变换……纠结了好久。记录一下，方便自查。 坐标系统及约定本文讨论的所有坐标系均为右手系，并使用其次坐标系。坐标体系采用ROS的规定，前左上为XYZ轴正方向，欧拉角选定ZYX顺规。 本文涉及到的坐标系有：  NED坐标系和ENU坐标系 里程计初始坐标系(init) 载体坐标系(body) 激光坐标系(lidar)  其中NED和ENU坐">
-<meta name="keywords" content="坐标变换">
+<meta name="keywords" content="几何变换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动机器人中的坐标转换">
 <meta property="og:url" content="https://zhi-ang.github.io/2019/09/27/coord_trans/index.html">
@@ -167,7 +167,7 @@ P = (2,2+\sqrt{2},90°)">
 <meta property="og:image" content="http://latex.codecogs.com/gif.latex?
 T{ij} := T{i}^{-1} \cdot T_{j}">
 <meta property="og:image" content="https://zhi-ang.github.io/2019/09/27/coord_trans/body_lidar.jpg">
-<meta property="og:updated_time" content="2019-09-27T09:48:59.059Z">
+<meta property="og:updated_time" content="2019-10-14T02:45:21.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动机器人中的坐标转换">
 <meta name="twitter:description" content="移动机器人中的坐标变换真是又累又绕。向量的平移旋转，欧拉角，位姿变换……纠结了好久。记录一下，方便自查。 坐标系统及约定本文讨论的所有坐标系均为右手系，并使用其次坐标系。坐标体系采用ROS的规定，前左上为XYZ轴正方向，欧拉角选定ZYX顺规。 本文涉及到的坐标系有：  NED坐标系和ENU坐标系 里程计初始坐标系(init) 载体坐标系(body) 激光坐标系(lidar)  其中NED和ENU坐">
@@ -447,12 +447,24 @@ P^{3d} = (x,y,z,pitch,yaw,roll) \\P^{2d} = (x,y,\theta)">
                 
               
 
-              <time title="Created: 2019-09-27 17:17:10 / Modified: 17:48:59" itemprop="dateCreated datePublished" datetime="2019-09-27T17:17:10+08:00">2019-09-27</time>
+              <time title="Created: 2019-09-27 17:17:10" itemprop="dateCreated datePublished" datetime="2019-09-27T17:17:10+08:00">2019-09-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-14 10:45:21" itemprop="dateModified" datetime="2019-10-14T10:45:21+08:00">2019-10-14</time>
               
             
           </span>
@@ -469,7 +481,7 @@ P^{3d} = (x,y,z,pitch,yaw,roll) \\P^{2d} = (x,y,\theta)">
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/坐标变换/" itemprop="url" rel="index"><span itemprop="name">坐标变换</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/几何变换/" itemprop="url" rel="index"><span itemprop="name">几何变换</span></a></span>
 
                 
                 
@@ -606,7 +618,7 @@ T{ij} := T{i}^{-1} \cdot T_{j}"></p>
       
         <div class="post-tags">
           
-            <a href="/tags/坐标变换/" rel="tag"># 坐标变换</a>
+            <a href="/tags/几何变换/" rel="tag"># 几何变换</a>
           
         </div>
       
@@ -703,7 +715,7 @@ T{ij} := T{i}^{-1} \cdot T_{j}"></p>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
